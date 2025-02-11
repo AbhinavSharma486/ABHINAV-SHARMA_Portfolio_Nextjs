@@ -1,5 +1,6 @@
 
-export default function Home() {
+
+export default function page() {
   return (
     <div>
       <h1 className="text-purple-600 text-4xl font-bold">
@@ -8,3 +9,4 @@ export default function Home() {
     </div>
   );
 }
+
