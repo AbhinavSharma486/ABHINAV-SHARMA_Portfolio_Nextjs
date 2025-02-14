@@ -48,9 +48,11 @@ const BackgroundBlobs = () => (
 // Profile Image
 const ProfileImage = () => (
   <div className="relative group mx-auto md:mx-0 w-fit">
+
     <div className="absolute -inset-1 bg-gradient-to-r from-primary via-violet-500 to-blue-500 rounded-full opacity-75 group-hover:opacity-100 blur transition duration-500">
       <div className="absolute inset-0 animate-spin-slow" />
     </div>
+
     <div className="relative rounded-full overflow-hidden h-48 w-48 md:h-64 md:w-64">
       <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-violet-500/10 group-hover:opacity-0 transition duration-500" />
       <img
@@ -66,7 +68,7 @@ const ProfileImage = () => (
 
 // Social links 
 const SocialLinks = () => (
-  <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+  <div className="flex flex-wrap gap-4 justify-center md:justify-center">
     {SOCIAL_LINKS.map(({ icon: Icon, href, label, hoverColor }) => (
       <Link
         key={label}
@@ -90,9 +92,9 @@ const Profile = () => {
 
       <div className="relative w-full max-w-6xl mx-auto">
         <article className='backdrop-blur-sm bg-background/50 dark:bg-background/20 rounded-2xl border border-border shadow-2xl'>
-          <div className="grid md:grid-cols-[1fr,1.5fr] gap-8 p-8 md:p-12">
+          <div className="grid md:grid-cols-[1fr,2fr] gap-8 p-8 md:p-12">
 
-            <div className="space-y-8">
+            <div className="space-y-8 flex flex-col items-center justify-center">
               <ProfileImage />
               <SocialLinks />
             </div>
