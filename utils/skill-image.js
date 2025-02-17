@@ -74,6 +74,17 @@ import vuetifyjs from '../app/assets/svg/skills/vuetifyjs.svg';
 import webix from '../app/assets/svg/skills/webix.svg';
 import wolframalpha from '../app/assets/svg/skills/wolframalpha.svg';
 import wordpress from '../app/assets/svg/skills/wordpress.svg';
+import redis from "../app/assets/svg/skills/Redis.svg";
+import redux from "../app/assets/svg/skills/Redux.svg";
+import postman from "../app/assets/svg/skills/Postman.svg";
+import linkedin from "../app/assets/svg/skills/LinkedIn.svg";
+import vercel from "../app/assets/svg/skills/Vercel.svg";
+import codepen from "../app/assets/svg/skills/CodePen.svg";
+import socketio from "../app/assets/svg/skills/Socket.io.svg";
+import babel from "../app/assets/svg/skills/Babel.svg";
+import appwrite from "../app/assets/svg/skills/appwrite.svg";
+import github from "../app/assets/svg/skills/GitHub.svg";
+
 
 import pandas from '../app/assets/svg/skills/pandas.svg';
 import scikitlearn from '../app/assets/svg/skills/scikit-learn.svg';
@@ -257,6 +268,26 @@ export const skillsImage = (skill) => {
       return fastapi;
     case 'express':
       return express;
+    case 'redis':
+      return redis;
+    case 'redux':
+      return redux;
+    case 'postman':
+      return postman;
+    case 'linkedin':
+      return linkedin;
+    case 'github':
+      return github;
+    case 'vercel':
+      return vercel;
+    case 'codepen':
+      return codepen;
+    case 'socket.io':
+      return socketio;
+    case 'babel':
+      return babel;
+    case 'appwrite':
+      return appwrite;
     default:
       break;
   }

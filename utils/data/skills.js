@@ -2,6 +2,7 @@ export const skillsData = [
   'HTML',
   'CSS',
   'Javascript',
+  'Babel',
   'React',
   'ViteJS',
   'Node JS',
@@ -18,5 +19,14 @@ export const skillsData = [
   'C',
   'C++',
   'Java',
-  'Canva'
+  'Canva',
+  'Redis',
+  'Redux',
+  'Postman',
+  'Linkedin',
+  'Github',
+  'Vercel',
+  'CodePen',
+  'Socket.io',
+  'appwrite'
 ];
