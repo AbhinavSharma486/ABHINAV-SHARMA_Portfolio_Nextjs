@@ -20,6 +20,9 @@ export const eduNSW = Edu_NSW_ACT_Foundation({
 export const metadata: Metadata = {
   title: "Abhinav Sharma | Full Stack developer | Personal portfolio",
   description: "Abhinav Sharma Personal portfolio",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode; }) {

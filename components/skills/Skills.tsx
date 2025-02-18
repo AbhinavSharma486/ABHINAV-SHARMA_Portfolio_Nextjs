@@ -9,17 +9,13 @@ const Skills = () => {
 
   return (
     <>
-      <section id='skills' className="pt-10 dark:bg-gray-900">
+      <section id='skills' className="p-10 dark:bg-gray-900">
         <div className={`container mx-auto px-8 md:px-10 lg:px-20 xl:px-32`}>
           <h1
-            className={`font-orbitron text-center font-bold  dark:text-white text-4xl mt-4 text-blue-950`}
+            className={`font-orbitron text-center font-bold  dark:text-white text-6xl mt-4 text-blue-950`}
           >
             Experties
           </h1>
-
-          <div className="flex justify-center">
-            <span className="w-48 h-[4px] bg-[#1a1443] dark:bg-white"></span>
-          </div>
 
           <div className="relative z-50 border-t border-gray-300 dark:border-gray-700 my-2 lg:my-2">
 

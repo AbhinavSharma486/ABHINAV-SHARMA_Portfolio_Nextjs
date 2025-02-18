@@ -1,9 +1,16 @@
-import React from 'react'
+import dynamic from 'next/dynamic';
+import { Metadata } from "next";
+import SuspenseLoading from '../../components/ui/SuspenseLoading';
+
+const Projects = dynamic(() => import('../../components/projects/Projects'), { ssr: false, loading: () => <SuspenseLoading /> });
+
+export const metadata: Metadata = {
+  title: "Abhinav Sharma - Projects",
+  description: "Notable projects | Abhinav Sharma",
+};
 
 const Page = () => {
-  return (
-    <div>Page</div>
-  )
-}
+  return <Projects />;
+};
 
-export default Page
+export default Page;
