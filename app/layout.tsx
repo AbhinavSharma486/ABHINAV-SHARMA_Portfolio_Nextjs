@@ -1,9 +1,20 @@
 import "./globals.css";
-import type { Metadata } from "next";
-import { Edu_NSW_ACT_Foundation, Geist, Geist_Mono, Orbitron } from "next/font/google";
+import { Edu_NSW_ACT_Foundation, Orbitron } from "next/font/google";
 import Nav from "../components/navigation/Navigation";
-import React from "react";
+import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Theme from "../context/theme-provider";
+
+
+const Footer = dynamic(() => import("../components/Footer"));
+
+export const metadata: Metadata = {
+  title: "Abhinav Sharma | Full Stack developer | Personal portfolio",
+  description: "Abhinav Sharma Personal portfolio",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 const orbitron = Orbitron({
   subsets: ['latin'],
@@ -17,14 +28,6 @@ export const eduNSW = Edu_NSW_ACT_Foundation({
   weight: ['400'], // Only one weight is available for this font
 });
 
-export const metadata: Metadata = {
-  title: "Abhinav Sharma | Full Stack developer | Personal portfolio",
-  description: "Abhinav Sharma Personal portfolio",
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode; }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
@@ -34,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
           <main>
             {children}
           </main>
+          <Footer />
         </Theme>
       </body>
     </html>

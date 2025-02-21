@@ -21,7 +21,7 @@ const SOCIAL_LINKS = [
   },
   {
     icon: MailIcon,
-    href: "/contact",
+    href: "/",
     label: "Email",
     hoverColor: "hover:bg-primary"
   }
