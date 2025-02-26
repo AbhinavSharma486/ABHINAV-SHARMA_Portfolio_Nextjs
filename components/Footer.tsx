@@ -1,78 +1,142 @@
 // @ts-ignore
 // @ts-nocheck
+
 "use client";
 
-import ContactForm from "./contact/Form";
-import { usePathname } from "next/navigation";
+import React from "react";
 import Link from "next/link";
-import { FacebookIcon, LucideGithub, TwitterIcon, LucideLink2, ArrowRightIcon, MailIcon, ArrowRightCircle, GithubIcon, Linkedin, LinkedinIcon } from "lucide-react";
+import { Mail, Phone, MapPin, User, GithubIcon, TwitterIcon, FacebookIcon, MailIcon, LinkedinIcon } from "lucide-react";
+import localFont from "next/font/local";
+import Form from "../components/contact/Form";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
-const ImportantLinks = ({ href, text }) => {
+// Font configuration
+const orbitron = localFont({
+  src: "../fonts/Orbitron/static/Orbitron-Black.ttf",
+  variable: '--font-orbitron',
+  display: 'swap',
+});
+
+// Contact information type
+interface ContactInfo {
+  icon: React.ElementType;
+  label: string;
+  value: string;
+  href?: string;
+}
+
+const contactInfo: ContactInfo[] = [
+  {
+    icon: User,
+    label: "Role",
+    value: "Web developer"
+  },
+  {
+    icon: MapPin,
+    label: "Location",
+    value: "Baraut, Uttar Pradesh, India",
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: "abhinavparashar486@gmail.com",
+    href: "mailto:abhinavparashar486@gmail.com"
+  },
+  {
+    icon: Phone,
+    label: "Phone",
+    value: "7819872024",
+    href: "tel:+917819872024"
+  }
+];
+
+const ContactInfoItem: React.FC<ContactInfo> = ({ icon: Icon, label, value, href }) => {
+  const content = (
+    <div className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors">
+      <Icon className="h-5 w-5" />
+      <div>
+        <dt className="sr-only">{label}</dt>
+        <dd className="text-base">{value}</dd>
+      </div>
+    </div>
+  );
 
   return (
-    <li className="mb-2 hover:text-gray-500">
-      {href.startsWith('/') ? (
-        <Link href={href} className="flex text-lg gap-2 items-center">
-          <ArrowRightCircle /> {text}
+    <div className="py-2">
+      {href ? (
+        <Link href={href} className="hover:underline">
+          {content}
         </Link>
       ) : (
-        <a className="flex text-lg gap-2 items-center" href={href}>
-          <ArrowRightCircle /> {text}
-        </a>
+        content
       )}
-    </li>
+    </div>
   );
 };
 
 const Footer = () => {
-  const pathname = usePathname();
-
   return (
-    <div className=" text-white text-xl dark:bg-gray-900 py-8">
-      <div className="container mx-auto grid grid-cols-4 gap-10 px-8 md:px-20">
-        {pathname !== "/contact/" && (
-          <div className="col-span-4 md:col-span-2">
-            <ContactForm />
-          </div>
-        )}
+    <main className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 md:px-8 py-16">
+        <header className="text-center mb-12">
+          <h1 className={`${orbitron.variable} font-orbitron text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent`}>
+            Contact Me
+          </h1>
+        </header>
 
-        <div
-          className={`col-span-4 text-center text-gray-300 flex flex-col items-center justify-center ${pathname === "/contact/" ? "md:-col-span-4" : "md:col-span-2"
-            }`}
-        >
-          <h2 className={`font-edu-nsw mb-3 text-3xl text-gray-900 dark:text-white`}>
-            What's next?
-          </h2>
-          <h3 className="text-2xl mb-3 text-gray-900 dark:text-white">
-            Let's connect
-          </h3>
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {/* Contact Information Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-3xl font-bold">Abhinav Sharma</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <dl className="space-y-4">
+                {contactInfo.map((info, index) => (
+                  <ContactInfoItem key={index} {...info} />
+                ))}
+              </dl>
 
-          <p className="mt-5 text-gray-900 dark:text-white">
-            If you have any opportunity, suggestion or feedback we would love to hear from you!
-            Please feel free to reach out to us using the contact form or our email address.
-          </p>
+              {/* Additional Information */}
+              <div className="mt-8 space-y-4">
 
-          <div className="flex gap-3 pt-8 justify-center items-center text-gray-900 dark:text-white">
-            <a aria-label="Github account" href="https://github.com/AbhinavSharma486" target="_blank">
-              <GithubIcon size={25} />
-            </a>
-            <a aria-label="Linkedin Account" href="https://www.linkedin.com/in/abhinav-sharma-6254252a5/" target="_blank">
-              <LinkedinIcon size={25} />
-            </a>
-            <a aria-label="Email address" href="/" target="_blank">
-              <MailIcon size={25} />
-            </a>
-          </div>
+                <p className="text-muted-foreground">
+                  Feel free to reach out for collaborations, opportunities, or just to say hello!
+                  I typically respond within 24 hours.
+                </p>
+
+                <div className="flex gap-2 items-center">
+                  <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-sm text-muted-foreground">
+                    Available for new projects
+                  </span>
+                </div>
+
+                <div className="flex gap-3 pt-8 justify-center items-center">
+                  <a aria-label="Github account" href="https://github.com/AbhinavSharma486" target="_blank">
+                    <GithubIcon size={25} />
+                  </a>
+                  <a aria-label="Linkedin Account" href="https://www.linkedin.com/in/abhinav-sharma-6254252a5/" target="_blank">
+                    <LinkedinIcon size={25} />
+                  </a>
+                  <a aria-label="Email address" href="/" target="_blank">
+                    <MailIcon size={25} />
+                  </a>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Contact Form Card */}
+          <Card>
+            <CardContent className="pt-6">
+              <Form />
+            </CardContent>
+          </Card>
         </div>
 
-        <div className="text-center text-lg col-span-4 text-gray-900 dark:text-white">
-          <p className="mb-2">
-            Copyright © {new Date().getFullYear()} Abhinav Sharma. All rights
-            reserved.
-          </p>
-        </div>
       </div>
-    </div>
+    </main>
   );
 };
 

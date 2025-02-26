@@ -91,7 +91,7 @@ const Form = () => {
 
     const templateParams = {
       user_name: name.trim(),
-      to_name: "Abass Dev",
+      to_name: "Abhinav Sharma",
       from_name: name.trim(),
       from_subject: subject.trim(),
       from_email: email.trim(),
@@ -103,10 +103,10 @@ const Form = () => {
 
     try {
       await emailjs.send(
-        "service_jebasxm",
-        "template_mduuz2e",
+        "service_ggnu69n",
+        "template_ifd66zh",
         templateParams,
-        "9QHGoEPmDaBELUbZn"
+        "FwICwjumTnvkxF5CO"
       );
       notyf.success("Message sent!");
       userInput.name = "";
@@ -125,7 +125,7 @@ const Form = () => {
   return (
     <div className="bg-background shadow-md rounded-md p-5">
       <h2 className="text-4xl font-bold text-gray-700 dark:text-white text-center pb-5">
-        Contact Us
+        Get in touch
       </h2>
       {isLoading && <ProgressBar />}
       {message.success && <Alert message={message.success} type="success" />}
