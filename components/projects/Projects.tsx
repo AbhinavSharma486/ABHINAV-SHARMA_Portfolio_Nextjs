@@ -24,7 +24,7 @@ const Projects = () => {
               name="Advance Authentication in MERN"
               headerImg="/assets/images/advance-auth-mern.webp"
               description="Advance Authentication in MERN is a robust user management system built with the MERN stack. It features secure signup, signin, forgot/reset password functionality, and OTP verification.  Automated welcome, reset password, and forgot password emails enhance user experience. This project provides a solid base for secure web applications."
-              seeMore={{ url: "https://advance-authentication-in-mern.onrender.com/login", text: "Visit the Website..." }}
+              seeMore={{ text: "Visit the Website..." }}
               techs={["reactjs", "nodejs", "mongodb", "express", "framer-motion", "tailwindcss", "zustand", "mailtrap", "axios", "bcryptjs", "jsonwebtoken", "javascript"]}
               headerLinks={{
                 github: {

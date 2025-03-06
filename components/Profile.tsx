@@ -1,5 +1,6 @@
 "use client";
-import React from 'react';
+
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import ShimmerButton from './ui/shimmer-button';
@@ -21,7 +22,7 @@ const SOCIAL_LINKS = [
   },
   {
     icon: MailIcon,
-    href: "/",
+    href: "/contact",
     label: "Email",
     hoverColor: "hover:bg-primary"
   }
@@ -85,6 +86,7 @@ const SocialLinks = () => (
 );
 
 const Profile = () => {
+
   return (
     <main className='relative min-h-screen bg-gradient-to-br from-background to-background/95 flex items-center justify-center p-4 overflow-hidden'>
 
@@ -104,7 +106,7 @@ const Profile = () => {
 
                 <div className="font-edu-nsw text-2xl md:text-3xl">
                   <span className="bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">
-                    Hello World, I am
+                    जय श्री राधे, I am
                   </span>
                 </div>
 
@@ -117,12 +119,12 @@ const Profile = () => {
               </header>
 
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                I am a passionate web developer.
+                I am a passionate full stack MERN web developer. Transforming ideas into interactive and dynamic web experiences. Converting chai into code.
               </p>
 
               <div className="flex items-center gap-2 justify-center md:justify-start text-muted-foreground">
                 <span className="inline-block w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-                Ready to get Job
+                Looking for Full Stack MERN opportunities
               </div>
 
               <div className="flex flex-wrap gap-6 justify-center items-center pt-4">

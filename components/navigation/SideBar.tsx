@@ -5,11 +5,12 @@ import Link from 'next/link';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import ThemeToggle from '../ui/theme-toggle';
-import { CodeXml, Contact, Folder, History, MenuIcon } from "lucide-react";
+import { CodeXml, Contact, Folder, History, Home, MenuIcon } from "lucide-react";
 
 interface NavigationItem {
   name: string;
-  link: string;
+  link?: string;
+  href?: string,
   icon: React.ElementType;
   margin?: boolean;
   external?: boolean;
@@ -27,10 +28,10 @@ interface NavigationItemProps {
 }
 
 const NAVIGATION_ITEMS: NavigationItem[] = [
-  { name: "Projects", link: "/", icon: Folder },
-  { name: "Web apps", link: "/", icon: CodeXml, external: true },
-  { name: "My Story", link: "/", icon: History },
-  { name: "Contact Me", link: "/", icon: Contact },
+  { name: "Home", href: "/", icon: Home },
+  { name: "Projects", href: "/projects", icon: Folder },
+  { name: "My Story", href: "/", icon: History },
+  { name: "Contact Me", href: "/contact", icon: Contact },
 ];
 
 const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) => {
@@ -38,7 +39,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) 
 
   return (
     <Link
-      href={item.link}
+      href={item.href || "#"}
       onClick={onClick}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
@@ -76,15 +77,8 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) 
   );
 };
 
-const Logo: React.FC<LogoProps> = ({ open, onClick }) => (
-  <Link
-    href="/"
-    className={cn(
-      "flex items-center gap-2 transition-all duration-200",
-      !open && "w-0"
-    )}
-    onClick={onClick}
-  >
+const Logo: React.FC<LogoProps> = ({ open }) => (
+  <Link href="/" className={cn("flex items-center gap-2 transition-all duration-200", !open && "w-0")}>
     {open && <span className="text-4xl">{`{`}</span>}
     <img
       src="/assets/images/logo.webp"
@@ -103,9 +97,11 @@ const SideBar = () => {
 
   // Close sidebar on route change
   React.useEffect(() => {
-    const handleRouteChange = () => setOpen(false);
-    window.addEventListener('popstate', handleRouteChange);
-    return () => window.removeEventListener('popstate', handleRouteChange);
+    if (typeof window !== "undefined") {
+      const handleRouteChange = () => setOpen(false);
+      window.addEventListener("popstate", handleRouteChange);
+      return () => window.removeEventListener("popstate", handleRouteChange);
+    }
   }, []);
 
   // Handle ESC key to close sidebar

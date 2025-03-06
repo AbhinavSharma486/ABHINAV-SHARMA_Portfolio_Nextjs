@@ -3,12 +3,13 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { Mail, Phone, MapPin, User, GithubIcon, TwitterIcon, FacebookIcon, MailIcon, LinkedinIcon } from "lucide-react";
 import localFont from "next/font/local";
 import Form from "../components/contact/Form";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { useSearchParams } from "next/navigation";
 
 // Font configuration
 const orbitron = localFont({
@@ -75,6 +76,7 @@ const ContactInfoItem: React.FC<ContactInfo> = ({ icon: Icon, label, value, href
 };
 
 const Footer = () => {
+
   return (
     <main className="min-h-screen bg-background">
       <div className="container mx-auto px-4 md:px-8 py-16">
