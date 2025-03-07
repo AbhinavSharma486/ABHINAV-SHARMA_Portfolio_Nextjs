@@ -137,6 +137,11 @@ const Footer = () => {
           </Card>
         </div>
 
+        {/* Copyright Footer */}
+        <footer className="text-center mt-12 text-muted-foreground text-lg">
+          Copyright © 2025 made by ❤️ Abhinav Sharma. All rights reserved.
+        </footer>
+
       </div>
     </main>
   );

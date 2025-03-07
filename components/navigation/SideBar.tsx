@@ -30,7 +30,7 @@ interface NavigationItemProps {
 const NAVIGATION_ITEMS: NavigationItem[] = [
   { name: "Home", href: "/", icon: Home },
   { name: "Projects", href: "/projects", icon: Folder },
-  { name: "My Story", href: "/", icon: History },
+  { name: "My Story", href: "/my-story", icon: History },
   { name: "Contact Me", href: "/contact", icon: Contact },
 ];
 

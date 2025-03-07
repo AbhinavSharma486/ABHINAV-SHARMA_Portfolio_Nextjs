@@ -12,7 +12,7 @@ const Skills = () => {
       <section id='skills' className="p-10 dark:bg-gray-900">
         <div className={`container mx-auto px-8 md:px-10 lg:px-20 xl:px-32`}>
           <h1
-            className={`font-orbitron text-center font-bold  dark:text-white text-6xl mt-4 text-blue-950`}
+            className={`font-orbitron text-center font-bold  dark:text-white text-5xl mt-4 text-blue-950`}
           >
             Experties
           </h1>

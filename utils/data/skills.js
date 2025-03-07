@@ -20,5 +20,4 @@ export const skillsData = [
   'Postman',
   'Github',
   'Socket.io',
-  'appwrite'
 ];

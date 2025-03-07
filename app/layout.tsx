@@ -5,8 +5,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Theme from "../context/theme-provider";
 
-
-const Footer = dynamic(() => import("../components/Footer"));
+const Footer = dynamic(() => import("../components/FooterWrapper"));
 
 export const metadata: Metadata = {
   title: "Abhinav Sharma | Full Stack developer | Personal portfolio",
@@ -29,6 +28,7 @@ export const eduNSW = Edu_NSW_ACT_Foundation({
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode; }) {
+
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${orbitron.variable} ${eduNSW.variable}`}>
