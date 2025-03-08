@@ -57,7 +57,7 @@ const ProfileImage = () => (
     <div className="relative rounded-full overflow-hidden h-48 w-48 md:h-64 md:w-64">
       <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-violet-500/10 group-hover:opacity-0 transition duration-500" />
       <img
-        src="/assets/images/profilePic.webp"
+        src="/assets/images/profile-img.webp"
         alt="Abhinav Sharma"
         width={256}
         height={256}

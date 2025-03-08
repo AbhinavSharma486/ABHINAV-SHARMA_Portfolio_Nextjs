@@ -46,7 +46,7 @@ const MyStory = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-500 to-pink-500" />
 
             <img
-              src="/assets/images/about.webp"
+              src="/assets/images/profile-img.webp"
               alt="Portrait of Abhinav Sharma - Full Stack MERN Developer"
               className="w-full h-auto object-cover relative z-10"
               width={1200}
