@@ -95,6 +95,19 @@ import linux from '../app/assets/svg/skills/linux.svg';
 import sqlalchemy from '../app/assets/svg/skills/sqlalchemy.svg';
 import fastapi from '../app/assets/svg/skills/fastapi.svg';
 
+import liveblocks from '../app/assets/svg/skills/liveblocks.svg';
+import emailjs from '../app/assets/svg/skills/emailjs.svg';
+import flowbite from '../app/assets/svg/skills/flowbite.svg';
+import mailtrap from '../app/assets/svg/skills/mailtrap.svg';
+import zod from '../app/assets/svg/skills/zod.svg';
+import radixui from '../app/assets/svg/skills/radixui.svg';
+import clerk from '../app/assets/svg/skills/clerk.svg';
+import daisyui from '../app/assets/svg/skills/daisyui.svg';
+import zustand from "../app/assets/svg/skills/zustand.svg";
+import framermotion from "../app/assets/svg/skills/framermotion.svg";
+import chakraui from "../app/assets/svg/skills/chakraui.svg";
+import sass from "../app/assets/svg/skills/sass.svg";
+
 
 
 export const skillsImage = (skill) => {
@@ -288,6 +301,30 @@ export const skillsImage = (skill) => {
       return babel;
     case 'appwrite':
       return appwrite;
+    case 'liveblocks':
+      return liveblocks;
+    case 'emailjs':
+      return emailjs;
+    case 'flowbite':
+      return flowbite;
+    case 'mailtrap':
+      return mailtrap;
+    case 'zod':
+      return zod;
+    case 'radixui':
+      return radixui;
+    case 'clerk':
+      return clerk;
+    case 'daisyui':
+      return daisyui;
+    case 'zustand':
+      return zustand;
+    case 'framer':
+      return framermotion;
+    case 'chakraui':
+      return chakraui;
+    case 'sass':
+      return sass;
     default:
       break;
   }
