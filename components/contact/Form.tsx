@@ -1,13 +1,10 @@
-// @ts-ignore
-// @ts-nocheck
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Notification from "@/utils/Notification";
 import {
   validateEmail,
   validateTextarea,
-  validateUsername,
 } from "../../helpers";
 import emailjs from "@emailjs/browser";
 import ProgressBar from "../ui/LoadingBar";
@@ -40,8 +37,8 @@ const Form = () => {
   });
 
   function inputHandler(e: React.FormEvent) {
-    const inputValue = e.target.value;
-    const inputName = e.target.name;
+    const inputValue = e.target?.value;
+    const inputName = e.target?.name;
     setInvalidInput({
       name: false,
       subject: false,
@@ -118,7 +115,7 @@ const Form = () => {
       });
 
       setLoading(false);
-    } catch (err) {
+    } catch (error) {
       setMessage({
         success: "",
         error: "Internal server error, technical issues!",

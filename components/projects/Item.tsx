@@ -6,6 +6,7 @@ import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
 import Link from "next/link";
 import { ExternalLink, GithubIcon } from 'lucide-react';
+import Image from 'next/image';
 
 interface HeaderLink {
   url?: string;
@@ -56,7 +57,7 @@ export default function Item({
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
 
           {/* Image */}
-          <img
+          <Image
             className="object-cover transition-all duration-500 group-hover:scale-105"
             src={headerImg}
             alt={name}

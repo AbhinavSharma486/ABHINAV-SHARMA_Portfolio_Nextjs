@@ -1,15 +1,11 @@
-// @ts-ignore
-// @ts-nocheck
-
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Link from "next/link";
-import { Mail, Phone, MapPin, User, GithubIcon, TwitterIcon, FacebookIcon, MailIcon, LinkedinIcon } from "lucide-react";
+import { Mail, Phone, MapPin, User, GithubIcon, MailIcon, LinkedinIcon } from "lucide-react";
 import localFont from "next/font/local";
 import Form from "../components/contact/Form";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { useSearchParams } from "next/navigation";
 import { FaWhatsapp } from "react-icons/fa";
 
 

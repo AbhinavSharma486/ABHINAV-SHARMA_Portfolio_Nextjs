@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { birthday } from '@/helpers';
+import Image from 'next/image';
 
 const biographyContent = [
   {
@@ -45,7 +46,7 @@ const MyStory = () => {
           <div className="relative w-full overflow-hidden rounded-lg shadow-lg">
             <div className="absolute inset-0 bg-gradient-to-r from-orange-400 via-red-500 to-pink-500" />
 
-            <img
+            <Image
               src="/assets/images/profile-img.webp"
               alt="Portrait of Abhinav Sharma - Full Stack MERN Developer"
               className="w-full h-auto object-cover relative z-10"

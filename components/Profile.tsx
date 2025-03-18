@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import ShimmerButton from './ui/shimmer-button';
-import { ArrowRight, FacebookIcon, GithubIcon, LinkedinIcon, MailIcon, TwitterIcon } from 'lucide-react';
+import { ArrowRight, GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
 import { FaWhatsapp } from "react-icons/fa";
+import Image from 'next/image';
 
 // Social links data;
 const SOCIAL_LINKS = [
@@ -63,7 +64,7 @@ const ProfileImage = () => (
 
     <div className="relative rounded-full overflow-hidden h-48 w-48 md:h-64 md:w-64">
       <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-violet-500/10 group-hover:opacity-0 transition duration-500" />
-      <img
+      <Image
         src="/assets/images/profile-img.webp"
         alt="Abhinav Sharma"
         width={256}

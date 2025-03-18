@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import ThemeToggle from '../ui/theme-toggle';
-import { CodeXml, Contact, Folder, History, Home, MenuIcon } from "lucide-react";
+import { Contact, Folder, History, Home, MenuIcon } from "lucide-react";
+import Image from 'next/image';
 
 interface NavigationItem {
   name: string;
@@ -80,7 +81,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) 
 const Logo: React.FC<LogoProps> = ({ open }) => (
   <Link href="/" className={cn("flex items-center gap-2 transition-all duration-200", !open && "w-0")}>
     {open && <span className="text-4xl">{`{`}</span>}
-    <img
+    <Image
       src="/assets/images/logo.webp"
       alt="Abhinav Sharma Logo"
       width={50}

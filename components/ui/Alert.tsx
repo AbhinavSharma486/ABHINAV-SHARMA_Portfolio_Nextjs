@@ -5,7 +5,7 @@ interface AlertProps {
   linkDesk?: string;
 }
 
-function Alert({ message, type, link, linkDesk }: AlertProps) {
+function Alert({ message, type, link }: AlertProps) {
   return (
     <div
       style={{

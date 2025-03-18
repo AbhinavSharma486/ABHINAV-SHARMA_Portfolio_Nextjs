@@ -1,11 +1,9 @@
 'use client';
 
 import { BsGithub } from "react-icons/bs";
-import { usePathname } from "next/navigation";
 import Item from "./Item";
 
 const Projects = () => {
-  const pathName = usePathname();
 
   return (
     <>
