@@ -3,6 +3,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Notification from "@/utils/Notification";
 import {
   validateEmail,
   validateTextarea,
@@ -11,6 +12,9 @@ import {
 import emailjs from "@emailjs/browser";
 import ProgressBar from "../ui/LoadingBar";
 import { Send } from "lucide-react";
+import Alert from "../ui/Alert";
+
+const notyf = new Notification(3000);
 
 const Form = () => {
 
@@ -59,7 +63,7 @@ const Form = () => {
    * @return {Promise<void>} - A promise that resolves when the email is sent successfully.
    */
 
-  async function onSubmitEmailHandler(event: React.FormEvent) {
+  async function onSubmitEmailHandler(event: React.FormEvent): Promise<void> {
     event.preventDefault();
 
     const valideEmail = validateEmail(userInput.email);
@@ -105,9 +109,14 @@ const Form = () => {
         "FwICwjumTnvkxF5CO"
       );
       notyf.success("Message sent!");
-      userInput.name = "";
-      userInput.subject = "";
-      userInput.email = "";
+
+      setUserInputs({
+        name: "",
+        subject: "",
+        email: "",
+        message: "",
+      });
+
       setLoading(false);
     } catch (err) {
       setMessage({

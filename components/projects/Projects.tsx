@@ -146,8 +146,6 @@ const Projects = () => {
           </div>
         </div>
       </section>
-
-      {pathName === "/projects/" && <Report report="projects/page" />}
     </>
   );
 };
