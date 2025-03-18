@@ -3,7 +3,6 @@
 import { BsGithub } from "react-icons/bs";
 import { usePathname } from "next/navigation";
 import Item from "./Item";
-import Report from "../Report";
 
 const Projects = () => {
   const pathName = usePathname();

@@ -30,7 +30,7 @@ const contactInfo: ContactInfo[] = [
   {
     icon: User,
     label: "Role",
-    value: "Web developer"
+    value: "MERN Full Stack Web Developer"
   },
   {
     icon: MapPin,
@@ -110,7 +110,7 @@ const Footer = () => {
                 <div className="flex gap-2 items-center">
                   <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                   <span className="text-sm text-muted-foreground">
-                    Available for new projects
+                    Looking for Full Stack MERN opportunities
                   </span>
                 </div>
 
@@ -121,7 +121,7 @@ const Footer = () => {
                   <a aria-label="Linkedin Account" href="https://www.linkedin.com/in/abhinav-sharma-6254252a5/" target="_blank">
                     <LinkedinIcon size={25} />
                   </a>
-                  <a aria-label="Email address" href="/" target="_blank">
+                  <a aria-label="Email address" href="/contact" target="_blank">
                     <MailIcon size={25} />
                   </a>
                 </div>

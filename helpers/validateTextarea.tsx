@@ -1,8 +1,6 @@
 // @ts-ignore
 // @ts-nocheck
 
-import Notification from "../utils/Notification";
-
 export default function validateTextarea(textareaId, minLength, maxLength) {
   const notyf = new Notification(3000);
   const textarea = document.getElementById(textareaId);
