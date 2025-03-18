@@ -85,6 +85,19 @@ const Projects = () => {
               }}
             />
             <Item
+              name="Github Profile Search"
+              headerImg="/assets/images/github-profile-search.webp"
+              description="GitHub Profile Search is a web application built using HTML, CSS, and JavaScript that allows users to search for any GitHub profile by entering a username. The application fetches and displays key profile details, including the user's avatar, username, full name, bio, followers, following count, and public repositories. It also includes a Check Profile button that redirects users to the corresponding GitHub profile."
+              techs={["html", "css", "javascript"]}
+              seeMore={{ url: "https://abhinavsharma486.github.io/Search_Github_Profile/", text: "Give it a try..." }}
+              headerLinks={{
+                github: {
+                  url: "https://github.com/AbhinavSharma486/Search_Github_Profile",
+                  icon: <BsGithub />,
+                },
+              }}
+            />
+            <Item
               name="Word Counter"
               headerImg="/assets/images/word-counter.webp"
               description=" Word Counter is a versatile text analysis tool that provides word, character, and sentence counts, along with an estimated reading time.  It also includes text transformation options (uppercase/lowercase) and a clear all function.  A dark/light mode toggle enhances usability. This project is ideal for quick text analysis and manipulation."
