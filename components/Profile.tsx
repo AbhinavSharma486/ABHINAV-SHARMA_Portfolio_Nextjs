@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from './ui/button';
 import ShimmerButton from './ui/shimmer-button';
 import { ArrowRight, FacebookIcon, GithubIcon, LinkedinIcon, MailIcon, TwitterIcon } from 'lucide-react';
+import { FaWhatsapp } from "react-icons/fa";
 
 // Social links data;
 const SOCIAL_LINKS = [
@@ -19,6 +20,12 @@ const SOCIAL_LINKS = [
     href: "https://www.linkedin.com/in/abhinav-sharma-6254252a5/",
     label: "LinkedIn",
     hoverColor: "hover:bg-[#0077b5]"
+  },
+  {
+    icon: FaWhatsapp,
+    href: "https://api.whatsapp.com/send?phone=7819872024",
+    label: "Whatsapp",
+    hoverColor: "hover:bg-primary"
   },
   {
     icon: MailIcon,
@@ -104,13 +111,13 @@ const Profile = () => {
             <div className="space-y-8 text-center md:text-left">
               <header className='space-y-8'>
 
-                <div className="font-edu-nsw text-2xl md:text-3xl">
+                <div className="font-orbitron  text-2xl md:text-3xl">
                   <span className="bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">
                     जय श्री राधे, I am
                   </span>
                 </div>
 
-                <h1 className='font-orbitron text-4xl md:text-6xl lg:text-7xl'>
+                <h1 className='font-orbitron text-4xl md:text-4xl lg:text-7xl'>
                   <span className="bg-gradient-to-r from-primary via-violet-500 to-blue-500 bg-clip-text text-transparent">
                     Abhinav Sharma
                   </span>

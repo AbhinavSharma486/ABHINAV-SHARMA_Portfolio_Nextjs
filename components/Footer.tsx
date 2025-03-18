@@ -10,6 +10,8 @@ import localFont from "next/font/local";
 import Form from "../components/contact/Form";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { useSearchParams } from "next/navigation";
+import { FaWhatsapp } from "react-icons/fa";
+
 
 // Font configuration
 const orbitron = localFont({
@@ -120,6 +122,9 @@ const Footer = () => {
                   </a>
                   <a aria-label="Linkedin Account" href="https://www.linkedin.com/in/abhinav-sharma-6254252a5/" target="_blank">
                     <LinkedinIcon size={25} />
+                  </a>
+                  <a aria-label="Linkedin Account" href="https://api.whatsapp.com/send?phone=7819872024" target="_blank">
+                    <FaWhatsapp size={25} />
                   </a>
                   <a aria-label="Email address" href="/contact" target="_blank">
                     <MailIcon size={25} />
