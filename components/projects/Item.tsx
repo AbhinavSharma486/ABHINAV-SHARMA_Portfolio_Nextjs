@@ -10,6 +10,7 @@ import { ExternalLink, GithubIcon } from 'lucide-react';
 interface HeaderLink {
   url?: string;
   icon?: React.ReactNode;
+  target?: string;
 }
 
 interface SeeMore {
@@ -17,6 +18,7 @@ interface SeeMore {
   after?: string;
   url?: string;
   text?: string;
+  target?: string;
 }
 
 interface ItemProps {
@@ -64,7 +66,7 @@ export default function Item({
           <div className={`absolute inset-0 flex items-center justify-center z-20 bg-background/10 backdrop-blur-sm transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
             {headerLinks && headerLinks.github && (
               <Button variant="secondary" size="sm" asChild className="transform -translate-y-2 transition-all duration-300 hover:scale-105">
-                <Link href={headerLinks.github.url || "#"} className="flex items-center gap-2">
+                <Link target="_blank" href={headerLinks.github.url || "#"} className="flex items-center gap-2">
                   <GithubIcon className="h-4 w-4" />
                   View Source
                 </Link>
@@ -93,6 +95,7 @@ export default function Item({
           <p className="text-sm">
             {seeMore.before}{" "}
             <Link
+              target="_blank"
               href={seeMore.url || "#"}
               className="text-primary hover:text-primary/80 inline-flex items-center gap-1 group"
             >

@@ -24,12 +24,13 @@ const Projects = () => {
               name="Chatify"
               headerImg="/assets/images/chatify-MERN.webp"
               description="Developed a secure and customizable user platform with authentication, real-time chat, profile management, and database integration. Implemented secure login (email/password, Google) with OTP verification and JWT for enhanced security. Built a real-time chat system with online/offline status tracking using Socket.io. Enabled profile updates, including name changes, profile picture uploads (Cloudinary), and password resets. Provided 32 theme options for UI customization. Utilized MongoDB for data storage and Nodemailer for email verification and password recovery."
-              seeMore={{ url: "https://chatify-4x1c.onrender.com/", text: "Visit the website..." }}
+              seeMore={{ url: "https://chatify-4x1c.onrender.com/", text: "Visit the website...", target: "_blank" }}
               techs={["reactjs", "tailwindcss", "vitejs", "expressjs", "nodejs", "mongodb", "cloudinary", "socket.io", "react-hot-toast", "firebase", "axios", "lucide-react", "redux-toolkit", "javascript", "bcryptjs", "cookie-parser", "jsonwebtoken", "nodemailer"]}
               headerLinks={{
                 github: {
                   url: "https://github.com/AbhinavSharma486/SyncDocsNextJS",
                   icon: <BsGithub />,
+                  target: "_blank"
                 },
               }}
             />
