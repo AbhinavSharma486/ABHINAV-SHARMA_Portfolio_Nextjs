@@ -119,7 +119,9 @@ const Profile = () => {
               </header>
 
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                I am a passionate full stack MERN web developer. Transforming ideas into interactive and dynamic web experiences. Converting chai into code.
+                MERN Stack Developer with hands-on experience in building scalable web applications, real-time systems,
+                and robust authentication solutions.
+                Transforming ideas into interactive and dynamic web experiences.
               </p>
 
               <div className="flex items-center gap-2 justify-center md:justify-start text-muted-foreground">
