@@ -139,10 +139,11 @@ const Profile = () => {
 
               <div className="flex flex-wrap gap-6 justify-center items-center pt-4">
 
-                <ShimmerButton className="min-w-[100px]">
-                  <Link href="/assets/pdf/abass-cv-fr.pdf" download className="px-8 text-white">
-                    Download Resume
-                  </Link>
+                <ShimmerButton
+                  className="min-w-[100px] text-white dark:text-white"
+                  onClick={() => window.open("https://drive.google.com/file/d/1QocCTBRD4I2A_kIxBIJ509zvRnj7MIFv/view?usp=drive_link", "_blank", "noopener,noreferrer")}
+                >
+                  Download Resume
                 </ShimmerButton>
 
                 <Button
@@ -159,9 +160,9 @@ const Profile = () => {
             </div>
           </div>
         </article>
-      </div>
+      </div >
 
-    </main>
+    </main >
   );
 };
 

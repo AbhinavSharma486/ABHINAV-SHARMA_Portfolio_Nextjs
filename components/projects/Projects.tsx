@@ -25,7 +25,7 @@ const Projects = () => {
               techs={["reactjs", "tailwindcss", "vitejs", "expressjs", "nodejs", "mongodb", "cloudinary", "socket.io", "react-hot-toast", "firebase", "axios", "lucide-react", "redux-toolkit", "javascript", "bcryptjs", "cookie-parser", "jsonwebtoken", "nodemailer"]}
               headerLinks={{
                 github: {
-                  url: "https://github.com/AbhinavSharma486/SyncDocsNextJS",
+                  url: "https://github.com/AbhinavSharma486/Advance_Chat_App",
                   icon: <BsGithub />,
                   target: "_blank"
                 },
