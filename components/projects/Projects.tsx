@@ -21,14 +21,14 @@ const Projects = () => {
 
           <div className="grid gap-8 md:grid-cols-2">
             <Item
-              name="Advance Authentication in MERN"
-              headerImg="/assets/images/advance-auth-mern.webp"
-              description="Advance Authentication in MERN is a robust user management system built with the MERN stack. It features secure signup, signin, forgot/reset password functionality, and OTP verification.  Automated welcome, reset password, and forgot password emails enhance user experience. This project provides a solid base for secure web applications."
-              seeMore={{ text: "Visit the Website..." }}
-              techs={["reactjs", "nodejs", "mongodb", "express", "framer-motion", "tailwindcss", "zustand", "mailtrap", "axios", "bcryptjs", "jsonwebtoken", "javascript"]}
+              name="Chatify"
+              headerImg="/assets/images/chatify-MERN.webp"
+              description="Developed a secure and customizable user platform with authentication, real-time chat, profile management, and database integration. Implemented secure login (email/password, Google) with OTP verification and JWT for enhanced security. Built a real-time chat system with online/offline status tracking using Socket.io. Enabled profile updates, including name changes, profile picture uploads (Cloudinary), and password resets. Provided 32 theme options for UI customization. Utilized MongoDB for data storage and Nodemailer for email verification and password recovery."
+              seeMore={{ url: "https://chatify-4x1c.onrender.com/", text: "Visit the website..." }}
+              techs={["reactjs", "tailwindcss", "vitejs", "expressjs", "nodejs", "mongodb", "cloudinary", "socket.io", "react-hot-toast", "firebase", "axios", "lucide-react", "redux-toolkit", "javascript", "bcryptjs", "cookie-parser", "jsonwebtoken", "nodemailer"]}
               headerLinks={{
                 github: {
-                  url: "https://github.com/AbhinavSharma486/Advance_Authentication_In_MERN",
+                  url: "https://github.com/AbhinavSharma486/SyncDocsNextJS",
                   icon: <BsGithub />,
                 },
               }}
@@ -36,12 +36,24 @@ const Projects = () => {
             <Item
               name="Sync Docs"
               headerImg="/assets/images/Sync-docs-nextjs.webp"
-              description="Sync Docs, built using Next.js, is a collaborative text editor that allows multiple users to work on the same document simultaneously.  The project features real-time text synchronization, enabling users to see edits made by others as they happen.  A built-in text editor provides rich text editing capabilities.  Furthermore, the platform supports commenting on specific words or sections, fostering seamless communication and feedback among collaborators. Sync Docs facilitates efficient teamwork and streamlined document creation."
+              description="Developed a real-time collaborative document editor using Liveblocks, enhancing team productivity and remote collaboration. Enabled multiple users to collaborate with role-based permissions  Can View and Can Write real-time edits, mentions, and threaded comments for discussion and issue resolution. Integrated Lexical for rich-text editing with advanced formatting options like headings, bold, italic, underline, and strikethrough. Built using Next.js and TypeScript, with Radix UI for accessible and modern UI components."
               seeMore={{ url: "https://sync-docs-next-js.vercel.app/sign-in", text: "Give it a try..." }}
               techs={["nextjs", "tailwindcss", "clerk", "lexical", "liveblocks", "redix-ui", "jsm-editor", "lucide-react", "nanoid", "typescript"]}
               headerLinks={{
                 github: {
                   url: "https://github.com/AbhinavSharma486/SyncDocsNextJS",
+                  icon: <BsGithub />,
+                },
+              }}
+            />
+            <Item
+              name="Advance Authentication in MERN"
+              headerImg="/assets/images/advance-auth-mern.webp"
+              description="Advance Authentication in MERN is a robust user management system built with the MERN stack. It features secure signup, signin, forgot/reset password functionality, and OTP verification.  Automated welcome, reset password, and forgot password emails enhance user experience. This project provides a solid base for secure web applications."
+              techs={["reactjs", "nodejs", "mongodb", "express", "framer-motion", "tailwindcss", "zustand", "mailtrap", "axios", "bcryptjs", "jsonwebtoken", "javascript"]}
+              headerLinks={{
+                github: {
+                  url: "https://github.com/AbhinavSharma486/Advance_Authentication_In_MERN",
                   icon: <BsGithub />,
                 },
               }}
