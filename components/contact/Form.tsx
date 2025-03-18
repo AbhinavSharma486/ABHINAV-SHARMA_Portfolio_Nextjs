@@ -36,21 +36,18 @@ const Form = () => {
     message: "",
   });
 
-  function inputHandler(e: React.FormEvent) {
-    const inputValue = e.target?.value;
-    const inputName = e.target?.name;
+  function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const { name, value } = e.target;
     setInvalidInput({
       name: false,
       subject: false,
       email: false,
       message: false,
     });
-    setUserInputs((prev) => {
-      return {
-        ...prev,
-        [inputName]: inputValue,
-      };
-    });
+    setUserInputs((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   }
 
   /**
@@ -116,6 +113,7 @@ const Form = () => {
 
       setLoading(false);
     } catch (error) {
+      console.log("error", error);
       setMessage({
         success: "",
         error: "Internal server error, technical issues!",
