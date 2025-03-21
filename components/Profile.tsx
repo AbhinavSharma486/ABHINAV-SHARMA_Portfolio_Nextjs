@@ -141,7 +141,7 @@ const Profile = () => {
 
                 <ShimmerButton
                   className="min-w-[100px] text-white dark:text-white"
-                  onClick={() => window.open("https://drive.google.com/file/d/1QocCTBRD4I2A_kIxBIJ509zvRnj7MIFv/view?usp=drive_link", "_blank", "noopener,noreferrer")}
+                  onClick={() => window.open("https://drive.google.com/file/d/1dD1IxITSiT_4aU0SIoLBFewqqN3Wg2UM/view", "_blank", "noopener,noreferrer")}
                 >
                   Download Resume
                 </ShimmerButton>
