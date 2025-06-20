@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const Skills = () => {
   return (
-    <section id='skills' className="dark:bg-gray-900 py-10">
+    <section id='skills' className="bg-gradient-to-br from-background to-background/95 py-10">
       <div className={`container mx-auto px-8 md:px-10 lg:px-20 xl:px-32`}>
         <h1 className={`font-orbitron text-center font-bold dark:text-white text-5xl mt-4 text-blue-950`}>
           Experties
