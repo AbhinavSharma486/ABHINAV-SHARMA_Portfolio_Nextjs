@@ -135,7 +135,7 @@ const Profile = () => {
               <div className="flex flex-wrap gap-4 justify-center items-center pt-3 md:pt-4">
                 <ShimmerButton
                   className="min-w-[120px] sm:min-w-[140px] text-white dark:text-white"
-                  onClick={() => window.open("https://drive.google.com/file/d/1dD1IxITSiT_4aU0SIoLBFewqqN3Wg2UM/view", "_blank", "noopener,noreferrer")}
+                  onClick={() => window.open("https://drive.google.com/file/d/1oJmaMKTolJIHsBHMWRLpUC2KWQ8EhTTO/view?usp=sharing", "_blank", "noopener,noreferrer")}
                 >
                   Download Resume
                 </ShimmerButton>
