@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import ThemeToggle from '../ui/theme-toggle';
-import { Contact, Folder, History, Home, MenuIcon } from "lucide-react";
+import { Contact, Folder, History, Home, MenuIcon, Briefcase } from "lucide-react";
 import Image from 'next/image';
 
 interface NavigationItem {
@@ -31,6 +31,7 @@ interface NavigationItemProps {
 const NAVIGATION_ITEMS: NavigationItem[] = [
   { name: "Home", href: "/", icon: Home },
   { name: "Projects", href: "/projects", icon: Folder },
+  { name: "Experience", href: "/experience", icon: Briefcase },
   { name: "My Story", href: "/my-story", icon: History },
   { name: "Contact Me", href: "/contact", icon: Contact },
 ];
