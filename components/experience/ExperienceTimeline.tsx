@@ -129,7 +129,8 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
   return (
     <section className="py-8 min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a]">
       <div className="container mx-auto px-2 md:px-10 lg:px-20 xl:px-32">
-        <h1 className="font-orbitron text-center font-bold dark:text-white text-3xl md:text-5xl mt-4 text-blue-950 mb-8 md:mb-12 drop-shadow-lg">Experience</h1>
+        <h1 className="font-orbitron text-center font-bold dark:text-white text-3xl md:text-5xl mt-4 text-blue-950 mb-2 md:mb-4 drop-shadow-lg">Experience</h1>
+        <div className="mx-auto mt-3 mb-8 md:mb-12 h-1 w-full max-w-[340px] md:max-w-[480px] rounded-full bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400" />
         <div className="relative flex flex-col items-center" ref={ref}>
           {/* Animated vertical line */}
           <motion.div
