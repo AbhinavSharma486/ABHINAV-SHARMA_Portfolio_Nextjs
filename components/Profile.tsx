@@ -173,7 +173,7 @@ const Profile = () => {
   const mainRef = useRef(null);
   const parallax = useParallax(mainRef);
   return (
-    <main ref={mainRef} className='relative min-h-[90vh] bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-8 md:py-10 overflow-hidden'>
+    <main id="home" ref={mainRef} className='relative min-h-[90vh] bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-8 md:py-10 overflow-hidden'>
       <BackgroundBlobs ref={mainRef} />
       <div className={`container mx-auto px-4 sm:px-8 md:px-10 lg:px-20 xl:px-32`}>
         <motion.article

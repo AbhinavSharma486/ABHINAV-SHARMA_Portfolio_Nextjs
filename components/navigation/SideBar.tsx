@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import ThemeToggle from '../ui/theme-toggle';
@@ -15,6 +16,7 @@ interface NavigationItem {
   icon: React.ElementType;
   margin?: boolean;
   external?: boolean;
+  scrollTo?: string; // For scroll navigation
 }
 
 interface LogoProps {
@@ -29,20 +31,40 @@ interface NavigationItemProps {
 }
 
 const NAVIGATION_ITEMS: NavigationItem[] = [
-  { name: "Home", href: "/", icon: Home },
+  { name: "Home", scrollTo: "#home", icon: Home },
   { name: "Projects", href: "/projects", icon: Folder },
-  { name: "Experience", href: "/experience", icon: Briefcase },
+  { name: "Experience", scrollTo: "#experience", icon: Briefcase },
   { name: "My Story", href: "/my-story", icon: History },
-  { name: "Contact Me", href: "/contact", icon: Contact },
+  { name: "Contact Me", scrollTo: "#contact", icon: Contact },
 ];
 
 const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) => {
+  const pathname = usePathname();
   const isExternal = item.external;
+  const isScrollLink = item.scrollTo;
+
+  const handleClick = (e: React.MouseEvent) => {
+    onClick();
+
+    if (isScrollLink) {
+      e.preventDefault();
+      // If we're not on home page, navigate to home with scrollTo param
+      if (pathname !== '/') {
+        window.location.href = `/?scrollTo=${item.scrollTo!.replace('#', '')}`;
+      } else {
+        // We're already on home page, just scroll
+        const element = document.querySelector(item.scrollTo!);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  };
 
   return (
     <Link
-      href={item.href || "#"}
-      onClick={onClick}
+      href={isScrollLink ? "/" : (item.href || "#")}
+      onClick={handleClick}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
       className={cn(

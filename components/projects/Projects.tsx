@@ -142,7 +142,7 @@ const Projects = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="pt-20 mb-10 bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] relative overflow-hidden">
+    <section id="projects" ref={sectionRef} className="pt-20 mb-10 bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] relative overflow-hidden">
       <ProjectBlobs y1={y1} y2={y2} y3={y3} />
       <div className={`relative z-10 container mx-auto px-4 sm:px-8 md:px-10 lg:px-20 xl:px-32`}>
         <motion.h1

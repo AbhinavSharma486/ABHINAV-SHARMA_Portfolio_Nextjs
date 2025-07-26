@@ -48,7 +48,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] py-8 sm:py-12 md:py-16 min-h-screen">
+    <section id="contact" className="bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] py-8 sm:py-12 md:py-16 min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
         {/* Header */}
         <motion.div
