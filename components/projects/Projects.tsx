@@ -3,7 +3,7 @@
 import { BsGithub } from "react-icons/bs";
 import Item from "./Item";
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 40, scale: 0.95 },
@@ -26,11 +26,14 @@ const ProjectBlobs = ({ y1, y2, y3 }: { y1: any; y2: any; y3: any; }) => (
 
 const Projects = () => {
   const sectionRef = useRef(null);
+  const [visibleProjects, setVisibleProjects] = useState(3);
+
   // Parallax effect for blobs (multi-layer)
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
   const y1 = useTransform(scrollYProgress, [0, 1], [0, 400]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 600]);
   const y3 = useTransform(scrollYProgress, [0, 1], [-100, 200]);
+
   const projects = [
     {
       key: "chatify",
@@ -141,8 +144,19 @@ const Projects = () => {
     },
   ];
 
+  const handleLoadMore = () => {
+    setVisibleProjects(prev => Math.min(prev + 3, projects.length));
+  };
+
+  const handleShowLess = () => {
+    setVisibleProjects(3);
+  };
+
+  const hasMoreProjects = visibleProjects < projects.length;
+  const showLessButton = visibleProjects > 3;
+
   return (
-    <section id="projects" ref={sectionRef} className="pt-20 mb-10 bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] relative overflow-hidden">
+    <section id="projects" ref={sectionRef} className="pt-20 bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] relative overflow-hidden">
       <ProjectBlobs y1={y1} y2={y2} y3={y3} />
       <div className={`relative z-10 container mx-auto px-4 sm:px-8 md:px-10 lg:px-20 xl:px-32`}>
         <motion.h1
@@ -155,8 +169,8 @@ const Projects = () => {
           Notable Projects
         </motion.h1>
         <div className="mx-auto mt-3 mb-8 h-1 w-full max-w-[340px] md:max-w-[480px] rounded-full bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400" />
-        <div className="grid gap-8 grid-cols-1 w-full mx-auto">
-          {projects.map((project, i) => {
+        <div className="grid gap-8 grid-cols-1 w-full mx-auto mb-12">
+          {projects.slice(0, visibleProjects).map((project, i) => {
             const { key, ...itemProps } = project;
             return (
               <motion.div
@@ -176,6 +190,46 @@ const Projects = () => {
             );
           })}
         </div>
+
+        {/* Load More Button */}
+        {hasMoreProjects && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, type: 'spring', bounce: 0.3 }}
+            className="flex justify-center mt-12 mb-8"
+          >
+            <motion.button
+              onClick={handleLoadMore}
+              whileHover={{ scale: 1.05, boxShadow: "0 8px 25px rgba(124, 58, 237, 0.3)" }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 hover:from-violet-600 hover:via-blue-600 hover:to-fuchsia-500 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 border-2 border-transparent hover:border-violet-300 dark:hover:border-violet-400 backdrop-blur-sm"
+            >
+              Load More Projects
+            </motion.button>
+          </motion.div>
+        )}
+
+        {/* Show Less Button */}
+        {showLessButton && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, type: 'spring', bounce: 0.3 }}
+            className="flex justify-center mt-8 mb-8"
+          >
+            <motion.button
+              onClick={handleShowLess}
+              whileHover={{ scale: 1.05, boxShadow: "0 8px 25px rgba(107, 114, 128, 0.3)" }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700 hover:from-gray-600 hover:via-gray-700 hover:to-gray-800 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 border-2 border-transparent hover:border-gray-400 dark:hover:border-gray-300 backdrop-blur-sm"
+            >
+              Show Less
+            </motion.button>
+          </motion.div>
+        )}
       </div>
     </section>
   );
