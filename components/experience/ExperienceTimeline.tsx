@@ -140,67 +140,55 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
     <section id="experience" className="py-8 min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] overflow-hidden relative">
       {/* Animated Starry Background */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        {/* Twinkling Stars */}
-        {[...Array(100)].map((_, i) => (
-          <motion.div
-            key={`star-${i}`}
-            className="absolute w-1 h-1 bg-white/90 dark:bg-yellow-200/90 rounded-full"
-            initial={{
-              opacity: 0,
-              scale: 0,
-              x: Math.random() * 100,
-              y: Math.random() * 100
-            }}
-            animate={{
-              opacity: [0, 1, 0.8, 0],
-              scale: [0, 1, 0.8, 0],
-              x: Math.random() * 100,
-              y: Math.random() * 100
-            }}
-            transition={{
-              duration: 3 + Math.random() * 4,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: "easeInOut"
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              filter: "blur(0.3px)"
-            }}
-          />
-        ))}
+        {/* Ultra-Optimized Twinkling Stars */}
+        {[...Array(15)].map((_, i) => {
+          const random = Math.random();
+          return (
+            <motion.div
+              key={`star-${i}`}
+              className="absolute w-1 h-1 bg-white/50 dark:bg-yellow-200/50 rounded-full"
+              animate={{
+                opacity: [0, 0.6, 0]
+              }}
+              transition={{
+                duration: 6 + random * 3,
+                repeat: Infinity,
+                delay: random * 12,
+                ease: "easeInOut"
+              }}
+              style={{
+                left: `${random * 100}%`,
+                top: `${random * 100}%`,
+                filter: "blur(0.2px)"
+              }}
+            />
+          );
+        })}
 
-        {/* Larger Twinkling Stars */}
-        {[...Array(40)].map((_, i) => (
-          <motion.div
-            key={`big-star-${i}`}
-            className="absolute w-1.5 h-1.5 bg-yellow-300/80 dark:bg-yellow-100/80 rounded-full"
-            initial={{
-              opacity: 0,
-              scale: 0,
-              x: Math.random() * 100,
-              y: Math.random() * 100
-            }}
-            animate={{
-              opacity: [0, 1, 0.9, 0],
-              scale: [0, 1.2, 1, 0],
-              x: Math.random() * 100,
-              y: Math.random() * 100
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 6,
-              ease: "easeInOut"
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              filter: "blur(0.5px)"
-            }}
-          />
-        ))}
+        {/* Ultra-Optimized Larger Twinkling Stars */}
+        {[...Array(6)].map((_, i) => {
+          const random = Math.random();
+          return (
+            <motion.div
+              key={`big-star-${i}`}
+              className="absolute w-1.5 h-1.5 bg-yellow-300/40 dark:bg-yellow-100/40 rounded-full"
+              animate={{
+                opacity: [0, 0.7, 0]
+              }}
+              transition={{
+                duration: 8 + random * 4,
+                repeat: Infinity,
+                delay: random * 15,
+                ease: "easeInOut"
+              }}
+              style={{
+                left: `${random * 100}%`,
+                top: `${random * 100}%`,
+                filter: "blur(0.3px)"
+              }}
+            />
+          );
+        })}
 
 
 

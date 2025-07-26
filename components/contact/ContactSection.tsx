@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, MessageCircle, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageCircle, Clock } from 'lucide-react';
 import Form from './Form';
 
 const ContactSection = () => {
@@ -43,7 +43,7 @@ const ContactSection = () => {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { delay: 0.08 + i * 0.07, duration: 0.7, type: 'spring', bounce: 0.22 }
+      transition: { delay: 0.08 + i * 0.07, duration: 0.7, type: 'spring' as const, bounce: 0.22 }
     })
   };
 

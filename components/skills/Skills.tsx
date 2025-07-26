@@ -7,12 +7,11 @@ import Image from "next/image";
 import { motion } from 'framer-motion';
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 32, scale: 0.96 },
-  visible: (i) => ({
+  hidden: { opacity: 0, y: 15 },
+  visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { delay: 0.03 * i, duration: 0.38, ease: 'easeOut' }
+    transition: { delay: 0.01 * i, duration: 0.25, ease: 'easeOut' as const }
   })
 };
 
@@ -42,11 +41,11 @@ const Skills = () => {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.2 }}
-                  className="flex flex-col items-center justify-center transition-all duration-700 ease-out rounded-2xl group relative hover:scale-[1.08] cursor-pointer shadow-lg hover:shadow-2xl will-change-transform will-change-opacity"
-                  whileHover={{ scale: 1.08, boxShadow: "0 8px 32px 0 rgba(124,58,237,0.18)" }}
-                  transition={{ type: 'tween', duration: 0.32, ease: 'easeOut' }}
+                  className="flex flex-col items-center justify-center transition-all duration-200 ease-out rounded-2xl group relative hover:scale-[1.03] cursor-pointer shadow-lg hover:shadow-lg"
+                  whileHover={{ scale: 1.03, boxShadow: "0 2px 12px 0 rgba(124,58,237,0.12)" }}
+                  transition={{ type: 'tween', duration: 0.15, ease: 'easeOut' }}
                 >
-                  <div className="h-full w-full rounded-2xl border border-transparent bg-[#18181b]/80 backdrop-blur-lg group-hover:border-violet-400 group-hover:border-violet-500 transition-all duration-700 ease-out shadow-md group-hover:shadow-violet-200 group-hover:shadow-violet-900/30 will-change-transform will-change-opacity">
+                  <div className="h-full w-full rounded-2xl border border-transparent bg-[#18181b]/80 backdrop-blur-lg group-hover:border-violet-400 group-hover:border-violet-500 transition-all duration-200 ease-out shadow-md group-hover:shadow-violet-200 group-hover:shadow-violet-900/30">
                     <div className="flex -translate-y-[1px] justify-center">
                       <div className="w-3/4">
                         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-violet-500 to-transparent" />

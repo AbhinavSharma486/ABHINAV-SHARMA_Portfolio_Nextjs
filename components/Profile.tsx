@@ -37,20 +37,28 @@ const SOCIAL_LINKS = [
   }
 ];
 
-// Parallax/floating effect hook
+// Optimized Parallax hook with throttling
 function useParallax(ref: React.RefObject<HTMLElement | null>) {
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
   React.useEffect(() => {
     if (!ref.current) return;
+
+    let ticking = false;
     const handle = (e: MouseEvent) => {
-      const rect = ref.current!.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-      setParallax({ x, y });
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const rect = ref.current!.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width - 0.5) * 1.5;
+          const y = ((e.clientY - rect.top) / rect.height - 0.5) * 1.5;
+          setParallax({ x, y });
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     const reset = () => setParallax({ x: 0, y: 0 });
     const currentRef = ref.current;
-    currentRef.addEventListener('mousemove', handle);
+    currentRef.addEventListener('mousemove', handle, { passive: true });
     currentRef.addEventListener('mouseleave', reset);
     return () => {
       currentRef.removeEventListener('mousemove', handle);
@@ -70,19 +78,19 @@ const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => (
     className="absolute inset-0 overflow-hidden"
     aria-hidden="true"
   >
-    <div className="absolute -inset-[10px] opacity-100 pointer-events-none">
+    <div className="absolute -inset-[10px] opacity-40 pointer-events-none">
       {[
-        "top-1/4 left-1/4 bg-primary/20",
-        "top-1/3 right-1/4 bg-violet-500/20 animation-delay-2000",
-        "bottom-1/4 left-1/3 bg-blue-500/20 animation-delay-4000"
+        "top-1/4 left-1/4 bg-primary/10",
+        "top-1/3 right-1/4 bg-violet-500/10 animation-delay-2000",
+        "bottom-1/4 left-1/3 bg-blue-500/10 animation-delay-4000"
       ].map((className, index) => (
         <motion.div
           key={index}
-          className={`absolute w-40 h-40 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-xl animate-blob ${className}`}
+          className={`absolute w-24 h-24 sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-lg animate-blob ${className}`}
           style={{ zIndex: 0 }}
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 + index * 0.2, duration: 1.1, type: 'spring', bounce: 0.2 }}
+          transition={{ delay: 0.4 + index * 0.4, duration: 2, type: 'spring', bounce: 0.05 }}
         />
       ))}
     </div>
@@ -91,15 +99,15 @@ const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => (
 
 BackgroundBlobs.displayName = 'BackgroundBlobs';
 
-// Enhanced Profile Image with floating badge and parallax
+// Optimized Profile Image with reduced parallax
 const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) => (
   <motion.div
-    initial={{ opacity: 0, y: 40, scale: 0.92 }}
-    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.7 }}
-    transition={{ duration: 0.8, type: 'spring', bounce: 0.25 }}
+    transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
     style={{
-      transform: `translate3d(${parallax.x * 12}px, ${parallax.y * 12}px, 0)`
+      transform: `translate3d(${parallax.x * 4}px, ${parallax.y * 4}px, 0)`
     }}
     className="relative group mx-auto w-full max-w-[12rem] md:max-w-[16rem] mt-14 md:mt-0"
   >

@@ -1,27 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardFooter, CardHeader } from "../../components/ui/card";
+import { Card } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
 import Link from "next/link";
 import { ExternalLink, GithubIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from "next/image";
-import React, { useRef } from 'react';
+import React from 'react';
 
-const cardMotion = {
-  rest: {
-    scale: 1,
-    y: 0,
-    boxShadow: '0 4px 24px -4px rgba(124,58,237,0.1), 0 2px 8px -2px rgba(0,0,0,0.05)'
-  },
-  hover: {
-    scale: 1.015,
-    y: -6,
-    boxShadow: '0 16px 48px -8px rgba(124,58,237,0.25), 0 8px 24px -4px rgba(0,0,0,0.1)'
-  }
-};
+
 
 interface HeaderLink {
   url?: string;
@@ -56,7 +45,6 @@ export default function Item({
   seeMore,
   techs,
   headerLinks,
-  reverse = false,
 }: ItemProps) {
   const [isHovered, setIsHovered] = useState(false);
 

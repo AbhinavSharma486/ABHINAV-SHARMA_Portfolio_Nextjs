@@ -183,7 +183,6 @@ const Form = () => {
                 placeholder="Enter your full name"
                 variants={inputVariants}
                 whileFocus="focus"
-                whileBlur="blur"
               />
             </motion.div>
 
@@ -218,7 +217,6 @@ const Form = () => {
                 value={userInput.email}
                 variants={inputVariants}
                 whileFocus="focus"
-                whileBlur="blur"
               />
             </motion.div>
 
@@ -252,7 +250,6 @@ const Form = () => {
                 placeholder="What's this about?"
                 variants={inputVariants}
                 whileFocus="focus"
-                whileBlur="blur"
               />
             </motion.div>
 
@@ -286,7 +283,6 @@ const Form = () => {
                 value={userInput.message}
                 variants={inputVariants}
                 whileFocus="focus"
-                whileBlur="blur"
               />
             </motion.div>
 

@@ -6,6 +6,8 @@ import dynamic from "next/dynamic";
 import Theme from "../context/theme-provider";
 
 const Footer = dynamic(() => import("../components/FooterWrapper"));
+const ServiceWorkerRegistration = dynamic(() => import("../components/ServiceWorkerRegistration"));
+const PerformanceMonitor = dynamic(() => import("../components/PerformanceMonitor"));
 
 export const metadata: Metadata = {
   title: "Abhinav Sharma | Full Stack Developer | Personal Portfolio",
@@ -35,6 +37,9 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
           <Nav />
           <main>{children}</main>
           <Footer />
+          {/* Temporarily disabled for debugging */}
+          {/* <ServiceWorkerRegistration />
+          <PerformanceMonitor /> */}
         </Theme>
       </body>
     </html>

@@ -2,25 +2,17 @@
 
 import { BsGithub } from "react-icons/bs";
 import Item from "./Item";
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import { useRef, useState } from 'react';
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { delay: 0.08 + i * 0.09, duration: 0.7, type: 'spring', bounce: 0.22 }
-  })
-};
 
-// Animated background blobs for extra depth with strong parallax effect
-const ProjectBlobs = ({ y1, y2, y3 }: { y1: any; y2: any; y3: any; }) => (
+
+// Ultra-optimized background blobs with minimal parallax
+const ProjectBlobs = ({ y1, y2, y3 }: { y1: MotionValue<number>; y2: MotionValue<number>; y3: MotionValue<number>; }) => (
   <div className="absolute inset-0 overflow-hidden z-0 hidden sm:block pointer-events-none" aria-hidden="true">
-    <motion.div style={{ y: y1 }} className="absolute top-1/4 left-1/4 w-72 h-72 bg-violet-400/20 rounded-full blur-3xl animate-blob" />
-    <motion.div style={{ y: y2 }} className="absolute top-1/3 right-1/4 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl animate-blob" />
-    <motion.div style={{ y: y3 }} className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-fuchsia-400/20 rounded-full blur-3xl animate-blob" />
+    <motion.div style={{ y: y1 }} className="absolute top-1/4 left-1/4 w-32 h-32 bg-violet-400/10 rounded-full blur-xl animate-blob" />
+    <motion.div style={{ y: y2 }} className="absolute top-1/3 right-1/4 w-40 h-40 bg-blue-400/10 rounded-full blur-xl animate-blob" />
+    <motion.div style={{ y: y3 }} className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-fuchsia-400/10 rounded-full blur-xl animate-blob" />
   </div>
 );
 
@@ -28,11 +20,11 @@ const Projects = () => {
   const sectionRef = useRef(null);
   const [visibleProjects, setVisibleProjects] = useState(3);
 
-  // Parallax effect for blobs (multi-layer)
+  // Ultra-optimized parallax effect for blobs
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, 400]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, 600]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [-100, 200]);
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [-25, 50]);
 
   const projects = [
     {
@@ -178,10 +170,10 @@ const Projects = () => {
                 initial={{ opacity: 0, y: 60, scale: 0.96 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{
-                  duration: 0.7,
-                  delay: 0.08 + i * 0.12,
+                  duration: 0.5,
+                  delay: 0.05 + i * 0.08,
                   type: 'spring',
-                  bounce: 0.22
+                  bounce: 0.15
                 }}
                 viewport={{ once: true, amount: 0.25 }}
               >
