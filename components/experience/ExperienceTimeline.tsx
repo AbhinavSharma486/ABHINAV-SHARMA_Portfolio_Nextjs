@@ -27,9 +27,8 @@ const TimelineItem: React.FC<ExperienceItem & { idx: number; }> = (props) => {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.8, type: "spring", bounce: 0.25 }}
             whileHover={{ scale: 1.04, boxShadow: "0 8px 32px 0 rgba(124,58,237,0.18)" }}
-            className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-lg border border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-2xl shadow-xl p-8 transition-all duration-300 group overflow-hidden max-w-[95vw]"
+            className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-lg border-2 border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-2xl shadow-xl p-8 transition-all duration-300 group max-w-[95vw]"
           >
-            <div className="absolute inset-0 pointer-events-none rounded-2xl group-hover:border-2 group-hover:border-violet-400 group-hover:shadow-[0_0_32px_0_rgba(124,58,237,0.18)] transition-all duration-300" />
             <div className="flex items-center gap-3 mb-2">
               <span className="text-2xl">💼</span>
               <span className="font-bold text-xl text-blue-900 dark:text-white">{props.role}</span>
@@ -63,9 +62,8 @@ const TimelineItem: React.FC<ExperienceItem & { idx: number; }> = (props) => {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.8, type: "spring", bounce: 0.25 }}
             whileHover={{ scale: 1.04, boxShadow: "0 8px 32px 0 rgba(124,58,237,0.18)" }}
-            className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-lg border border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-2xl shadow-xl p-8 transition-all duration-300 group overflow-hidden max-w-[95vw]"
+            className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-lg border-2 border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-2xl shadow-xl p-8 transition-all duration-300 group max-w-[95vw]"
           >
-            <div className="absolute inset-0 pointer-events-none rounded-2xl group-hover:border-2 group-hover:border-violet-400 group-hover:shadow-[0_0_32px_0_rgba(124,58,237,0.18)] transition-all duration-300" />
             <div className="flex items-center gap-3 mb-2">
               <span className="text-2xl">💼</span>
               <span className="font-bold text-xl text-blue-900 dark:text-white">{props.role}</span>
@@ -96,9 +94,8 @@ const TimelineItem: React.FC<ExperienceItem & { idx: number; }> = (props) => {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8, type: "spring", bounce: 0.25 }}
           whileHover={{ scale: 1.04, boxShadow: "0 8px 32px 0 rgba(124,58,237,0.18)" }}
-          className="relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-2xl shadow-xl p-5 flex-1 ml-2 group overflow-hidden mt-6 min-h-[90px]"
+          className="relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-2 border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-2xl shadow-xl p-5 flex-1 ml-2 group mt-6 min-h-[90px]"
         >
-          <div className="absolute inset-0 pointer-events-none rounded-2xl group-hover:border-2 group-hover:border-violet-400 group-hover:shadow-[0_0_32px_0_rgba(124,58,237,0.18)] transition-all duration-300" />
           <div className="flex items-center gap-3 mb-2">
             <span className="text-2xl">💼</span>
             <span className="font-bold text-lg text-blue-900 dark:text-white">{props.role}</span>
@@ -118,7 +115,18 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
 
   useEffect(() => {
     if (ref.current) {
-      setHeight(ref.current.scrollHeight);
+      const updateHeight = () => {
+        const scrollHeight = ref.current?.scrollHeight || 0;
+        const clientHeight = ref.current?.clientHeight || 0;
+        // Use the actual content height, but cap it to prevent overflow
+        setHeight(Math.min(scrollHeight, clientHeight * 2));
+      };
+
+      updateHeight();
+
+      // Update height on window resize
+      window.addEventListener('resize', updateHeight);
+      return () => window.removeEventListener('resize', updateHeight);
     }
   }, [ref, experiences.length]);
 
@@ -126,17 +134,96 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
+
+
   return (
-    <section id="experience" className="py-8 min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a]">
-      <div className="container mx-auto px-2 md:px-10 lg:px-20 xl:px-32">
+    <section id="experience" className="py-8 min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] overflow-hidden relative">
+      {/* Animated Starry Background */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Twinkling Stars */}
+        {[...Array(100)].map((_, i) => (
+          <motion.div
+            key={`star-${i}`}
+            className="absolute w-1 h-1 bg-white/90 dark:bg-yellow-200/90 rounded-full"
+            initial={{
+              opacity: 0,
+              scale: 0,
+              x: Math.random() * 100,
+              y: Math.random() * 100
+            }}
+            animate={{
+              opacity: [0, 1, 0.8, 0],
+              scale: [0, 1, 0.8, 0],
+              x: Math.random() * 100,
+              y: Math.random() * 100
+            }}
+            transition={{
+              duration: 3 + Math.random() * 4,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "easeInOut"
+            }}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              filter: "blur(0.3px)"
+            }}
+          />
+        ))}
+
+        {/* Larger Twinkling Stars */}
+        {[...Array(40)].map((_, i) => (
+          <motion.div
+            key={`big-star-${i}`}
+            className="absolute w-1.5 h-1.5 bg-yellow-300/80 dark:bg-yellow-100/80 rounded-full"
+            initial={{
+              opacity: 0,
+              scale: 0,
+              x: Math.random() * 100,
+              y: Math.random() * 100
+            }}
+            animate={{
+              opacity: [0, 1, 0.9, 0],
+              scale: [0, 1.2, 1, 0],
+              x: Math.random() * 100,
+              y: Math.random() * 100
+            }}
+            transition={{
+              duration: 4 + Math.random() * 3,
+              repeat: Infinity,
+              delay: Math.random() * 6,
+              ease: "easeInOut"
+            }}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              filter: "blur(0.5px)"
+            }}
+          />
+        ))}
+
+
+
+        {/* Subtle Glow Effect */}
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white/5 dark:to-yellow-200/5 pointer-events-none" />
+      </div>
+
+      <div className="container mx-auto px-2 md:px-10 lg:px-20 xl:px-32 relative z-10">
         <h1 className="font-orbitron text-center font-bold dark:text-white text-3xl md:text-5xl mt-4 text-blue-950 mb-2 md:mb-4 drop-shadow-lg">Experience</h1>
         <div className="mx-auto mt-3 mb-8 md:mb-12 h-1 w-full max-w-[340px] md:max-w-[480px] rounded-full bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400" />
         <div className="relative flex flex-col items-center" ref={ref}>
-          {/* Animated vertical line */}
+          {/* Animated vertical line - with proper constraints */}
           <motion.div
-            style={{ height: heightTransform, opacity: opacityTransform }}
-            className="absolute left-6 md:left-1/2 top-0 w-1 bg-gradient-to-b from-violet-500 via-blue-500 to-fuchsia-400 dark:from-violet-400 dark:via-blue-400 dark:to-fuchsia-400 z-10 -translate-x-0 md:-translate-x-1/2 rounded-full shadow-[0_0_32px_8px_rgba(124,58,237,0.18)]"
+            style={{
+              height: heightTransform,
+              opacity: opacityTransform,
+              maxHeight: `${height}px`
+            }}
+            className="absolute left-6 md:left-1/2 top-0 w-1 bg-gradient-to-b from-violet-500 via-blue-500 to-fuchsia-400 dark:from-violet-400 dark:via-blue-400 dark:to-fuchsia-400 z-10 -translate-x-1/2 md:-translate-x-1/2 rounded-full shadow-[0_0_32px_8px_rgba(124,58,237,0.18)]"
           />
+
+
+
           <div className="w-full flex flex-col gap-y-10 md:gap-y-0">
             {experiences.map((exp, idx) => (
               <TimelineItem key={idx} idx={idx} {...exp} />
