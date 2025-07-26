@@ -143,7 +143,7 @@ const SideBar = () => {
 
   return (
     <nav
-      className="fixed z-50 flex gap-6 min-h-screen"
+      className="fixed z-[9999] flex gap-6 min-h-screen"
       role="navigation"
       aria-label="Main navigation"
     >
@@ -161,9 +161,9 @@ const SideBar = () => {
             onClick={() => setOpen(!open)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="p-3 h-14 w-14"
+            className="p-2 h-10 w-10 md:h-14 md:w-14 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 z-[9999]"
           >
-            <MenuIcon size={50} />
+            <MenuIcon size={24} className="md:w-8 md:h-8" />
           </Button>
         </div>
 
