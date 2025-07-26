@@ -38,31 +38,30 @@ const SOCIAL_LINKS = [
 ];
 
 // Parallax/floating effect hook
-function useParallax(ref) {
+function useParallax(ref: React.RefObject<HTMLElement | null>) {
   const [parallax, setParallax] = useState({ x: 0, y: 0 });
   React.useEffect(() => {
     if (!ref.current) return;
-    const handle = (e) => {
-      const rect = ref.current.getBoundingClientRect();
+    const handle = (e: MouseEvent) => {
+      const rect = ref.current!.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
       const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
       setParallax({ x, y });
     };
     const reset = () => setParallax({ x: 0, y: 0 });
-    ref.current.addEventListener('mousemove', handle);
-    ref.current.addEventListener('mouseleave', reset);
+    const currentRef = ref.current;
+    currentRef.addEventListener('mousemove', handle);
+    currentRef.addEventListener('mouseleave', reset);
     return () => {
-      if (ref.current) {
-        ref.current.removeEventListener('mousemove', handle);
-        ref.current.removeEventListener('mouseleave', reset);
-      }
+      currentRef.removeEventListener('mousemove', handle);
+      currentRef.removeEventListener('mouseleave', reset);
     };
   }, [ref]);
   return parallax;
 }
 
 // Enhanced Background Blobs
-const BackgroundBlobs = React.forwardRef((props, ref) => (
+const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => (
   <motion.div
     ref={ref}
     initial={{ opacity: 0, scale: 0.95 }}
@@ -90,8 +89,10 @@ const BackgroundBlobs = React.forwardRef((props, ref) => (
   </motion.div>
 ));
 
+BackgroundBlobs.displayName = 'BackgroundBlobs';
+
 // Enhanced Profile Image with floating badge and parallax
-const ProfileImage = ({ parallax }) => (
+const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) => (
   <motion.div
     initial={{ opacity: 0, y: 40, scale: 0.92 }}
     whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -136,7 +137,7 @@ const SocialLinks = () => (
       hidden: {},
       visible: { transition: { staggerChildren: 0.08 } },
     }}
-    className="flex flex-wrap gap-3 justify-center"
+    className="flex flex-wrap gap-4 justify-center"
   >
     {SOCIAL_LINKS.map(({ icon: Icon, href, label, hoverColor }, i) => (
       <motion.div
@@ -144,53 +145,41 @@ const SocialLinks = () => (
         initial={{ opacity: 0, scale: 0.8, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 + i * 0.08, type: 'spring', bounce: 0.4 }}
-        className=""
+        className="relative group"
       >
-        <div className="relative group">
-          <Link
-            href={href}
-            target={href.startsWith('http') ? "_blank" : undefined}
-            rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-            className={`flex items-center justify-center w-11 h-11 md:w-12 md:h-12 rounded-full bg-background dark:bg-background/80 text-foreground transition-all duration-300 ${hoverColor} hover:text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95`}
-            aria-label={label}
-            tabIndex={0}
-          >
-            <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
-            {/* Ripple effect */}
-            <span className="absolute inset-0 rounded-full pointer-events-none group-active:animate-ping bg-violet-400/20" />
-          </Link>
-          {/* Tooltip */}
-          <span className="absolute left-1/2 -bottom-8 -translate-x-1/2 scale-0 group-hover:scale-100 group-focus:scale-100 bg-gray-900 text-white text-xs rounded px-2 py-1 shadow-lg transition-transform duration-200 z-20 whitespace-nowrap">
-            {label}
-          </span>
-        </div>
+        <Link
+          href={href}
+          target={href.startsWith('http') ? "_blank" : undefined}
+          rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
+          className={`flex items-center justify-center w-11 h-11 md:w-12 md:h-12 rounded-full bg-background dark:bg-background/80 text-foreground transition-all duration-300 ${hoverColor} hover:text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95`}
+          aria-label={label}
+          tabIndex={0}
+        >
+          <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
+          {/* Ripple effect */}
+          <span className="absolute inset-0 rounded-full pointer-events-none group-active:animate-ping bg-violet-400/20" />
+        </Link>
+        {/* Tooltip removed as per user request */}
       </motion.div>
     ))}
   </motion.div>
 );
 
 const Profile = () => {
-  const mainRef = useRef(null);
+  const mainRef = useRef<HTMLDivElement>(null);
   const parallax = useParallax(mainRef);
   return (
-    <motion.main
+    <main
       id="home"
       ref={mainRef}
-      initial={{ opacity: 0, y: 32, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-      className='relative min-h-[90vh] bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-8 md:py-10 overflow-hidden will-change-transform will-change-opacity'>
+      className='relative min-h-[90vh] bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-8 md:py-10 overflow-hidden'>
       <BackgroundBlobs ref={mainRef} />
       <div className={`container mx-auto px-4 sm:px-8 md:px-10 lg:px-20 xl:px-32`}>
-        <motion.article
-          initial={{ opacity: 0, y: 32, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          className='relative backdrop-blur-2xl bg-white/70 dark:bg-gray-900/60 rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl overflow-hidden transition-all duration-300 group max-w-5xl mx-auto will-change-transform will-change-opacity'
-        >
+        <article
+          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl overflow-visible transition-all duration-300 group max-w-8xl mx-auto'>
           {/* Floating badge - responsive position and size */}
           <motion.div
-            className="absolute right-4 top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-3 py-1.5 text-sm md:text-base md:px-4 md:py-2 shadow-2xl font-bold flex items-center gap-2 border-2 border-white dark:border-black/40 drop-shadow-lg animate-bounce-slow md:right-6 md:top-6 md:mt-4 md:left-auto md:translate-x-0 md:right-10 md:top-10"
+            className="absolute right-4 top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-3 py-1.5 text-sm md:text-base md:px-4 md:py-2 shadow-2xl font-bold flex items-center gap-2 border-2 border-white dark:border-black/40 drop-shadow-lg animate-bounce-slow md:right-10 md:top-10"
             initial={{ opacity: 0, y: -16, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 1.1, duration: 0.7, type: 'spring', bounce: 0.4 }}
@@ -224,7 +213,7 @@ const Profile = () => {
             >
               <header className='space-y-4 md:space-y-8'>
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: -20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.7 }}
                   transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
@@ -235,7 +224,7 @@ const Profile = () => {
                   </span>
                 </motion.div>
                 <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: -20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.7 }}
                   transition={{ duration: 0.7, delay: 0.1, type: 'spring', bounce: 0.22 }}
@@ -247,7 +236,7 @@ const Profile = () => {
                 </motion.h1>
               </header>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.7 }}
                 transition={{ duration: 0.7, delay: 0.18, type: 'spring', bounce: 0.22 }}
@@ -258,7 +247,7 @@ const Profile = () => {
                 Transforming ideas into interactive and dynamic web experiences.
               </motion.p>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.7 }}
                 transition={{ duration: 0.7, delay: 0.25, type: 'spring', bounce: 0.22 }}
@@ -268,7 +257,7 @@ const Profile = () => {
                 Looking for Full Stack MERN opportunities
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.7 }}
                 transition={{ duration: 0.7, delay: 0.32, type: 'spring', bounce: 0.22 }}
@@ -293,9 +282,9 @@ const Profile = () => {
               </motion.div>
             </motion.div>
           </div>
-        </motion.article>
+        </article>
       </div>
-    </motion.main>
+    </main>
   );
 };
 
