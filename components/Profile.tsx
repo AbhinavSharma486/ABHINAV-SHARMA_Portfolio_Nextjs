@@ -173,15 +173,20 @@ const Profile = () => {
   const mainRef = useRef(null);
   const parallax = useParallax(mainRef);
   return (
-    <main id="home" ref={mainRef} className='relative min-h-[90vh] bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-8 md:py-10 overflow-hidden'>
+    <motion.main
+      id="home"
+      ref={mainRef}
+      initial={{ opacity: 0, y: 32, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
+      className='relative min-h-[90vh] bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-8 md:py-10 overflow-hidden will-change-transform will-change-opacity'>
       <BackgroundBlobs ref={mainRef} />
       <div className={`container mx-auto px-4 sm:px-8 md:px-10 lg:px-20 xl:px-32`}>
         <motion.article
-          initial={{ opacity: 0, y: 60, scale: 0.97 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.9, type: 'spring', bounce: 0.22 }}
-          className='relative backdrop-blur-2xl bg-white/70 dark:bg-gray-900/60 rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl overflow-hidden transition-all duration-300 group max-w-5xl mx-auto'
+          initial={{ opacity: 0, y: 32, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className='relative backdrop-blur-2xl bg-white/70 dark:bg-gray-900/60 rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl overflow-hidden transition-all duration-300 group max-w-5xl mx-auto will-change-transform will-change-opacity'
         >
           {/* Floating badge - responsive position and size */}
           <motion.div
@@ -290,7 +295,7 @@ const Profile = () => {
           </div>
         </motion.article>
       </div>
-    </main>
+    </motion.main>
   );
 };
 
