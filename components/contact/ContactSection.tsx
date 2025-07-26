@@ -49,7 +49,7 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] py-8 sm:py-12 md:py-16 min-h-screen">
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
+      <div className="container mx-auto px-4 sm:px-8 md:px-10 lg:px-20 xl:px-32">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -121,28 +121,30 @@ const ContactSection = () => {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
                   whileHover={{ scale: 1.02, y: -2 }}
-                  className="group relative"
+                  className="group relative h-full"
                 >
-                  <div className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-lg border border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+                  <div className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-lg border border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col">
                     <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl group-hover:border-2 group-hover:border-violet-400 group-hover:shadow-[0_0_32px_0_rgba(124,58,237,0.18)] transition-all duration-300" />
 
-                    <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="flex items-start gap-3 sm:gap-4 flex-1">
                       <div className="flex-shrink-0">
                         <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-violet-500 via-blue-500 to-fuchsia-400 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-violet-500/25 transition-all duration-300">
                           <info.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                         </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-sm sm:text-lg font-semibold text-blue-900 dark:text-white mb-1">
-                          {info.title}
-                        </h3>
-                        <a
-                          href={info.href}
-                          className="text-xs sm:text-sm text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 font-medium transition-colors duration-200 block break-all"
-                        >
-                          {info.value}
-                        </a>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      <div className="flex-1 min-w-0 flex flex-col justify-between h-full">
+                        <div>
+                          <h3 className="text-sm sm:text-lg font-semibold text-blue-900 dark:text-white mb-1">
+                            {info.title}
+                          </h3>
+                          <a
+                            href={info.href}
+                            className="text-xs sm:text-sm text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 font-medium transition-colors duration-200 block break-all"
+                          >
+                            {info.value}
+                          </a>
+                        </div>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
                           {info.description}
                         </p>
                       </div>
