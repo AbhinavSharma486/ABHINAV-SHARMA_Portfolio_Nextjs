@@ -8,27 +8,24 @@ import {
 } from "../../helpers";
 import emailjs from "@emailjs/browser";
 import ProgressBar from "../ui/LoadingBar";
-import { Send } from "lucide-react";
+import { Send, User, Mail, MessageSquare, FileText } from "lucide-react";
 import Alert from "../ui/Alert";
+import { motion } from "framer-motion";
 
 const notyf = new Notification(3000);
 
 const Form = () => {
-
   const [isLoading, setLoading] = useState(false);
-
   const [message, setMessage] = useState({
     success: "",
     error: "",
   });
-
   const [invalidInput, setInvalidInput] = useState({
     name: false,
     subject: false,
     email: false,
     message: false,
   });
-
   const [userInput, setUserInputs] = useState({
     name: "",
     subject: "",
@@ -49,13 +46,6 @@ const Form = () => {
       [name]: value,
     }));
   }
-
-  /**
-   * Submits the email form and sends an email using the provided input.
-   *
-   * @param {React.FormEvent} event - The form submit event.
-   * @return {Promise<void>} - A promise that resolves when the email is sent successfully.
-   */
 
   async function onSubmitEmailHandler(event: React.FormEvent): Promise<void> {
     event.preventDefault();
@@ -102,7 +92,7 @@ const Form = () => {
         templateParams,
         "FwICwjumTnvkxF5CO"
       );
-      notyf.success("Message sent!");
+      notyf.success("Message sent successfully!");
 
       setUserInputs({
         name: "",
@@ -122,120 +112,202 @@ const Form = () => {
     }
   }
 
+  const inputVariants = {
+    focus: { scale: 1.02, boxShadow: "0 0 0 3px rgba(124, 58, 237, 0.1)" },
+    blur: { scale: 1, boxShadow: "0 0 0 0 rgba(124, 58, 237, 0)" }
+  };
+
   return (
-    <div className="bg-background shadow-md rounded-md p-5">
-      <h2 className="text-4xl font-bold text-gray-700 dark:text-white text-center pb-5">
-        Get in touch
-      </h2>
-      {isLoading && <ProgressBar />}
-      {message.success && <Alert message={message.success} type="success" />}
-      {message.error && <Alert message={message.error} type="error" />}
+    <motion.div
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.6 }}
+      transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
+      className="w-full max-w-sm sm:max-w-md mx-auto"
+    >
+      <div className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-lg border border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 transition-all duration-300 group overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl group-hover:border-2 group-hover:border-violet-400 group-hover:shadow-[0_0_32px_0_rgba(124,58,237,0.18)] transition-all duration-300" />
 
-      <form onSubmit={onSubmitEmailHandler}>
-
-        {/* Name */}
-        <div>
-          <label
-            className={`${invalidInput.name
-              ? "text-red-800 dark:text-red-800"
-              : "text-gray-700"
-              } dark:text-gray-100 block uppercase tracking-wide text-xs font-bold mb-2`}
-            htmlFor="username"
+        <div className="relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.7 }}
+            transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
+            className="text-center mb-6 sm:mb-8"
           >
-            Name:{" "}
-          </label>
-          <input
-            autoComplete="name"
-            name="name"
-            value={userInput.name}
-            onChange={inputHandler}
-            className={`${invalidInput.name ? "border-red-800" : ""
-              } appearance-none block w-full bg-gray-900 text-white border rounded-3xl py-3 px-4 mb-3 leading-tight focus:outline-none`}
-            id="username"
-            type="text"
-            placeholder="Jane"
-          />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-violet-500 via-blue-500 to-fuchsia-400 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg">
+              <MessageSquare className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+            </div>
+            <h2 className="text-xl sm:text-2xl font-bold text-blue-900 dark:text-white mb-2">
+              Send Message
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
+              Fill out the form below and I'll get back to you soon
+            </p>
+          </motion.div>
+
+          {isLoading && <ProgressBar />}
+          {message.success && <Alert message={message.success} type="success" />}
+          {message.error && <Alert message={message.error} type="error" />}
+
+          <form onSubmit={onSubmitEmailHandler} className="space-y-4 sm:space-y-6">
+            {/* Name */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.1, type: 'spring', bounce: 0.22 }}
+            >
+              <label
+                className={`${invalidInput.name
+                  ? "text-red-600 dark:text-red-400"
+                  : "text-gray-700 dark:text-gray-200"
+                  } block text-sm font-semibold mb-2 flex items-center gap-2`}
+                htmlFor="username"
+              >
+                <User className="w-4 h-4" />
+                Full Name
+              </label>
+              <motion.input
+                autoComplete="name"
+                name="name"
+                value={userInput.name}
+                onChange={inputHandler}
+                className={`${invalidInput.name
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                  : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
+                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
+                id="username"
+                type="text"
+                placeholder="Enter your full name"
+                variants={inputVariants}
+                whileFocus="focus"
+                whileBlur="blur"
+              />
+            </motion.div>
+
+            {/* Email */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.2, type: 'spring', bounce: 0.22 }}
+            >
+              <label
+                className={`${invalidInput.email
+                  ? "text-red-600 dark:text-red-400"
+                  : "text-gray-700 dark:text-gray-200"
+                  } block text-sm font-semibold mb-2 flex items-center gap-2`}
+                htmlFor="email"
+              >
+                <Mail className="w-4 h-4" />
+                Email Address
+              </label>
+              <motion.input
+                autoComplete="email"
+                className={`${invalidInput.email
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                  : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
+                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                onChange={inputHandler}
+                value={userInput.email}
+                variants={inputVariants}
+                whileFocus="focus"
+                whileBlur="blur"
+              />
+            </motion.div>
+
+            {/* Subject */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.3, type: 'spring', bounce: 0.22 }}
+            >
+              <label
+                className={`${invalidInput.subject
+                  ? "text-red-600 dark:text-red-400"
+                  : "text-gray-700 dark:text-gray-200"
+                  } block text-sm font-semibold mb-2 flex items-center gap-2`}
+                htmlFor="subject"
+              >
+                <FileText className="w-4 h-4" />
+                Subject
+              </label>
+              <motion.input
+                value={userInput.subject}
+                onChange={inputHandler}
+                className={`${invalidInput.subject
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                  : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
+                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
+                id="subject"
+                name="subject"
+                type="text"
+                placeholder="What's this about?"
+                variants={inputVariants}
+                whileFocus="focus"
+                whileBlur="blur"
+              />
+            </motion.div>
+
+            {/* Message */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.4, type: 'spring', bounce: 0.22 }}
+            >
+              <label
+                className={`${invalidInput.message
+                  ? "text-red-600 dark:text-red-400"
+                  : "text-gray-700 dark:text-gray-200"
+                  } block text-sm font-semibold mb-2 flex items-center gap-2`}
+                htmlFor="message"
+              >
+                <MessageSquare className="w-4 h-4" />
+                Message
+              </label>
+              <motion.textarea
+                rows={4}
+                className={`${invalidInput.message
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                  : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
+                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500 resize-none`}
+                id="message"
+                placeholder="Tell me about your project..."
+                name="message"
+                onChange={inputHandler}
+                value={userInput.message}
+                variants={inputVariants}
+                whileFocus="focus"
+                whileBlur="blur"
+              />
+            </motion.div>
+
+            {/* Send Button */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.5, type: 'spring', bounce: 0.22 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 hover:from-violet-600 hover:via-blue-600 hover:to-fuchsia-500 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group text-sm sm:text-base"
+            >
+              <span>{isLoading ? "Sending..." : "Send Message"}</span>
+              <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
+            </motion.button>
+          </form>
         </div>
-
-        {/* Email */}
-        <div>
-          <label
-            className={`${invalidInput.email
-              ? "text-red-800 dark:text-red-800"
-              : "text-gray-700"
-              } dark:text-gray-100 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2`}
-            htmlFor="email"
-          >
-            Email:{" "}
-          </label>
-          <input
-            autoComplete="email"
-            className={`${invalidInput.email ? "border-red-300" : ""
-              } appearance-none block w-full bg-gray-900 text-white border rounded-3xl py-3 px-4 mb-3 leading-tight focus:outline-none`}
-            id="email"
-            name="email"
-            type="text"
-            placeholder="Email"
-            onChange={inputHandler}
-            value={userInput.email}
-          />
-        </div>
-
-        {/* Subject */}
-        <div>
-          <label
-            className={`${invalidInput.subject
-              ? "text-red-800 dark:text-red-800"
-              : "text-gray-700"
-              } dark:text-gray-100 block uppercase tracking-wide text-xs font-bold mb-2`}
-            htmlFor="subject"
-          >
-            Subject:{" "}
-          </label>
-          <input
-            value={userInput.subject}
-            onChange={inputHandler}
-            className={`${invalidInput.subject ? "border-red-300" : ""
-              } appearance-none block w-full bg-gray-900 text-white border rounded-3xl py-3 px-4 mb-3 leading-tight focus:outline-none`}
-            id="subject"
-            name="subject"
-            type="text"
-            placeholder="Subject"
-          />
-        </div>
-
-        {/* Message */}
-        <div className="mb-10">
-          <label
-            className={`${invalidInput.message
-              ? "text-red-800 dark:text-red-800"
-              : "text-gray-100"
-              } dark:text-gray-100 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2`}
-            htmlFor="message"
-          >
-            Message:{" "}
-          </label>
-          <textarea
-            rows={4}
-            cols={40}
-            className={`${invalidInput.message ? "border-red-300" : ""
-              } appearance-none block w-full bg-gray-900 text-white border rounded-3xl py-3 px-4 mb-3 leading-tight focus:outline-none`}
-            id="message"
-            placeholder="Message"
-            name="message"
-            onChange={inputHandler}
-            value={userInput.message}
-          />
-        </div>
-
-        {/* Send Button */}
-        <button className="flex items-center justify-center gap-2 bg-transparent w-full hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded-3xl">
-          <span>Send</span>
-          <Send size={20} />
-        </button>
-
-      </form>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 

@@ -3,6 +3,7 @@ import Skills from "../components/skills/Skills";
 import Projects from "../components/projects/Projects";
 import ExperienceTimeline from "../components/experience/ExperienceTimeline";
 import { experienceData } from "../utils/data/experience";
+import ContactSection from "../components/contact/ContactSection";
 
 export default function page() {
   return (
@@ -11,6 +12,7 @@ export default function page() {
       <Skills />
       <ExperienceTimeline experiences={experienceData} />
       <Projects />
+      <ContactSection />
     </>
   );
 }

@@ -1,10 +1,13 @@
-import SuspenseLoading from "@/components/ui/SuspenseLoading";
-import dynamic from "next/dynamic";
+import { Metadata } from "next";
+import ContactSection from "../../components/contact/ContactSection";
 
-const Footer = dynamic(() => import("@/components/Footer"), { loading: () => <SuspenseLoading /> });
+export const metadata: Metadata = {
+  title: "Contact - Abhinav Sharma",
+  description: "Get in touch with Abhinav Sharma | Contact for collaborations and opportunities",
+};
 
 const Page = () => {
-  return <Footer />;
+  return <ContactSection />;
 };
 
 export default Page;
