@@ -1,13 +1,11 @@
 import "./globals.css";
-import { Edu_NSW_ACT_Foundation, Orbitron } from "next/font/google";
+import localFont from "next/font/local";
 import Nav from "../components/navigation/Navigation";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Theme from "../context/theme-provider";
 
 const Footer = dynamic(() => import("../components/FooterWrapper"));
-const ServiceWorkerRegistration = dynamic(() => import("../components/ServiceWorkerRegistration"));
-const PerformanceMonitor = dynamic(() => import("../components/PerformanceMonitor"));
 
 export const metadata: Metadata = {
   title: "Abhinav Sharma | Full Stack Developer | Personal Portfolio",
@@ -17,16 +15,42 @@ export const metadata: Metadata = {
   },
 };
 
-const orbitron = Orbitron({
-  subsets: ["latin"],
+// Use local fonts instead of Google Fonts
+const orbitron = localFont({
+  src: [
+    {
+      path: '../fonts/Orbitron/static/Orbitron-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/Orbitron/static/Orbitron-Medium.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/Orbitron/static/Orbitron-SemiBold.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/Orbitron/static/Orbitron-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
   variable: "--font-orbitron",
-  weight: ["400", "500", "600", "700"],
 });
 
-export const eduNSW = Edu_NSW_ACT_Foundation({
-  subsets: ["latin"],
+export const eduNSW = localFont({
+  src: [
+    {
+      path: '../fonts/Edu_NSW_ACT_Foundation/static/EduNSWACTFoundation-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
   variable: "--font-edu-nsw",
-  weight: ["400"],
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode; }) {

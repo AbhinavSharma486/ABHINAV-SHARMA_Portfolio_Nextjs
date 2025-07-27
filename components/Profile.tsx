@@ -109,7 +109,7 @@ const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) =>
     style={{
       transform: `translate3d(${parallax.x * 4}px, ${parallax.y * 4}px, 0)`
     }}
-    className="relative group mx-auto w-full max-w-[12rem] md:max-w-[16rem] mt-14 md:mt-0"
+    className="relative group mx-auto w-full max-w-[10rem] sm:max-w-[12rem] md:max-w-[14rem] lg:max-w-[16rem] mt-8 sm:mt-10 md:mt-0"
   >
     <motion.div
       className="absolute -inset-1 bg-gradient-to-r from-primary via-violet-500 to-blue-500 rounded-full opacity-80 group-hover:opacity-100 blur-lg transition duration-500 border-2 border-violet-400 animate-gradient-x"
@@ -180,21 +180,21 @@ const Profile = () => {
     <main
       id="home"
       ref={mainRef}
-      className='relative min-h-[90vh] bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-8 md:py-10 overflow-hidden'>
+      className='relative min-h-screen h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-4 sm:py-6 md:py-8 lg:py-10 overflow-hidden'>
       <BackgroundBlobs ref={mainRef} />
       <div className={`container mx-auto px-4 sm:px-8 md:px-10 lg:px-20 xl:px-32`}>
         <article
-          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl overflow-visible transition-all duration-300 group max-w-8xl mx-auto'>
+          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl overflow-visible transition-all duration-300 group max-w-7xl h-full max-h-[95vh] flex flex-col'>
           {/* Floating badge - responsive position and size */}
           <motion.div
-            className="absolute right-4 top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-3 py-1.5 text-sm md:text-base md:px-4 md:py-2 shadow-2xl font-bold flex items-center gap-2 border-2 border-white dark:border-black/40 drop-shadow-lg animate-bounce-slow md:right-10 md:top-10"
+            className="absolute right-2 sm:right-4 top-2 sm:top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm md:text-base md:px-4 md:py-2 shadow-2xl font-bold flex items-center gap-1 sm:gap-2 border-2 border-white dark:border-black/40 drop-shadow-lg animate-bounce-slow md:right-10 md:top-10"
             initial={{ opacity: 0, y: -16, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 1.1, duration: 0.7, type: 'spring', bounce: 0.4 }}
             style={{ zIndex: 20 }}
           >
             <motion.span
-              className="text-xl md:text-2xl inline-block"
+              className="text-lg sm:text-xl md:text-2xl inline-block"
               animate={{ rotate: [0, 20, -10, 20, 0] }}
               transition={{
                 repeat: Infinity,
@@ -207,8 +207,8 @@ const Profile = () => {
               👋
             </motion.span> Open to Work
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-8 md:gap-12 p-6 sm:p-8 md:p-10 lg:p-14 md:pt-24">
-            <div className="space-y-8 md:space-y-12 flex flex-col items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-4 sm:gap-6 md:gap-8 lg:gap-12 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-14 md:pt-20 lg:pt-24 flex-1">
+            <div className="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-12 flex flex-col items-center">
               <ProfileImage parallax={parallax} />
               <SocialLinks />
             </div>
@@ -217,15 +217,15 @@ const Profile = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
-              className="space-y-8 md:space-y-12 text-center md:text-left"
+              className="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-12 text-center md:text-left"
             >
-              <header className='space-y-4 md:space-y-8'>
+              <header className='space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-6 xl:space-y-8'>
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.7 }}
                   transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
-                  className="font-orbitron text-xl sm:text-2xl md:text-3xl drop-shadow-md"
+                  className="font-orbitron text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-md"
                 >
                   <span className="bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">
                     जय श्री राधे, I am
@@ -236,7 +236,7 @@ const Profile = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.7 }}
                   transition={{ duration: 0.7, delay: 0.1, type: 'spring', bounce: 0.22 }}
-                  className='font-orbitron text-3xl sm:text-4xl md:text-5xl lg:text-6xl drop-shadow-lg'
+                  className='font-orbitron text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl drop-shadow-lg'
                 >
                   <span className="bg-gradient-to-r from-primary via-violet-500 to-blue-500 bg-clip-text text-transparent">
                     Abhinav Sharma
@@ -248,7 +248,7 @@ const Profile = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.7 }}
                 transition={{ duration: 0.7, delay: 0.18, type: 'spring', bounce: 0.22 }}
-                className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed"
+                className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed"
               >
                 MERN Stack Developer with hands-on experience in building scalable web applications, real-time systems,
                 and robust authentication solutions.

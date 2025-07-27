@@ -5,11 +5,9 @@ import dynamic from "next/dynamic";
 
 const MyStory = dynamic(() => import('../../components/story/MyStory'), { loading: () => <SuspenseLoading /> });
 
-
 export const metadata: Metadata = {
   title: "My story - Abhinav Sharma",
-  description:
-    "A passionate web developer. | Abhinav Sharma",
+  description: "A passionate web developer. | Abhinav Sharma",
 };
 
 const Page = () => {
