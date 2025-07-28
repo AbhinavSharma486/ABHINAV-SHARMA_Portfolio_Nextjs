@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import ThemeToggle from '../ui/theme-toggle';
-import { Contact, Folder, History, Home, MenuIcon, Briefcase } from "lucide-react";
+import { Contact, Folder, History, Home, MenuIcon, Briefcase, X } from "lucide-react";
 import Image from 'next/image';
 
 interface NavigationItem {
@@ -69,13 +69,15 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) 
       rel={isExternal ? "noopener noreferrer" : undefined}
       className={cn(
         "group flex items-center text-sm gap-3.5 font-medium p-2",
-        "hover:text-gray-100 hover:bg-gray-800 rounded-md",
+        "text-gray-700 dark:text-gray-300",
+        "hover:text-gray-900 dark:hover:text-gray-100",
+        "hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         "transition-colors duration-200",
         item.margin && "mt-5"
       )}
     >
-      <div aria-hidden="true">
+      <div aria-hidden="true" className="text-black dark:text-white group-hover:text-gray-800 dark:group-hover:text-gray-200">
         {React.createElement(item.icon, { size: "20" })}
       </div>
       <span
@@ -89,7 +91,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) 
       </span>
       <span
         className={cn(
-          "absolute left-48 bg-white font-semibold whitespace-pre text-gray-900",
+          "absolute left-48 bg-black dark:bg-gray-800 font-semibold whitespace-pre text-white dark:text-white",
           "rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden",
           "group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit",
           open && "hidden"
@@ -103,7 +105,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) 
 
 const Logo: React.FC<LogoProps> = ({ open }) => (
   <Link href="/" className={cn("flex items-center gap-2 transition-all duration-200", !open && "w-0")}>
-    {open && <span className="text-4xl">{`{`}</span>}
+    {open && <span className="text-4xl text-black dark:text-white">{`{`}</span>}
     <Image
       src="/assets/images/logo.webp"
       alt="Abhinav Sharma Logo"
@@ -111,7 +113,7 @@ const Logo: React.FC<LogoProps> = ({ open }) => (
       height={50}
       className="rounded-xl mt-2"
     />
-    {open && <span className="text-4xl">{`}`}</span>}
+    {open && <span className="text-4xl text-black dark:text-white">{`}`}</span>}
   </Link>
 );
 
@@ -156,14 +158,13 @@ const SideBar = () => {
         <div className="flex min-w-full justify-between py-3">
           <Logo open={open} onClick={() => setOpen(false)} />
           <Button
-            variant="ghost"
             size="lg"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="p-2 h-10 w-10 md:h-14 md:w-14 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 z-[9999]"
+            className="p-2 h-8 w-8 md:h-11 md:w-8 backdrop-blur-sm rounded-xl shadow-lg transition-all duration-200 z-[9999] bg-gray-800 hover:bg-gray-700"
           >
-            <MenuIcon size={24} className="md:w-8 md:h-8" />
+            {open ? <X size={24} className="md:w-8 md:h-8" /> : <MenuIcon size={24} className="md:w-8 md:h-8" />}
           </Button>
         </div>
 

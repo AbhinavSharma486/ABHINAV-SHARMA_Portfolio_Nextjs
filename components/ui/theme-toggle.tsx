@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const SunIcon = () => (
   <svg
-    className="dark:hidden h-4 w-4"
+    className="dark:hidden h-4 w-4 text-gray-800"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 16 16"
     aria-hidden="true"
@@ -24,7 +24,7 @@ const SunIcon = () => (
 
 const MoonIcon = () => (
   <svg
-    className="hidden dark:block h-4 w-4"
+    className="hidden dark:block h-4 w-4 text-white"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 16 16"
     aria-hidden="true"
@@ -50,7 +50,7 @@ const ThemeToggle = () => {
       size="icon"
       onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
       aria-label={`Switch to ${currentTheme === "dark" ? "light" : "dark"} mode`}
-      className="h-9 w-9"
+      className="h-9 w-9 dark:hover:bg-transparent dark:hover:text-foreground"
     >
       <SunIcon />
       <MoonIcon />
