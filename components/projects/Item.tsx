@@ -115,7 +115,7 @@ export default function Item({
             <div className="space-y-3 lg:space-y-4">
               <motion.h2
                 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 dark:from-white dark:via-gray-100 dark:to-gray-200 group-hover:from-violet-600 group-hover:via-blue-600 group-hover:to-fuchsia-600 transition-all duration-700 leading-tight tracking-tight"
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
@@ -124,7 +124,7 @@ export default function Item({
 
               <motion.p
                 className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-500 break-words max-w-none"
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
@@ -136,7 +136,7 @@ export default function Item({
             {seeMore && (
               <motion.div
                 className="pt-2 lg:pt-4"
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
@@ -158,7 +158,7 @@ export default function Item({
         {/* Tech Stack Section */}
         <motion.div
           className="w-full border-t border-gray-200/60 dark:border-gray-700/60 bg-gradient-to-r from-gray-50/50 via-white/30 to-gray-50/50 dark:from-gray-800/50 dark:via-gray-900/30 dark:to-gray-800/50 backdrop-blur-sm p-4 sm:p-5 md:p-6 lg:p-8"
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           initial={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
@@ -170,7 +170,7 @@ export default function Item({
                 whileTap={{ scale: 0.95 }}
                 className="inline-block"
                 initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{
                   duration: 0.4,
                   delay: 0.5 + index * 0.05,

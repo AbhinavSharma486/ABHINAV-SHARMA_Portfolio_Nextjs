@@ -103,8 +103,7 @@ BackgroundBlobs.displayName = 'BackgroundBlobs';
 const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.7 }}
+    animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
     style={{
       transform: `translate3d(${parallax.x * 4}px, ${parallax.y * 4}px, 0)`
@@ -139,8 +138,7 @@ const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) =>
 const SocialLinks = () => (
   <motion.div
     initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, amount: 0.6 }}
+    animate="visible"
     variants={{
       hidden: {},
       visible: { transition: { staggerChildren: 0.08 } },
@@ -222,16 +220,14 @@ const Profile = () => {
             </div>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
               className="space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4 text-center md:text-left flex flex-col justify-center"
             >
               <header className='space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4'>
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.7 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
                   className="font-orbitron font-bold text-2xl sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl 2xl:text-4xl drop-shadow-md"
                 >
@@ -242,8 +238,7 @@ const Profile = () => {
                 <div className="mt-4" />
                 <motion.h1
                   initial={{ opacity: 0, y: -20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.7 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.1, type: 'spring', bounce: 0.22 }}
                   className='font-orbitron font-bold text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl drop-shadow-lg'
                 >
@@ -255,8 +250,7 @@ const Profile = () => {
               </header>
               <motion.p
                 initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.7 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.18, type: 'spring', bounce: 0.22 }}
                 className="text-xs xs:text-sm sm:text-base lg:text-lg xl:text-xl text-black dark:text-white leading-relaxed profile-text mb-4"
               >
@@ -266,8 +260,7 @@ const Profile = () => {
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.7 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.25, type: 'spring', bounce: 0.22 }}
                 className="flex items-center gap-2 justify-center md:justify-start text-muted-foreground text-xs xs:text-sm sm:text-base mb-4 text-gray-800 dark:text-white"
               >
@@ -276,8 +269,7 @@ const Profile = () => {
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.7 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.32, type: 'spring', bounce: 0.22 }}
                 className="flex flex-col sm:flex-row flex-wrap gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 justify-center items-center pt-2 xs:pt-2.5 sm:pt-3 md:pt-4"
               >

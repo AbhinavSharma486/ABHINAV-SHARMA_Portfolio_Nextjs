@@ -1,12 +1,12 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import ThemeToggle from '../ui/theme-toggle';
-import { Contact, Folder, History, Home, MenuIcon, Briefcase, X } from "lucide-react";
+import { Contact, Folder, History, Home, MenuIcon, Briefcase, X, Loader2 } from "lucide-react";
 import Image from 'next/image';
 
 interface NavigationItem {
@@ -28,6 +28,8 @@ interface NavigationItemProps {
   item: NavigationItem;
   open: boolean;
   onClick: () => void;
+  isLoading: boolean;
+  currentLoadingItem: string | null;
 }
 
 const NAVIGATION_ITEMS: NavigationItem[] = [
@@ -38,19 +40,21 @@ const NAVIGATION_ITEMS: NavigationItem[] = [
   { name: "Contact Me", scrollTo: "#contact", icon: Contact },
 ];
 
-const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) => {
+const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick, isLoading, currentLoadingItem }) => {
   const pathname = usePathname();
+  const router = useRouter();
   const isExternal = item.external;
   const isScrollLink = item.scrollTo;
+  const isCurrentlyLoading = isLoading && currentLoadingItem === item.name;
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
     onClick();
 
     if (isScrollLink) {
-      e.preventDefault();
       // If we're not on home page, navigate to home with scrollTo param
       if (pathname !== '/') {
-        window.location.href = `/?scrollTo=${item.scrollTo!.replace('#', '')}`;
+        router.push(`/?scrollTo=${item.scrollTo!.replace('#', '')}`);
       } else {
         // We're already on home page, just scroll
         const element = document.querySelector(item.scrollTo!);
@@ -58,6 +62,9 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) 
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }
+    } else if (item.href) {
+      // For regular page navigation
+      router.push(item.href);
     }
   };
 
@@ -74,11 +81,16 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) 
         "hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         "transition-colors duration-200",
+        isCurrentlyLoading && "opacity-70 cursor-not-allowed",
         item.margin && "mt-5"
       )}
     >
       <div aria-hidden="true" className="text-black dark:text-white group-hover:text-gray-800 dark:group-hover:text-gray-200">
-        {React.createElement(item.icon, { size: "20" })}
+        {isCurrentlyLoading ? (
+          <Loader2 size={20} className="animate-spin" />
+        ) : (
+          React.createElement(item.icon, { size: "20" })
+        )}
       </div>
       <span
         className={cn(
@@ -87,7 +99,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) 
         )}
         style={{ transitionDelay: `${NAVIGATION_ITEMS.indexOf(item) + 7}0ms` }}
       >
-        {item.name}
+        {isCurrentlyLoading ? `${item.name}...` : item.name}
       </span>
       <span
         className={cn(
@@ -97,7 +109,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) 
           open && "hidden"
         )}
       >
-        {item.name}
+        {isCurrentlyLoading ? `${item.name}...` : item.name}
       </span>
     </Link>
   );
@@ -117,14 +129,19 @@ const Logo: React.FC<LogoProps> = ({ open }) => (
   </Link>
 );
 
-
 const SideBar = () => {
   const [open, setOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentLoadingItem, setCurrentLoadingItem] = useState<string | null>(null);
 
   // Close sidebar on route change
   React.useEffect(() => {
     if (typeof window !== "undefined") {
-      const handleRouteChange = () => setOpen(false);
+      const handleRouteChange = () => {
+        setOpen(false);
+        setIsLoading(false);
+        setCurrentLoadingItem(null);
+      };
       window.addEventListener("popstate", handleRouteChange);
       return () => window.removeEventListener("popstate", handleRouteChange);
     }
@@ -142,6 +159,21 @@ const SideBar = () => {
     return () => document.removeEventListener('keydown', handleEscape);
   }, []);
 
+  const handleNavigationClick = (itemName: string) => {
+    if (open) {
+      setOpen(false);
+    }
+
+    // Set loading state for all navigation items
+    setIsLoading(true);
+    setCurrentLoadingItem(itemName);
+
+    // Clear loading state after a short delay to show loading feedback
+    setTimeout(() => {
+      setIsLoading(false);
+      setCurrentLoadingItem(null);
+    }, 1000);
+  };
 
   return (
     <nav
@@ -180,7 +212,9 @@ const SideBar = () => {
                 key={item.name}
                 item={item}
                 open={open}
-                onClick={() => open && setOpen(false)}
+                onClick={() => handleNavigationClick(item.name)}
+                isLoading={isLoading}
+                currentLoadingItem={currentLoadingItem}
               />
             ))
           }

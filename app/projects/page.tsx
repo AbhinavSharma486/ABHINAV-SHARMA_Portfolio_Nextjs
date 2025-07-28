@@ -1,8 +1,5 @@
-import dynamic from 'next/dynamic';
 import { Metadata } from "next";
-import SuspenseLoading from '../../components/ui/SuspenseLoading';
-
-const Projects = dynamic(() => import('../../components/projects/Projects'), { loading: () => <SuspenseLoading /> });
+import Projects from '../../components/projects/Projects';
 
 export const metadata: Metadata = {
   title: "Abhinav Sharma - Projects",

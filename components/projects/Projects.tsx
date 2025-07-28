@@ -153,8 +153,7 @@ const Projects = () => {
       <div className={`relative z-10 container mx-auto px-4 sm:px-8 md:px-10 lg:px-20 xl:px-32`}>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.7 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
           className={`font-orbitron text-center font-bold dark:text-white text-4xl sm:text-5xl pb-2 my-4 text-blue-950 drop-shadow-lg`}
         >
@@ -168,14 +167,13 @@ const Projects = () => {
               <motion.div
                 key={key}
                 initial={{ opacity: 0, y: 60, scale: 0.96 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
                 transition={{
                   duration: 0.5,
                   delay: 0.05 + i * 0.08,
                   type: 'spring',
                   bounce: 0.15
                 }}
-                viewport={{ once: true, amount: 0.25 }}
               >
                 <Item key={key} {...itemProps} reverse={i % 2 === 1} />
               </motion.div>
@@ -187,8 +185,7 @@ const Projects = () => {
         {hasMoreProjects && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, type: 'spring', bounce: 0.3 }}
             className="flex justify-center mt-12 mb-8"
           >
@@ -207,8 +204,7 @@ const Projects = () => {
         {showLessButton && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, type: 'spring', bounce: 0.3 }}
             className="flex justify-center mt-8 mb-8"
           >
