@@ -27,42 +27,178 @@ const LoadingBar = () => {
 // Full page loading overlay component
 export const FullPageLoading = () => {
   return (
-    <div className="fixed inset-0 z-[9998] bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center">
-      <div className="flex flex-col items-center gap-4">
+    <div className="fixed inset-0 z-[9998] bg-gradient-to-br from-white/95 via-white/90 to-violet-50/80 dark:from-gray-900/95 dark:via-gray-900/90 dark:to-violet-900/20 backdrop-blur-md flex items-center justify-center">
+      <div className="flex flex-col items-center gap-8">
+        {/* Enhanced Spinner Animation */}
         <div className="relative">
+          {/* Main rotating spinner ring */}
           <div
-            className="w-16 h-16 border-4 border-violet-200 dark:border-violet-800 rounded-full border-t-violet-600 dark:border-t-violet-400"
+            className="w-24 h-24 rounded-full border-4 border-transparent bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 bg-clip-border"
             style={{
-              animation: 'spin 1s linear infinite'
+              animation: 'loading-spin 1s linear infinite',
+              transform: 'translateZ(0)'
+            }}
+          >
+            <div className="w-full h-full rounded-full bg-white dark:bg-gray-900 flex items-center justify-center">
+              {/* Inner spinning dots */}
+              <div className="relative w-16 h-16">
+                <div
+                  className="absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-violet-500 rounded-full"
+                  style={{
+                    animation: 'loading-spin-reverse 1.5s linear infinite',
+                    transform: 'translateZ(0)'
+                  }}
+                ></div>
+                <div
+                  className="absolute top-1/2 right-0 transform -translate-y-1/2 w-3 h-3 bg-purple-500 rounded-full"
+                  style={{
+                    animation: 'loading-spin-reverse 1.5s linear infinite',
+                    animationDelay: '0.25s',
+                    transform: 'translateZ(0)'
+                  }}
+                ></div>
+                <div
+                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-blue-500 rounded-full"
+                  style={{
+                    animation: 'loading-spin-reverse 1.5s linear infinite',
+                    animationDelay: '0.5s',
+                    transform: 'translateZ(0)'
+                  }}
+                ></div>
+                <div
+                  className="absolute top-1/2 left-0 transform -translate-y-1/2 w-3 h-3 bg-violet-600 rounded-full"
+                  style={{
+                    animation: 'loading-spin-reverse 1.5s linear infinite',
+                    animationDelay: '0.75s',
+                    transform: 'translateZ(0)'
+                  }}
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Outer pulsing rings with different speeds */}
+          <div
+            className="absolute inset-0 w-24 h-24 rounded-full border-2 border-violet-400/30"
+            style={{
+              animation: 'loading-spin-ping 2s linear infinite',
+              transform: 'translateZ(0)'
+            }}
+          ></div>
+
+          <div
+            className="absolute inset-0 w-24 h-24 rounded-full border-2 border-purple-400/20"
+            style={{
+              animation: 'loading-spin-reverse-ping 2.5s linear infinite',
+              transform: 'translateZ(0)'
+            }}
+          ></div>
+
+          <div
+            className="absolute inset-0 w-24 h-24 rounded-full border-2 border-blue-400/15"
+            style={{
+              animation: 'loading-spin-ping 3s linear infinite',
+              transform: 'translateZ(0)'
+            }}
+          ></div>
+
+          {/* Floating spinner dots */}
+          <div
+            className="absolute -top-3 -right-3 w-4 h-4 bg-gradient-to-r from-violet-500 to-purple-600 rounded-full"
+            style={{
+              animation: 'bounce 1s infinite',
+              transform: 'translateZ(0)'
             }}
           ></div>
           <div
-            className="absolute inset-0 w-16 h-16 border-4 border-transparent rounded-full border-t-violet-400/30"
+            className="absolute -bottom-3 -left-3 w-4 h-4 bg-gradient-to-r from-blue-500 to-violet-600 rounded-full"
             style={{
-              animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite'
+              animation: 'bounce 1s infinite',
+              animationDelay: '0.3s',
+              transform: 'translateZ(0)'
+            }}
+          ></div>
+          <div
+            className="absolute -top-3 -left-3 w-3 h-3 bg-gradient-to-r from-purple-500 to-blue-600 rounded-full"
+            style={{
+              animation: 'bounce 1s infinite',
+              animationDelay: '0.6s',
+              transform: 'translateZ(0)'
+            }}
+          ></div>
+          <div
+            className="absolute -bottom-3 -right-3 w-3 h-3 bg-gradient-to-r from-violet-600 to-purple-500 rounded-full"
+            style={{
+              animation: 'bounce 1s infinite',
+              animationDelay: '0.9s',
+              transform: 'translateZ(0)'
             }}
           ></div>
         </div>
-        <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 animate-pulse">
-          Loading...
-        </p>
+
+        {/* Modern Loading Text with Spinner Effect */}
+        <div className="text-center">
+          <h3
+            className="text-xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 bg-clip-text text-transparent"
+            style={{
+              animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+            }}
+          >
+            Loading
+          </h3>
+          <div className="flex items-center justify-center gap-1 mt-2">
+            <div
+              className="w-2 h-2 bg-violet-500 rounded-full"
+              style={{
+                animation: 'bounce 1s infinite',
+                transform: 'translateZ(0)'
+              }}
+            ></div>
+            <div
+              className="w-2 h-2 bg-purple-500 rounded-full"
+              style={{
+                animation: 'bounce 1s infinite',
+                animationDelay: '0.1s',
+                transform: 'translateZ(0)'
+              }}
+            ></div>
+            <div
+              className="w-2 h-2 bg-blue-500 rounded-full"
+              style={{
+                animation: 'bounce 1s infinite',
+                animationDelay: '0.2s',
+                transform: 'translateZ(0)'
+              }}
+            ></div>
+            <div
+              className="w-2 h-2 bg-violet-600 rounded-full"
+              style={{
+                animation: 'bounce 1s infinite',
+                animationDelay: '0.3s',
+                transform: 'translateZ(0)'
+              }}
+            ></div>
+          </div>
+        </div>
+
+        {/* Enhanced Progress Bar with Spinner Effect */}
+        <div className="w-48 h-1 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden relative">
+          <div
+            className="h-full bg-gradient-to-r from-violet-500 via-purple-500 to-blue-500 rounded-full"
+            style={{
+              animation: 'progress 2s ease-in-out infinite'
+            }}
+          ></div>
+          {/* Spinning progress indicator */}
+          <div
+            className="absolute top-0 right-0 w-3 h-3 bg-gradient-to-r from-violet-500 to-purple-600 rounded-full"
+            style={{
+              animation: 'loading-spin-reverse 1.5s linear infinite',
+              transform: 'translateZ(0)'
+            }}
+          ></div>
+        </div>
       </div>
-      <style jsx>{`
-        @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        @keyframes ping {
-          75%, 100% {
-            transform: scale(2);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </div>
   );
 };
