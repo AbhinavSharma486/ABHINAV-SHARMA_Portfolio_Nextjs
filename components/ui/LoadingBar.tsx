@@ -24,4 +24,47 @@ const LoadingBar = () => {
   );
 };
 
+// Full page loading overlay component
+export const FullPageLoading = () => {
+  return (
+    <div className="fixed inset-0 z-[9998] bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center">
+      <div className="flex flex-col items-center gap-4">
+        <div className="relative">
+          <div
+            className="w-16 h-16 border-4 border-violet-200 dark:border-violet-800 rounded-full border-t-violet-600 dark:border-t-violet-400"
+            style={{
+              animation: 'spin 1s linear infinite'
+            }}
+          ></div>
+          <div
+            className="absolute inset-0 w-16 h-16 border-4 border-transparent rounded-full border-t-violet-400/30"
+            style={{
+              animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite'
+            }}
+          ></div>
+        </div>
+        <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 animate-pulse">
+          Loading...
+        </p>
+      </div>
+      <style jsx>{`
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes ping {
+          75%, 100% {
+            transform: scale(2);
+            opacity: 0;
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
+
 export default LoadingBar;

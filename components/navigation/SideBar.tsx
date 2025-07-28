@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import ThemeToggle from '../ui/theme-toggle';
 import { Contact, Folder, History, Home, MenuIcon, Briefcase, X, Loader2 } from "lucide-react";
 import Image from 'next/image';
+import { FullPageLoading } from '../ui/LoadingBar';
 
 interface NavigationItem {
   name: string;
@@ -45,7 +46,6 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick, is
   const router = useRouter();
   const isExternal = item.external;
   const isScrollLink = item.scrollTo;
-  const isCurrentlyLoading = isLoading && currentLoadingItem === item.name;
 
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -81,16 +81,11 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick, is
         "hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         "transition-colors duration-200",
-        isCurrentlyLoading && "opacity-70 cursor-not-allowed",
         item.margin && "mt-5"
       )}
     >
       <div aria-hidden="true" className="text-black dark:text-white group-hover:text-gray-800 dark:group-hover:text-gray-200">
-        {isCurrentlyLoading ? (
-          <Loader2 size={20} className="animate-spin" />
-        ) : (
-          React.createElement(item.icon, { size: "20" })
-        )}
+        {React.createElement(item.icon, { size: "20" })}
       </div>
       <span
         className={cn(
@@ -99,7 +94,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick, is
         )}
         style={{ transitionDelay: `${NAVIGATION_ITEMS.indexOf(item) + 7}0ms` }}
       >
-        {isCurrentlyLoading ? `${item.name}...` : item.name}
+        {item.name}
       </span>
       <span
         className={cn(
@@ -109,7 +104,7 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick, is
           open && "hidden"
         )}
       >
-        {isCurrentlyLoading ? `${item.name}...` : item.name}
+        {item.name}
       </span>
     </Link>
   );
@@ -172,65 +167,68 @@ const SideBar = () => {
     setTimeout(() => {
       setIsLoading(false);
       setCurrentLoadingItem(null);
-    }, 1000);
+    }, 1500);
   };
 
   return (
-    <nav
-      className="fixed z-[9999] flex gap-6 min-h-screen"
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      <div
-        className={cn(
-          "bg-transparent px-4 transition-all duration-300",
-          open ? "w-60 backdrop-blur" : "w-12 md:w-16",
-        )}
+    <>
+      {isLoading && <FullPageLoading />}
+      <nav
+        className="fixed z-[9999] flex gap-6 min-h-screen"
+        role="navigation"
+        aria-label="Main navigation"
       >
-        <div className="flex min-w-full justify-between py-3">
-          <Logo open={open} onClick={() => setOpen(false)} />
-          <Button
-            size="lg"
-            onClick={() => setOpen(!open)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            className="p-2 h-8 w-8 md:h-11 md:w-8 backdrop-blur-sm rounded-xl shadow-lg transition-all duration-200 z-[9999] bg-gray-800 hover:bg-gray-700"
-          >
-            {open ? <X size={24} className="md:w-8 md:h-8" /> : <MenuIcon size={24} className="md:w-8 md:h-8" />}
-          </Button>
-        </div>
-
         <div
           className={cn(
-            "mt-10 flex flex-col relative",
-            !open ? "md:space-y-5 hidden md:block" : "gap-5",
+            "bg-transparent px-4 transition-all duration-300",
+            open ? "w-60 backdrop-blur" : "w-12 md:w-16",
           )}
         >
-          {
-            NAVIGATION_ITEMS.map((item) => (
-              <NavigationItem
-                key={item.name}
-                item={item}
-                open={open}
-                onClick={() => handleNavigationClick(item.name)}
-                isLoading={isLoading}
-                currentLoadingItem={currentLoadingItem}
-              />
-            ))
-          }
+          <div className="flex min-w-full justify-between py-3">
+            <Logo open={open} onClick={() => setOpen(false)} />
+            <Button
+              size="lg"
+              onClick={() => setOpen(!open)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              className="p-2 h-8 w-8 md:h-11 md:w-8 backdrop-blur-sm rounded-xl shadow-lg transition-all duration-200 z-[9999] bg-gray-800 hover:bg-gray-700"
+            >
+              {open ? <X size={24} className="md:w-8 md:h-8" /> : <MenuIcon size={24} className="md:w-8 md:h-8" />}
+            </Button>
+          </div>
 
-          <div className={cn(
-            "mt-5",
-            !open && "flex justify-center"
-          )}>
-            <ThemeToggle />
+          <div
+            className={cn(
+              "mt-10 flex flex-col relative",
+              !open ? "md:space-y-5 hidden md:block" : "gap-5",
+            )}
+          >
+            {
+              NAVIGATION_ITEMS.map((item) => (
+                <NavigationItem
+                  key={item.name}
+                  item={item}
+                  open={open}
+                  onClick={() => handleNavigationClick(item.name)}
+                  isLoading={isLoading}
+                  currentLoadingItem={currentLoadingItem}
+                />
+              ))
+            }
+
+            <div className={cn(
+              "mt-5",
+              !open && "flex justify-center"
+            )}>
+              <ThemeToggle />
+            </div>
+
           </div>
 
         </div>
 
-      </div>
-
-    </nav >
+      </nav >
+    </>
   );
 };
 
