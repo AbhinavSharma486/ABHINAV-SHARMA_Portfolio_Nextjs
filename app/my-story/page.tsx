@@ -1,9 +1,6 @@
 import React from 'react';
-import SuspenseLoading from "@/components/ui/SuspenseLoading";
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
-
-const MyStory = dynamic(() => import('../../components/story/MyStory'), { loading: () => <SuspenseLoading /> });
+import MyStory from '../../components/story/MyStory';
 
 export const metadata: Metadata = {
   title: "My story - Abhinav Sharma",
