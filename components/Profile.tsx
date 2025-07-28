@@ -15,25 +15,25 @@ const SOCIAL_LINKS = [
     icon: GithubIcon,
     href: "https://github.com/AbhinavSharma486",
     label: "GitHub",
-    hoverColor: "hover:bg-[0000]"
+    hoverColor: "hover:bg-gray-800 dark:hover:bg-black"
   },
   {
     icon: LinkedinIcon,
     href: "https://www.linkedin.com/in/abhinav-sharma-6254252a5/",
     label: "LinkedIn",
-    hoverColor: "hover:bg-[#0077b5]"
+    hoverColor: "hover:bg-blue-600 dark:hover:bg-blue-500"
   },
   {
     icon: FaWhatsapp,
     href: "https://api.whatsapp.com/send?phone=7819872024",
     label: "Whatsapp",
-    hoverColor: "hover:bg-primary"
+    hoverColor: "hover:bg-green-600 dark:hover:bg-green-500"
   },
   {
     icon: MailIcon,
     href: "/contact",
     label: "Email",
-    hoverColor: "hover:bg-black"
+    hoverColor: "hover:bg-red-600 dark:hover:bg-red-500"
   }
 ];
 
@@ -112,18 +112,18 @@ const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) =>
     className="relative group mx-auto w-full max-w-[10rem] xs:max-w-[6rem] sm:max-w-[8rem] md:max-w-[10rem] lg:max-w-[12rem] xl:max-w-[14rem] 2xl:max-w-[16rem] mt-2 sm:mt-4 md:mt-6 lg:mt-0"
   >
     <motion.div
-      className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-primary via-violet-500 to-blue-500 rounded-full opacity-80 group-hover:opacity-100 blur-lg transition duration-500 border border-violet-400 animate-gradient-x"
+      className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 dark:from-primary dark:via-violet-500 dark:to-blue-500 rounded-full opacity-90 dark:opacity-80 group-hover:opacity-100 blur-lg transition duration-500 border border-violet-500/60 dark:border-violet-400 animate-gradient-x"
       animate={{
         boxShadow: [
-          '0 0 0 0 rgba(124,58,237,0.18)',
-          '0 0 32px 8px rgba(124,58,237,0.18)',
-          '0 0 0 0 rgba(124,58,237,0.18)'
+          '0 0 0 0 rgba(124,58,237,0.25)',
+          '0 0 32px 8px rgba(124,58,237,0.25)',
+          '0 0 0 0 rgba(124,58,237,0.25)'
         ]
       }}
       transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
     />
-    <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl border border-violet-300/60 dark:border-violet-700/60">
-      <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-violet-500/10 group-hover:opacity-0 transition duration-500" />
+    <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl border-2 border-violet-500/80 dark:border-violet-700/60">
+      <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 to-purple-500/20 dark:from-primary/10 dark:to-violet-500/10 group-hover:opacity-0 transition duration-500" />
       <Image
         src="/assets/images/profile-img.webp"
         alt="Abhinav Sharma"
@@ -159,7 +159,7 @@ const SocialLinks = () => (
           href={href}
           target={href.startsWith('http') ? "_blank" : undefined}
           rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-          className={`flex items-center justify-center w-8 h-8 rounded-full bg-[#18181b] dark:bg-[#232136] text-white border border-violet-700/40 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 ${hoverColor}`}
+          className={`flex items-center justify-center w-8 h-8 rounded-full bg-gray-700 dark:bg-gray-800 text-white border border-gray-600/40 dark:border-gray-700/40 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 ${hoverColor}`}
           aria-label={label}
           tabIndex={0}
         >
@@ -233,7 +233,7 @@ const Profile = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.7 }}
                   transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
-                  className="font-orbitron font-bold text-xl sm:text-base md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl drop-shadow-md"
+                  className="font-orbitron font-bold text-2xl sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl 2xl:text-4xl drop-shadow-md"
                 >
                   <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-violet-500 bg-clip-text text-transparent">
                     जय श्री राधे, I am
@@ -245,7 +245,7 @@ const Profile = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.7 }}
                   transition={{ duration: 0.7, delay: 0.1, type: 'spring', bounce: 0.22 }}
-                  className='font-orbitron font-bold text-xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl drop-shadow-lg'
+                  className='font-orbitron font-bold text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl drop-shadow-lg'
                 >
                   <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-violet-500 bg-clip-text text-transparent">
                     Abhinav Sharma
@@ -269,7 +269,7 @@ const Profile = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.7 }}
                 transition={{ duration: 0.7, delay: 0.25, type: 'spring', bounce: 0.22 }}
-                className="flex items-center gap-2 justify-center md:justify-start text-muted-foreground text-xs xs:text-sm sm:text-base mb-4 text-black dark:text-white"
+                className="flex items-center gap-2 justify-center md:justify-start text-muted-foreground text-xs xs:text-sm sm:text-base mb-4 text-gray-800 dark:text-white"
               >
                 <span className="inline-block w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
                 Looking for Full Stack MERN opportunities
@@ -281,7 +281,7 @@ const Profile = () => {
                 transition={{ duration: 0.7, delay: 0.32, type: 'spring', bounce: 0.22 }}
                 className="flex flex-col sm:flex-row flex-wrap gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 justify-center items-center pt-2 xs:pt-2.5 sm:pt-3 md:pt-4"
               >
-                <Button className="mb-4 group w-full sm:w-auto min-w-[100px] sm:min-w-[120px] md:min-w-[140px] relative overflow-hidden bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 hover:from-purple-800 hover:via-purple-700 hover:to-indigo-800 text-white text-sm sm:text-base font-medium shadow-lg hover:shadow-xl hover:shadow-violet-500/25 transition-all duration-300 transform hover:scale-105 active:scale-95 border border-white/20 hover:border-white/40 backdrop-blur-sm button-glow rounded-full"
+                <Button className="mb-4 group w-Content sm:w-auto min-w-[100px] sm:min-w-[120px] md:min-w-[140px] relative overflow-hidden bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 hover:from-purple-800 hover:via-purple-700 hover:to-indigo-800 text-white text-sm sm:text-base font-medium shadow-lg hover:shadow-xl hover:shadow-violet-500/25 transition-all duration-300 active:scale-95 border border-white/20 hover:border-white/40 backdrop-blur-sm button-glow rounded-full"
                   onClick={() => window.open("https://drive.google.com/file/d/1oJmaMKTolJIHsBHMWRLpUC2KWQ8EhTTO/view?usp=sharing", "_blank", "noopener,noreferrer")}
                 >
                   <span className="relative z-10 flex items-center gap-2">
@@ -295,7 +295,7 @@ const Profile = () => {
                 <Button
                   variant="outline"
                   asChild
-                  className="mb-4 group relative overflow-hidden w-full sm:w-auto min-w-[100px] sm:min-w-[120px] md:min-w-[140px] bg-black hover:text-black text-white text-sm sm:text-base shadow-lg hover:shadow-xl hover:border-violet-400 dark:hover:border-violet-500 border border-violet-700/60 transition-all duration-300 rounded-full"
+                  className="mb-4 group relative overflow-hidden w-Content sm:w-auto min-w-[100px] sm:min-w-[120px] md:min-w-[140px] bg-black hover:text-black text-white text-sm sm:text-base shadow-lg hover:shadow-xl hover:border-violet-400 dark:hover:border-violet-500 border border-violet-700/60 transition-all duration-300 rounded-full"
                 >
                   <Link href="/my-story" className="flex items-center justify-center gap-2">
                     More About Me
