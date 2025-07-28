@@ -8,6 +8,14 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      'xs': '475px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       fontFamily: {
         custom: ["CustomFont", "sans"],
@@ -62,20 +70,17 @@ const config: Config = {
         }
       },
       animation: {
-        'shimmer-slide': 'shimmer-slide var(--speed) ease-in-out infinite alternate',
+
         'spin-around': 'spin-around calc(var(--speed) * 2) infinite linear',
         'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
+        'border-shimmer': 'border-shimmer 2s ease-in-out infinite',
         shine: 'shine var(--duration) infinite linear',
         ripple: 'ripple var(--duration,2s) ease calc(var(--i, 0)*.2s) infinite',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out'
       },
       keyframes: {
-        'shimmer-slide': {
-          to: {
-            transform: 'translate(calc(100cqw - 100%), 0)'
-          }
-        },
+
         'spin-around': {
           '0%': {
             transform: 'translateZ(0) rotate(0)'

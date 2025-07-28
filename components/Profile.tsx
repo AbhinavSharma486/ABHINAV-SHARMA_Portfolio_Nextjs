@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from './ui/button';
-import ShimmerButton from './ui/shimmer-button';
+
 import { ArrowRight, GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
 import { FaWhatsapp } from "react-icons/fa";
 import Image from 'next/image';
@@ -15,7 +15,7 @@ const SOCIAL_LINKS = [
     icon: GithubIcon,
     href: "https://github.com/AbhinavSharma486",
     label: "GitHub",
-    hoverColor: "hover:bg-[#333]"
+    hoverColor: "hover:bg-[0000]"
   },
   {
     icon: LinkedinIcon,
@@ -33,7 +33,7 @@ const SOCIAL_LINKS = [
     icon: MailIcon,
     href: "/contact",
     label: "Email",
-    hoverColor: "hover:bg-primary"
+    hoverColor: "hover:bg-black"
   }
 ];
 
@@ -86,7 +86,7 @@ const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => (
       ].map((className, index) => (
         <motion.div
           key={index}
-          className={`absolute w-24 h-24 sm:w-36 sm:h-36 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-lg animate-blob ${className}`}
+          className={`absolute w-16 h-16 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-48 lg:h-48 xl:w-64 xl:h-64 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-lg animate-blob ${className}`}
           style={{ zIndex: 0 }}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -109,10 +109,10 @@ const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) =>
     style={{
       transform: `translate3d(${parallax.x * 4}px, ${parallax.y * 4}px, 0)`
     }}
-    className="relative group mx-auto w-full max-w-[10rem] sm:max-w-[12rem] md:max-w-[14rem] lg:max-w-[16rem] mt-8 sm:mt-10 md:mt-0"
+    className="relative group mx-auto w-full max-w-[10rem] xs:max-w-[6rem] sm:max-w-[8rem] md:max-w-[10rem] lg:max-w-[12rem] xl:max-w-[14rem] 2xl:max-w-[16rem] mt-2 sm:mt-4 md:mt-6 lg:mt-0"
   >
     <motion.div
-      className="absolute -inset-1 bg-gradient-to-r from-primary via-violet-500 to-blue-500 rounded-full opacity-80 group-hover:opacity-100 blur-lg transition duration-500 border-2 border-violet-400 animate-gradient-x"
+      className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-primary via-violet-500 to-blue-500 rounded-full opacity-80 group-hover:opacity-100 blur-lg transition duration-500 border border-violet-400 animate-gradient-x"
       animate={{
         boxShadow: [
           '0 0 0 0 rgba(124,58,237,0.18)',
@@ -122,7 +122,7 @@ const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) =>
       }}
       transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
     />
-    <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl border-2 border-violet-300/60 dark:border-violet-700/60">
+    <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl border border-violet-300/60 dark:border-violet-700/60">
       <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-violet-500/10 group-hover:opacity-0 transition duration-500" />
       <Image
         src="/assets/images/profile-img.webp"
@@ -145,7 +145,7 @@ const SocialLinks = () => (
       hidden: {},
       visible: { transition: { staggerChildren: 0.08 } },
     }}
-    className="flex flex-wrap gap-4 justify-center"
+    className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center"
   >
     {SOCIAL_LINKS.map(({ icon: Icon, href, label, hoverColor }, i) => (
       <motion.div
@@ -159,42 +159,47 @@ const SocialLinks = () => (
           href={href}
           target={href.startsWith('http') ? "_blank" : undefined}
           rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-          className={`flex items-center justify-center w-11 h-11 md:w-12 md:h-12 rounded-full bg-background dark:bg-background/80 text-foreground transition-all duration-300 ${hoverColor} hover:text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95`}
+          className={`flex items-center justify-center w-8 h-8 rounded-full bg-[#18181b] dark:bg-[#232136] text-white border border-violet-700/40 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 ${hoverColor}`}
           aria-label={label}
           tabIndex={0}
         >
-          <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
+          <Icon className="w-4 h-4 text-white transition-transform duration-300 group-hover:scale-110" />
           {/* Ripple effect */}
           <span className="absolute inset-0 rounded-full pointer-events-none group-active:animate-ping bg-violet-400/20" />
         </Link>
-        {/* Tooltip removed as per user request */}
       </motion.div>
     ))}
   </motion.div>
 );
 
 const Profile = () => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      document.documentElement.style.overflowX = 'hidden';
+      document.body.style.overflowX = 'hidden';
+    }
+  }, []);
   const mainRef = useRef<HTMLDivElement>(null);
   const parallax = useParallax(mainRef);
   return (
     <main
       id="home"
       ref={mainRef}
-      className='relative min-h-screen h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-4 sm:py-6 md:py-8 lg:py-10 overflow-hidden'>
+      className='relative min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-1 sm:py-2 md:py-4 lg:py-6 xl:py-8 2xl:py-10 overflow-x-hidden'>
       <BackgroundBlobs ref={mainRef} />
-      <div className={`container mx-auto px-4 sm:px-8 md:px-10 lg:px-20 xl:px-32`}>
+      <div className={`w-full max-w-7xl mx-auto px-1 xs:px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 ml-0 mr-0 md:ml-16 md:mr-16 lg:ml-20 lg:mr-20 xl:ml-24 xl:mr-24`} style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
         <article
-          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl overflow-visible transition-all duration-300 group max-w-7xl h-full max-h-[95vh] flex flex-col'>
-          {/* Floating badge - responsive position and size */}
+          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-lg sm:rounded-xl md:rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl transition-all duration-300 group w-full min-h-0 max-h-none md:min-h-[80vh] md:max-h-[95vh] flex flex-col'>
+          {/* Floating badge - improved responsive positioning */}
           <motion.div
-            className="absolute right-2 sm:right-4 top-2 sm:top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm md:text-base md:px-4 md:py-2 shadow-2xl font-bold flex items-center gap-1 sm:gap-2 border-2 border-white dark:border-black/40 drop-shadow-lg animate-bounce-slow md:right-10 md:top-10"
+            className="absolute right-1 top-1 xs:right-2 xs:top-2 sm:right-3 sm:top-3 md:right-4 md:top-4 lg:right-6 lg:top-6 xl:right-10 xl:top-10 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-1.5 py-0.5 xs:px-2 xs:py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 text-[8px] xs:text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg shadow-2xl font-bold flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 border border-white dark:border-black/40 animate-bounce-slow max-w-[calc(100%-1rem)] min-w-fit profile-badge"
             initial={{ opacity: 0, y: -16, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 1.1, duration: 0.7, type: 'spring', bounce: 0.4 }}
             style={{ zIndex: 20 }}
           >
             <motion.span
-              className="text-lg sm:text-xl md:text-2xl inline-block"
+              className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl inline-block"
               animate={{ rotate: [0, 20, -10, 20, 0] }}
               transition={{
                 repeat: Infinity,
@@ -205,50 +210,55 @@ const Profile = () => {
               style={{ display: 'inline-block', originX: 0.7, originY: 0.7 }}
             >
               👋
-            </motion.span> Open to Work
+            </motion.span>
+            <span className="inline">Open to Work</span>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-4 sm:gap-6 md:gap-8 lg:gap-12 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-14 md:pt-20 lg:pt-24 flex-1">
-            <div className="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-12 flex flex-col items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 p-1 xs:p-2 sm:p-3 md:p-4 lg:p-6 xl:p-8 2xl:p-10 md:pt-10 lg:pt-14 xl:pt-18 flex-1 min-h-0 profile-container" style={{ maxWidth: '100%' }}>
+            <div className="space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4 flex flex-col items-center justify-center">
               <ProfileImage parallax={parallax} />
+              <div className="mt-4" />
               <SocialLinks />
+              <div className="mt-4" />
             </div>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
-              className="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-12 text-center md:text-left"
+              className="space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4 text-center md:text-left flex flex-col justify-center"
             >
-              <header className='space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-6 xl:space-y-8'>
+              <header className='space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4'>
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.7 }}
                   transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
-                  className="font-orbitron text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-md"
+                  className="font-orbitron font-bold text-xl sm:text-base md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl drop-shadow-md"
                 >
-                  <span className="bg-gradient-to-r from-primary to-violet-500 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-violet-500 bg-clip-text text-transparent">
                     जय श्री राधे, I am
                   </span>
                 </motion.div>
+                <div className="mt-4" />
                 <motion.h1
                   initial={{ opacity: 0, y: -20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.7 }}
                   transition={{ duration: 0.7, delay: 0.1, type: 'spring', bounce: 0.22 }}
-                  className='font-orbitron text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl drop-shadow-lg'
+                  className='font-orbitron font-bold text-xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl drop-shadow-lg'
                 >
-                  <span className="bg-gradient-to-r from-primary via-violet-500 to-blue-500 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-violet-500 bg-clip-text text-transparent">
                     Abhinav Sharma
                   </span>
                 </motion.h1>
+                <div className="mt-4" />
               </header>
               <motion.p
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.7 }}
                 transition={{ duration: 0.7, delay: 0.18, type: 'spring', bounce: 0.22 }}
-                className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed"
+                className="text-xs xs:text-sm sm:text-base lg:text-lg xl:text-xl text-black dark:text-white leading-relaxed profile-text mb-4"
               >
                 MERN Stack Developer with hands-on experience in building scalable web applications, real-time systems,
                 and robust authentication solutions.
@@ -259,7 +269,7 @@ const Profile = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.7 }}
                 transition={{ duration: 0.7, delay: 0.25, type: 'spring', bounce: 0.22 }}
-                className="flex items-center gap-2 justify-center md:justify-start text-muted-foreground text-sm sm:text-base"
+                className="flex items-center gap-2 justify-center md:justify-start text-muted-foreground text-xs xs:text-sm sm:text-base mb-4 text-black dark:text-white"
               >
                 <span className="inline-block w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
                 Looking for Full Stack MERN opportunities
@@ -269,20 +279,25 @@ const Profile = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.7 }}
                 transition={{ duration: 0.7, delay: 0.32, type: 'spring', bounce: 0.22 }}
-                className="flex flex-wrap gap-4 justify-center items-center pt-3 md:pt-4"
+                className="flex flex-col sm:flex-row flex-wrap gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 justify-center items-center pt-2 xs:pt-2.5 sm:pt-3 md:pt-4"
               >
-                <ShimmerButton
-                  className="min-w-[120px] sm:min-w-[140px] text-white dark:text-white shadow-lg hover:shadow-xl hover:border-violet-400 dark:hover:border-violet-500 transition-all duration-300"
+                <Button className="mb-4 group w-full sm:w-auto min-w-[100px] sm:min-w-[120px] md:min-w-[140px] relative overflow-hidden bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 hover:from-purple-800 hover:via-purple-700 hover:to-indigo-800 text-white text-sm sm:text-base font-medium shadow-lg hover:shadow-xl hover:shadow-violet-500/25 transition-all duration-300 transform hover:scale-105 active:scale-95 border border-white/20 hover:border-white/40 backdrop-blur-sm button-glow rounded-full"
                   onClick={() => window.open("https://drive.google.com/file/d/1oJmaMKTolJIHsBHMWRLpUC2KWQ8EhTTO/view?usp=sharing", "_blank", "noopener,noreferrer")}
                 >
-                  Download Resume
-                </ShimmerButton>
+                  <span className="relative z-10 flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Download Resume
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
+                </Button>
                 <Button
                   variant="outline"
                   asChild
-                  className="group relative overflow-hidden min-w-[120px] sm:min-w-[140px] bg-background/80 hover:bg-background dark:hover:text-primary shadow-lg hover:shadow-xl hover:border-violet-400 dark:hover:border-violet-500 transition-all duration-300"
+                  className="mb-4 group relative overflow-hidden w-full sm:w-auto min-w-[100px] sm:min-w-[120px] md:min-w-[140px] bg-black hover:text-black text-white text-sm sm:text-base shadow-lg hover:shadow-xl hover:border-violet-400 dark:hover:border-violet-500 border border-violet-700/60 transition-all duration-300 rounded-full"
                 >
-                  <Link href="/my-story" className="flex dark:text-white items-center justify-center gap-2">
+                  <Link href="/my-story" className="flex items-center justify-center gap-2">
                     More About Me
                     <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                   </Link>
