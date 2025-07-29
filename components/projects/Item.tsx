@@ -70,15 +70,17 @@ export default function Item({
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              <Image
-                className="object-cover w-full h-full transition-all duration-700 group-hover:scale-[1.02] bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900"
-                src={headerImg}
-                alt={name}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 40vw"
-                quality={85}
-                priority={false}
-              />
+              {headerImg ? (
+                <Image
+                  className="object-cover w-full h-full transition-all duration-700 group-hover:scale-[1.02] bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900"
+                  src={headerImg}
+                  alt={name}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 40vw"
+                  quality={85}
+                  priority={false}
+                />
+              ) : null}
 
               {/* Enhanced gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

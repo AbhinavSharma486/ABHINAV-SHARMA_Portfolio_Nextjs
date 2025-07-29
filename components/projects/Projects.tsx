@@ -45,6 +45,46 @@ const Projects = () => {
       },
     },
     {
+      key: "ten-sentinel",
+      name: "Ten Sentinel",
+      type: "internship" as const,
+      headerImg: "",
+      description: "Contributed to “Ten Sentinel”, developed responsive user interfaces for a cybersecurity platform using React.js and Tailwind CSS.Collaborated with a team of 8 members to ensure UI/ UX consistency and security standards. Implemented security focused design patterns and optimized frontend performance",
+      seeMore: { url: "https://ten-sentinel-lilac.vercel.app/", text: "Visit the website...", target: "_blank" },
+      techs: ["reactjs", "tailwindcss", "vitejs", "react-hot-toast", "lucide-react", "javascript", "bootstrap", "framer-motion", "react-icons", "react-countup"],
+      headerLinks: {
+        github: {
+          url: "https://github.com/yogita0914/Ten_Sentinel",
+          icon: <BsGithub />,
+          target: "_blank"
+        },
+      },
+    },
+    {
+      key: "aniicone's-cafe",
+      name: "Aniicone's Cafe",
+      type: "internship" as const,
+      headerImg: "",
+      description: "Collaborated in a 10-member team to build Aniicone’s Café, a café management system using the MERN stack. Developed frontend components with React.js and RESTful APIs with Node.js and Express.js. Implemented MongoDB integration and participated in agile development processes.",
+      techs: ["reactjs", "tailwindcss", "vitejs", "react-hot-toast", "lucide-react", "javascript", "bootstrap", "react-icons", "expressjs", "nodejs", "mongodb", "cloudinary", "firebase", "axios", "redux-toolkit", "javascript", "bcryptjs", "cookie-parser", "jsonwebtoken"],
+    },
+    {
+      key: "event-flow",
+      name: "Event Flow",
+      type: "internship" as const,
+      headerImg: "",
+      description: "Developed “Event Flow” a full-stack event management system using MERN stack with real-time updates and user authentication. Built dynamic event dashboards with React.js and Redux, integrated JWT tokens for secure access control. Designed scalable backend services with Node.js, Express.js, and MongoDB for seamless user experience.",
+      seeMore: { url: "https://eventflow-km9l.onrender.com/", text: "Visit the website...", target: "_blank" },
+      techs: ["reactjs", "tailwindcss", "vitejs", "react-hot-toast", "lucide-react", "javascript", "bootstrap", "framer-motion", "react-icons", "@reduxjs/toolkit", "@tanstack/react-query", "axios", "date-fns", "react-datepicker", "react-helmet", "react-redux", "react-toastify", "redux-persist", "bcryptjs", "cloudinary", "compression", "cookie-parser", "cors", "dotenv", "express", "express-rate-limit", "jsonwebtoken", "mongoose", "morgan", "node-cron", "validator"],
+      headerLinks: {
+        github: {
+          url: "https://github.com/AbhinavSharma486/Event_Management_System_IBI_Internship_Project",
+          icon: <BsGithub />,
+          target: "_blank"
+        },
+      },
+    },
+    {
       key: "syncdocs",
       name: "Sync Docs",
       type: "personal" as const,
@@ -78,7 +118,7 @@ const Projects = () => {
       key: "todo-redux",
       name: "Todo using Redux",
       type: "personal" as const,
-      headerImg: "/assets/images/todo-using-redux.webp",
+      headerImg: "",
       description: "I built a  To-Do application using Redux Toolkit.  This app features an input field where users can enter tasks. Upon hitting enter, the entered text becomes a to-do item displayed below the input field.  Each to-do item has a delete button for removal.  The application utilizes Redux to persist the to-do list, ensuring that tasks remain even after page refresh.",
       techs: ["reactjs", "reduxjs", "tailwindcss", "vitejs", "javascript"],
       seeMore: { url: "https://todo-using-reduxtoolkit.netlify.app/", text: "Give it a try..." },
@@ -222,8 +262,8 @@ const Projects = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base ${selectedType === 'all'
-                ? 'bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 text-white shadow-lg'
-                : 'bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700'
+              ? 'bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 text-white shadow-lg'
+              : 'bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700'
               }`}
           >
             All Projects
@@ -233,8 +273,8 @@ const Projects = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base ${selectedType === 'personal'
-                ? 'bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 text-white shadow-lg'
-                : 'bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700'
+              ? 'bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 text-white shadow-lg'
+              : 'bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700'
               }`}
           >
             Personal Projects
@@ -244,8 +284,8 @@ const Projects = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base ${selectedType === 'internship'
-                ? 'bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 text-white shadow-lg'
-                : 'bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700'
+              ? 'bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 text-white shadow-lg'
+              : 'bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700'
               }`}
           >
             Internship Projects
