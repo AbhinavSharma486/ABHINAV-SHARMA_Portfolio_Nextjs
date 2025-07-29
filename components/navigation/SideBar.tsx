@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import ThemeToggle from '../ui/theme-toggle';
-import { Contact, Folder, History, Home, MenuIcon, Briefcase, X, Loader2 } from "lucide-react";
+import { Contact, Folder, History, Home, MenuIcon, Briefcase, X } from "lucide-react";
 import Image from 'next/image';
 import { FullPageLoading } from '../ui/LoadingBar';
 
@@ -29,8 +29,6 @@ interface NavigationItemProps {
   item: NavigationItem;
   open: boolean;
   onClick: () => void;
-  isLoading: boolean;
-  currentLoadingItem: string | null;
 }
 
 const NAVIGATION_ITEMS: NavigationItem[] = [
@@ -41,7 +39,7 @@ const NAVIGATION_ITEMS: NavigationItem[] = [
   { name: "Contact Me", scrollTo: "#contact", icon: Contact },
 ];
 
-const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick, isLoading, currentLoadingItem }) => {
+const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) => {
   const pathname = usePathname();
   const router = useRouter();
   const isExternal = item.external;
@@ -127,7 +125,6 @@ const Logo: React.FC<LogoProps> = ({ open }) => (
 const SideBar = () => {
   const [open, setOpen] = React.useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentLoadingItem, setCurrentLoadingItem] = useState<string | null>(null);
 
   // Close sidebar on route change
   React.useEffect(() => {
@@ -135,7 +132,6 @@ const SideBar = () => {
       const handleRouteChange = () => {
         setOpen(false);
         setIsLoading(false);
-        setCurrentLoadingItem(null);
       };
       window.addEventListener("popstate", handleRouteChange);
       return () => window.removeEventListener("popstate", handleRouteChange);
@@ -154,19 +150,17 @@ const SideBar = () => {
     return () => document.removeEventListener('keydown', handleEscape);
   }, []);
 
-  const handleNavigationClick = (itemName: string) => {
+  const handleNavigationClick = () => {
     if (open) {
       setOpen(false);
     }
 
     // Set loading state for all navigation items
     setIsLoading(true);
-    setCurrentLoadingItem(itemName);
 
     // Clear loading state after a short delay to show loading feedback
     setTimeout(() => {
       setIsLoading(false);
-      setCurrentLoadingItem(null);
     }, 1500);
   };
 
@@ -209,9 +203,7 @@ const SideBar = () => {
                   key={item.name}
                   item={item}
                   open={open}
-                  onClick={() => handleNavigationClick(item.name)}
-                  isLoading={isLoading}
-                  currentLoadingItem={currentLoadingItem}
+                  onClick={() => handleNavigationClick()}
                 />
               ))
             }
