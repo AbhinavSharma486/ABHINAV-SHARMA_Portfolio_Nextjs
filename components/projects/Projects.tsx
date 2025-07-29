@@ -18,7 +18,7 @@ const ProjectBlobs = ({ y1, y2, y3 }: { y1: MotionValue<number>; y2: MotionValue
 
 const Projects = () => {
   const sectionRef = useRef(null);
-  const [visibleProjects, setVisibleProjects] = useState(3);
+  const [visibleProjects, setVisibleProjects] = useState(4);
   const [selectedType, setSelectedType] = useState<'all' | 'personal' | 'internship'>('all');
 
   // Ultra-optimized parallax effect for blobs
@@ -32,7 +32,7 @@ const Projects = () => {
       key: "chatify",
       name: "Chatify",
       type: "personal" as const,
-      headerImg: "/assets/images/chatify-MERN.webp",
+      headerImg: "/assets/images/chatifyHomePage.webp",
       description: "Developed a secure and customizable user platform with authentication, real-time chat, profile management, and database integration. Implemented secure login (email/password, Google) with OTP verification and JWT for enhanced security. Built a real-time chat system with online/offline status tracking using Socket.io. Enabled profile updates, including name changes, profile picture uploads (Cloudinary), and password resets. Provided 32 theme options for UI customization. Utilized MongoDB for data storage and Nodemailer for email verification and password recovery.",
       seeMore: { url: "https://chatify-4x1c.onrender.com/", text: "Visit the website...", target: "_blank" },
       techs: ["reactjs", "tailwindcss", "vitejs", "expressjs", "nodejs", "mongodb", "cloudinary", "socket.io", "react-hot-toast", "firebase", "axios", "lucide-react", "redux-toolkit", "javascript", "bcryptjs", "cookie-parser", "jsonwebtoken", "nodemailer"],
@@ -43,12 +43,14 @@ const Projects = () => {
           target: "_blank"
         },
       },
+      linesOfCode: "14,318",
+      sizeOnGitHub: "9.8 MB",
     },
     {
       key: "ten-sentinel",
       name: "Ten Sentinel",
       type: "internship" as const,
-      headerImg: "",
+      headerImg: "/assets/images/tenSentinelHomePage.webp",
       description: "Contributed to “Ten Sentinel”, developed responsive user interfaces for a cybersecurity platform using React.js and Tailwind CSS.Collaborated with a team of 8 members to ensure UI/ UX consistency and security standards. Implemented security focused design patterns and optimized frontend performance",
       seeMore: { url: "https://ten-sentinel-lilac.vercel.app/", text: "Visit the website...", target: "_blank" },
       techs: ["reactjs", "tailwindcss", "vitejs", "react-hot-toast", "lucide-react", "javascript", "bootstrap", "framer-motion", "react-icons", "react-countup"],
@@ -59,6 +61,8 @@ const Projects = () => {
           target: "_blank"
         },
       },
+      linesOfCode: "8,742",
+      sizeOnGitHub: "6.2 MB",
     },
     {
       key: "aniicone's-cafe",
@@ -67,12 +71,14 @@ const Projects = () => {
       headerImg: "",
       description: "Collaborated in a 10-member team to build Aniicone’s Café, a café management system using the MERN stack. Developed frontend components with React.js and RESTful APIs with Node.js and Express.js. Implemented MongoDB integration and participated in agile development processes.",
       techs: ["reactjs", "tailwindcss", "vitejs", "react-hot-toast", "lucide-react", "javascript", "bootstrap", "react-icons", "expressjs", "nodejs", "mongodb", "cloudinary", "firebase", "axios", "redux-toolkit", "javascript", "bcryptjs", "cookie-parser", "jsonwebtoken"],
+      linesOfCode: "15,234",
+      sizeOnGitHub: "10.5 MB",
     },
     {
       key: "event-flow",
       name: "Event Flow",
       type: "internship" as const,
-      headerImg: "",
+      headerImg: "/assets/images/eventFlowHomePage.webp",
       description: "Developed “Event Flow” a full-stack event management system using MERN stack with real-time updates and user authentication. Built dynamic event dashboards with React.js and Redux, integrated JWT tokens for secure access control. Designed scalable backend services with Node.js, Express.js, and MongoDB for seamless user experience.",
       seeMore: { url: "https://eventflow-km9l.onrender.com/", text: "Visit the website...", target: "_blank" },
       techs: ["reactjs", "tailwindcss", "vitejs", "react-hot-toast", "lucide-react", "javascript", "bootstrap", "framer-motion", "react-icons", "@reduxjs/toolkit", "@tanstack/react-query", "axios", "date-fns", "react-datepicker", "react-helmet", "react-redux", "react-toastify", "redux-persist", "bcryptjs", "cloudinary", "compression", "cookie-parser", "cors", "dotenv", "express", "express-rate-limit", "jsonwebtoken", "mongoose", "morgan", "node-cron", "validator"],
@@ -83,12 +89,14 @@ const Projects = () => {
           target: "_blank"
         },
       },
+      linesOfCode: "18,567",
+      sizeOnGitHub: "12.3 MB",
     },
     {
       key: "syncdocs",
       name: "Sync Docs",
       type: "personal" as const,
-      headerImg: "/assets/images/Sync-docs-nextjs.webp",
+      headerImg: "/assets/images/syncDocsHomePage.webp",
       description: "Developed a real-time collaborative document editor using Liveblocks, enhancing team productivity and remote collaboration. Enabled multiple users to collaborate with role-based permissions  Can View and Can Write real-time edits, mentions, and threaded comments for discussion and issue resolution. Integrated Lexical for rich-text editing with advanced formatting options like headings, bold, italic, underline, and strikethrough. Built using Next.js and TypeScript, with Radix UI for accessible and modern UI components.",
       seeMore: { url: "https://sync-docs-next-js.vercel.app/sign-in", text: "Give it a try..." },
       techs: ["nextjs", "tailwindcss", "clerk", "lexical", "liveblocks", "redix-ui", "jsm-editor", "lucide-react", "nanoid", "typescript"],
@@ -98,6 +106,8 @@ const Projects = () => {
           icon: <BsGithub />,
         },
       },
+      linesOfCode: "9,876",
+      sizeOnGitHub: "7.2 MB",
     },
     {
       key: "crypto-harbor",
@@ -113,6 +123,8 @@ const Projects = () => {
           icon: <BsGithub />,
         },
       },
+      linesOfCode: "13,245",
+      sizeOnGitHub: "9.1 MB",
     },
     {
       key: "todo-redux",
@@ -128,6 +140,8 @@ const Projects = () => {
           icon: <BsGithub />,
         },
       },
+      linesOfCode: "2,456",
+      sizeOnGitHub: "1.8 MB",
     },
     {
       key: "ecommerce-platform",
@@ -143,6 +157,8 @@ const Projects = () => {
           icon: <BsGithub />,
         },
       },
+      linesOfCode: "16,789",
+      sizeOnGitHub: "11.4 MB",
     },
     {
       key: "github-profile",
@@ -158,6 +174,8 @@ const Projects = () => {
           icon: <BsGithub />,
         },
       },
+      linesOfCode: "1,234",
+      sizeOnGitHub: "0.8 MB",
     },
     {
       key: "word-counter",
@@ -167,6 +185,8 @@ const Projects = () => {
       description: " Word Counter is a versatile text analysis tool that provides word, character, and sentence counts, along with an estimated reading time.  It also includes text transformation options (uppercase/lowercase) and a clear all function.  A dark/light mode toggle enhances usability. This project is ideal for quick text analysis and manipulation.",
       seeMore: { url: "https://word-counter-using-react-two.vercel.app/", text: "Give it a try..." },
       techs: ["reactjs", "css", "javascript"],
+      linesOfCode: "1,567",
+      sizeOnGitHub: "1.2 MB",
     },
     {
       key: "mycart",
@@ -185,6 +205,8 @@ const Projects = () => {
           icon: <BsGithub />,
         },
       },
+      linesOfCode: "3,789",
+      sizeOnGitHub: "2.5 MB",
     },
     {
       key: "mystore",
@@ -200,6 +222,8 @@ const Projects = () => {
           icon: <BsGithub />,
         },
       },
+      linesOfCode: "5,432",
+      sizeOnGitHub: "3.7 MB",
     },
     {
       key: "password-generator",
@@ -212,6 +236,8 @@ const Projects = () => {
         text: "Checkout it",
       },
       techs: ["reactjs", "javascript", "css"],
+      linesOfCode: "987",
+      sizeOnGitHub: "0.6 MB",
     },
   ];
 
@@ -221,20 +247,20 @@ const Projects = () => {
   );
 
   const handleLoadMore = () => {
-    setVisibleProjects(prev => Math.min(prev + 3, filteredProjects.length));
+    setVisibleProjects(prev => Math.min(prev + 4, filteredProjects.length));
   };
 
   const handleShowLess = () => {
-    setVisibleProjects(3);
+    setVisibleProjects(4);
   };
 
   // Reset visible projects when filter changes
   React.useEffect(() => {
-    setVisibleProjects(3);
+    setVisibleProjects(4);
   }, [selectedType]);
 
   const hasMoreProjects = visibleProjects < filteredProjects.length;
-  const showLessButton = visibleProjects > 3;
+  const showLessButton = visibleProjects > 4;
 
   return (
     <section id="projects" ref={sectionRef} className="pt-16 sm:pt-20 bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] relative overflow-hidden">
@@ -292,7 +318,7 @@ const Projects = () => {
           </motion.button>
         </motion.div>
 
-        <div className="grid gap-6 sm:gap-8 grid-cols-1 w-full mx-auto mb-8 sm:mb-12">
+        <div className="grid gap-6 sm:gap-8 lg:gap-6 grid-cols-1 lg:grid-cols-2 w-full mx-auto mb-8 sm:mb-12">
           {filteredProjects.slice(0, visibleProjects).map((project, i) => {
             const { key, ...itemProps } = project;
             return (
