@@ -33,9 +33,9 @@ const Projects = () => {
       name: "Chatify",
       type: "personal" as const,
       headerImg: "/assets/images/chatifyHomePage.webp",
-      description: "Developed a secure and customizable user platform with authentication, real-time chat, profile management, and database integration. Implemented secure login (email/password, Google) with OTP verification and JWT for enhanced security. Built a real-time chat system with online/offline status tracking using Socket.io. Enabled profile updates, including name changes, profile picture uploads (Cloudinary), and password resets. Provided 32 theme options for UI customization. Utilized MongoDB for data storage and Nodemailer for email verification and password recovery.",
+      description: "💬 Real-time full-stack chat app built with the MERN stack featuring Socket.IO for instant messaging, typing indicators, and online user tracking. 🔐 Robust authentication system with JWT, email verification, password reset, and Google OAuth (Firebase integration). 🖼️ Media support including image and video sharing via Cloudinary with message reactions, editing, deletion, and replies. 🎨 Customizable UI using Tailwind CSS + DaisyUI, offering light/dark themes, font scaling, and mobile responsiveness. ⚙️ Scalable architecture with Redux Toolkit & Persist, modular backend (Express), and secure real-time communication.",
       seeMore: { url: "https://chatify-4x1c.onrender.com/", text: "Visit the website...", target: "_blank" },
-      techs: ["reactjs", "tailwindcss", "vitejs", "expressjs", "nodejs", "mongodb", "cloudinary", "socket.io", "react-hot-toast", "firebase", "axios", "lucide-react", "redux-toolkit", "javascript", "bcryptjs", "cookie-parser", "jsonwebtoken", "nodemailer"],
+      techs: ["reactjs", "daisyui", "tailwindcss", "vitejs", "expressjs", "nodejs", "mongodb", "cloudinary", "socket.io", "firebase", "axios", "javascript", "bcryptjs", "jsonwebtoken", "nodemailer", "cors", "dotenv", "socket.io", "framer-motion", "react-icons", "react-redux", "redux-persist", "lucide-react", "reduxjs-toolkit", "cookie-parser", "react-datepicker", "react-easy-crop", "socket.io-client", "react-hot-toast"],
       headerLinks: {
         github: {
           url: "https://github.com/AbhinavSharma486/Advance_Chat_App",
@@ -51,9 +51,10 @@ const Projects = () => {
       name: "Ten Sentinel",
       type: "internship" as const,
       headerImg: "/assets/images/tenSentinelHomePage.webp",
-      description: "Contributed to “Ten Sentinel”, developed responsive user interfaces for a cybersecurity platform using React.js and Tailwind CSS.Collaborated with a team of 8 members to ensure UI/ UX consistency and security standards. Implemented security focused design patterns and optimized frontend performance",
+      description: "🔐 Built a cybersecurity platform offering cloud security, VAPT, ISO 27001 certification, and phishing simulations using React, Tailwind CSS, and Framer Motion for modern UI. 📱 Developed a responsive multi - page web app with 19 + service pages, mobile menu, dropdowns, and scroll - to - top functionality for smooth navigation. 🧩 Integrated features like blog system, newsletter subscription, testimonial carousel, animated counters, and secure contact forms. ⚙️ Used Vite, React Router, ESLint, and modular architecture to ensure performance, scalability, and clean code structure. 🎓 Completed as an internship project at The Entrepreneurship Network Pvt.Ltd., delivering real - world cybersecurity services and client - ready UI.",
       seeMore: { url: "https://ten-sentinel-lilac.vercel.app/", text: "Visit the website...", target: "_blank" },
-      techs: ["reactjs", "tailwindcss", "vitejs", "react-hot-toast", "lucide-react", "javascript", "bootstrap", "framer-motion", "react-icons", "react-countup"],
+      techs: [
+        "reactjs", "Aceternity UI", "tailwindcss", "vitejs", "javascript", "bootstrap", "react-icons", "clsx", "swiper", "framer-motion", "react-countup", "@biomejs/biome", "@heroicons/react", "react-icons", "react-slick", "slick-carousel", "tailwind-merge", "tailwind-scrollbar", "tailwindcss-animate", "lucide-react", "react-hot-toast", "react-transition-group", "react-intersection-observer"],
       headerLinks: {
         github: {
           url: "https://github.com/yogita0914/Ten_Sentinel",
@@ -65,41 +66,13 @@ const Projects = () => {
       sizeOnGitHub: "6.2 MB",
     },
     {
-      key: "aniicone's-cafe",
-      name: "Aniicone's Cafe",
-      type: "internship" as const,
-      headerImg: "",
-      description: "Collaborated in a 10-member team to build Aniicone’s Café, a café management system using the MERN stack. Developed frontend components with React.js and RESTful APIs with Node.js and Express.js. Implemented MongoDB integration and participated in agile development processes.",
-      techs: ["reactjs", "tailwindcss", "vitejs", "react-hot-toast", "lucide-react", "javascript", "bootstrap", "react-icons", "expressjs", "nodejs", "mongodb", "cloudinary", "firebase", "axios", "redux-toolkit", "javascript", "bcryptjs", "cookie-parser", "jsonwebtoken"],
-      linesOfCode: "15,234",
-      sizeOnGitHub: "10.5 MB",
-    },
-    {
-      key: "event-flow",
-      name: "Event Flow",
-      type: "internship" as const,
-      headerImg: "/assets/images/eventFlowHomePage.webp",
-      description: "Developed “Event Flow” a full-stack event management system using MERN stack with real-time updates and user authentication. Built dynamic event dashboards with React.js and Redux, integrated JWT tokens for secure access control. Designed scalable backend services with Node.js, Express.js, and MongoDB for seamless user experience.",
-      seeMore: { url: "https://eventflow-km9l.onrender.com/", text: "Visit the website...", target: "_blank" },
-      techs: ["reactjs", "tailwindcss", "vitejs", "react-hot-toast", "lucide-react", "javascript", "bootstrap", "framer-motion", "react-icons", "@reduxjs/toolkit", "@tanstack/react-query", "axios", "date-fns", "react-datepicker", "react-helmet", "react-redux", "react-toastify", "redux-persist", "bcryptjs", "cloudinary", "compression", "cookie-parser", "cors", "dotenv", "express", "express-rate-limit", "jsonwebtoken", "mongoose", "morgan", "node-cron", "validator"],
-      headerLinks: {
-        github: {
-          url: "https://github.com/AbhinavSharma486/Event_Management_System_IBI_Internship_Project",
-          icon: <BsGithub />,
-          target: "_blank"
-        },
-      },
-      linesOfCode: "18,567",
-      sizeOnGitHub: "12.3 MB",
-    },
-    {
       key: "syncdocs",
       name: "Sync Docs",
       type: "personal" as const,
       headerImg: "/assets/images/syncDocsHomePage.webp",
-      description: "Developed a real-time collaborative document editor using Liveblocks, enhancing team productivity and remote collaboration. Enabled multiple users to collaborate with role-based permissions  Can View and Can Write real-time edits, mentions, and threaded comments for discussion and issue resolution. Integrated Lexical for rich-text editing with advanced formatting options like headings, bold, italic, underline, and strikethrough. Built using Next.js and TypeScript, with Radix UI for accessible and modern UI components.",
+      description: "🔧 Built Sync Docs using Next.js, Liveblocks, and Lexical for real-time editing.Added live cursors, auto-save, and Clerk-based auth with role-based access. 📝 Integrated Lexical editor with text formatting, inline title editing, toolbar, shortcuts, and @mentions to streamline collaboration. 👥 Enabled creating, deleting, and sharing docs.Managed roles in real - time and ensured document owners couldn’t be removed. 🔔 Added notifications for invites, mentions, and replies.Showed active users with color - coded avatars and supported comment threads. 🎨 Designed responsive UI with Tailwind CSS, Radix UI, and shadcn / ui.Styled with dark mode and deployed securely on Vercel.",
       seeMore: { url: "https://sync-docs-next-js.vercel.app/sign-in", text: "Give it a try..." },
-      techs: ["nextjs", "tailwindcss", "clerk", "lexical", "liveblocks", "redix-ui", "jsm-editor", "lucide-react", "nanoid", "typescript"],
+      techs: ["nextjs", "typescript", "tailwindcss", "clerk", "lexical", "liveblocks", "nanoid", "typescript", "clsx", "dotenv", "redix-ui", "jsm-editor", "lucide-react", "@liveblocks/react", "@clerk/nextjs", "@clerk/themes", "@lexical/react", "@liveblocks/client", "@liveblocks/node", "@liveblocks/react-ui", "@liveblocks/react-lexical", "@radix-ui/react-dialog", "@radix-ui/react-label", "@radix-ui/react-popover", "@radix-ui/react-select", "@radix-ui/react-slot"],
       headerLinks: {
         github: {
           url: "https://github.com/AbhinavSharma486/SyncDocsNextJS",
@@ -110,16 +83,28 @@ const Projects = () => {
       sizeOnGitHub: "7.2 MB",
     },
     {
+      key: "aniicone's-cafe",
+      name: "Aniicone's Cafe",
+      type: "internship" as const,
+      headerImg: "",
+      description: "🍽️ Modern café ordering system with a mobile-first UI, allowing customers to browse a categorized menu, place orders, and view real-time summaries.  🛠️ Admin dashboard for real-time order tracking, status updates, and order filtering by date, customer, or item. 🧾 Automated PDF billing with café branding, order breakdown, timestamps, and tax-inclusive totals—downloadable or printable.  🔐 Secure authentication system for both customers and admins using JWT/session management. ⚙️ Fully responsive full-stack app built with clean code architecture, RESTful backend, and environment-based config handling.",
+      techs: ["reactjs", "tailwindcss", "vitejs", "javascript", "bootstrap", "expressjs", "nodejs", "mongodb", "cloudinary", "firebase", "axios", "bcryptjs", "jsonwebtoken", "cors", "dotenv", "lucide-react", "react-icons", "redux-toolkit", "cookie-parser", "cookie-parser", "react-datepicker", "framer-motion", "react-redux", "redux-persist", "react-easy-crop", "react-hot-toast"],
+
+      linesOfCode: "8,742",
+      sizeOnGitHub: "6.2 MB",
+    },
+    {
       key: "crypto-harbor",
       name: "Crypto Harbor",
-      type: "internship" as const,
+      type: "personal" as const,
       headerImg: "/assets/images/crypto-harbor.webp",
-      description: "Developed a comprehensive cryptocurrency trading platform during my internship. Implemented real-time price tracking, portfolio management, and trading functionality. Built secure authentication system and integrated multiple cryptocurrency APIs. Created responsive dashboard with advanced charting capabilities and real-time notifications.",
-      seeMore: { url: "#", text: "View Project..." },
-      techs: ["reactjs", "typescript", "nodejs", "mongodb", "socket.io", "chart.js", "tailwindcss", "expressjs"],
+      description: "🚀 Developed a modern, responsive cryptocurrency tracking web app using React.js, Chakra UI, and Framer Motion for dynamic UI. 📊 Integrated CoinGecko API to display live crypto prices, market stats, exchange data, and interactive charts using Chart.js. 💱 Implemented multi-currency support (INR/USD/EUR) with real-time updates and timeframe-based analysis (24h to 365d, max). 🌗 Added floating dark/light theme toggle, smooth animations, and professional loaders for seamless user experience. 🧩 Designed reusable components including CoinCards, analytics dashboard, exchange listings, and detailed coin pages",
+      seeMore: { url: "https://crypto-harbor.vercel.app/", text: "View Project..." },
+      techs: [
+        "reactjs", "typescript", "nodejs", "mongodb", "tailwindcss", "expressjs", "axios", "socket.io", "chart.js", "@emotion/react", "@emotion/styled", "framer-motion", "react-icons", "@chakra-ui/react", "@testing-library/react", "@testing-library/user-event", "@testing-library/jest-dom", "react-chartjs-2"],
       headerLinks: {
         github: {
-          url: "#",
+          url: "https://github.com/AbhinavSharma486/Crypto-Harbor_using_react",
           icon: <BsGithub />,
         },
       },
@@ -127,118 +112,23 @@ const Projects = () => {
       sizeOnGitHub: "9.1 MB",
     },
     {
-      key: "todo-redux",
-      name: "Todo using Redux",
-      type: "personal" as const,
-      headerImg: "",
-      description: "I built a  To-Do application using Redux Toolkit.  This app features an input field where users can enter tasks. Upon hitting enter, the entered text becomes a to-do item displayed below the input field.  Each to-do item has a delete button for removal.  The application utilizes Redux to persist the to-do list, ensuring that tasks remain even after page refresh.",
-      techs: ["reactjs", "reduxjs", "tailwindcss", "vitejs", "javascript"],
-      seeMore: { url: "https://todo-using-reduxtoolkit.netlify.app/", text: "Give it a try..." },
-      headerLinks: {
-        github: {
-          url: "https://github.com/AbhinavSharma486/Todo-using-ReduxToolkit",
-          icon: <BsGithub />,
-        },
-      },
-      linesOfCode: "2,456",
-      sizeOnGitHub: "1.8 MB",
-    },
-    {
-      key: "ecommerce-platform",
-      name: "E-Commerce Platform",
+      key: "event-flow",
+      name: "Event Flow",
       type: "internship" as const,
-      headerImg: "/assets/images/mystore.webp",
-      description: "Built a full-stack e-commerce platform during internship with features like product catalog, shopping cart, payment integration, and admin dashboard. Implemented user authentication, order management, and inventory tracking. Integrated payment gateways and shipping APIs for complete e-commerce functionality.",
-      seeMore: { url: "#", text: "View Project..." },
-      techs: ["nextjs", "typescript", "prisma", "postgresql", "stripe", "tailwindcss", "next-auth"],
+      headerImg: "/assets/images/eventFlowHomePage.webp",
+      description: "🗓️ Full-featured event platform built with the MERN stack, allowing users to create, manage, and attend events with calendar and analytics support.  🔐 JWT-based authentication system with protected routes, user roles, and secure cookie/session handling.  🧾 Cloudinary integration for seamless event image uploads and visual branding in the UI.  📊 Admin dashboard with attendee management, event status tracking, and data visualization via Recharts.  🌙 Modern, responsive UI with dark mode, built using Tailwind CSS, Redux Toolkit, and Framer Motion for smooth UX.",
+      seeMore: { url: "https://eventflow-km9l.onrender.com/", text: "Visit the website...", target: "_blank" },
+      techs: ["reactjs", "tailwindcss", "vitejs", "lucide-react", "javascript", "bootstrap", "axios", "bcryptjs", "cloudinary", "compression", "cors", "dotenv", "express", "jsonwebtoken", "mongoose", "morgan", "validator", "date-fns", "node-cron", "framer-motion", "react-icons", "@reduxjs/toolkit", "react-datepicker", "react-helmet", "react-redux", "react-toastify", "redux-persist", "@tanstack/react-query", "cookie-parser", "express-rate-limit", "react-hot-toast",],
       headerLinks: {
         github: {
-          url: "#",
+          url: "https://github.com/AbhinavSharma486/Event_Management_System_IBI_Internship_Project",
           icon: <BsGithub />,
+          target: "_blank"
         },
       },
-      linesOfCode: "16,789",
-      sizeOnGitHub: "11.4 MB",
-    },
-    {
-      key: "github-profile",
-      name: "Github Profile Search",
-      type: "personal" as const,
-      headerImg: "/assets/images/github-profile-search.webp",
-      description: "GitHub Profile Search is a web application built using HTML, CSS, and JavaScript that allows users to search for any GitHub profile by entering a username. The application fetches and displays key profile details, including the user's avatar, username, full name, bio, followers, following count, and public repositories. It also includes a Check Profile button that redirects users to the corresponding GitHub profile.",
-      techs: ["html", "css", "javascript"],
-      seeMore: { url: "https://abhinavsharma486.github.io/Search_Github_Profile/", text: "Give it a try..." },
-      headerLinks: {
-        github: {
-          url: "https://github.com/AbhinavSharma486/Search_Github_Profile",
-          icon: <BsGithub />,
-        },
-      },
-      linesOfCode: "1,234",
-      sizeOnGitHub: "0.8 MB",
-    },
-    {
-      key: "word-counter",
-      name: "Word Counter",
-      type: "personal" as const,
-      headerImg: "/assets/images/word-counter.webp",
-      description: " Word Counter is a versatile text analysis tool that provides word, character, and sentence counts, along with an estimated reading time.  It also includes text transformation options (uppercase/lowercase) and a clear all function.  A dark/light mode toggle enhances usability. This project is ideal for quick text analysis and manipulation.",
-      seeMore: { url: "https://word-counter-using-react-two.vercel.app/", text: "Give it a try..." },
-      techs: ["reactjs", "css", "javascript"],
-      linesOfCode: "1,567",
-      sizeOnGitHub: "1.2 MB",
-    },
-    {
-      key: "mycart",
-      name: "My Cart",
-      type: "personal" as const,
-      headerImg: "/assets/images/mycart.webp",
-      description: "I developed  My Cart, a front-end focused project.  This project allowed me to gain expertise in implementing shopping cart functionality, including dynamically updating the cart's contents and total value as items are added or removed.",
-      seeMore: {
-        url: "https://my-cart-using-react.vercel.app/",
-        text: "Checkout it",
-      },
-      techs: ["javascript", "reactjs", "redux", "sass", "react-hot-toast"],
-      headerLinks: {
-        github: {
-          url: "https://github.com/AbhinavSharma486/my-cart-using-react",
-          icon: <BsGithub />,
-        },
-      },
-      linesOfCode: "3,789",
-      sizeOnGitHub: "2.5 MB",
-    },
-    {
-      key: "mystore",
-      name: "MYSTORE",
-      type: "personal" as const,
-      headerImg: "/assets/images/mystore.webp",
-      description: "MyStore is a front-end website showcasing a variety of audio products, specializing in headphones.  The site is designed to highlight different product categories, including headphones, Bluetooth speakers, smartwatches, and wireless earbuds.  A dedicated  Popular Products section further curates a selection of trending items.  MyStore provides a visually appealing platform for browsing and discovering the latest audio technology.",
-      seeMore: { url: "https://mystore-one-ecru.vercel.app/", text: "Explore the hub..." },
-      techs: ["Material UI", "javascript", "reactjs", "sass"],
-      headerLinks: {
-        github: {
-          url: "https://github.com/AbhinavSharma486/mystore",
-          icon: <BsGithub />,
-        },
-      },
-      linesOfCode: "5,432",
-      sizeOnGitHub: "3.7 MB",
-    },
-    {
-      key: "password-generator",
-      name: "Password Generator",
-      type: "personal" as const,
-      headerImg: "/assets/images/password-generator.webp",
-      description: "I developed a Password Generator project that creates strong, customizable passwords.  Users can specify the desired password length and choose whether to include uppercase letters and numbers.  The password updates in real-time as the user adjusts these options, without the need for a submit button.",
-      seeMore: {
-        url: "https://password-generator-using-react.netlify.app/",
-        text: "Checkout it",
-      },
-      techs: ["reactjs", "javascript", "css"],
-      linesOfCode: "987",
-      sizeOnGitHub: "0.6 MB",
-    },
+      linesOfCode: "18,567",
+      sizeOnGitHub: "12.3 MB",
+    }
   ];
 
   // Filter projects based on selected type
