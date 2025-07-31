@@ -8,6 +8,7 @@ import Skills from "../components/skills/Skills";
 import Projects from "../components/projects/Projects";
 import ExperienceTimeline from "../components/experience/ExperienceTimeline";
 import ContactSection from "../components/contact/ContactSection";
+import ScrollToTop from "../components/ui/ScrollToTop";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -32,6 +33,7 @@ export default function Page() {
       <ExperienceTimeline experiences={experienceData} />
       <Projects />
       <ContactSection />
+      <ScrollToTop />
     </>
   );
 }
