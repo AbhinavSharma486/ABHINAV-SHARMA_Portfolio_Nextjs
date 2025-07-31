@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, MessageCircle, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageCircle, Clock, GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
+import { FaWhatsapp } from "react-icons/fa";
 import Form from './Form';
 
 const ContactSection = () => {
@@ -31,9 +32,36 @@ const ContactSection = () => {
     {
       icon: Clock,
       title: "Response Time",
-      value: "Within 24 hours",
+      value: "Within 24-48 hrs",
       href: "#",
       description: "I'll get back to you quickly"
+    }
+  ];
+
+  const socialLinks = [
+    {
+      icon: GithubIcon,
+      href: "https://github.com/AbhinavSharma486",
+      label: "GitHub",
+      hoverColor: "hover:bg-gray-800 dark:hover:bg-black"
+    },
+    {
+      icon: LinkedinIcon,
+      href: "https://www.linkedin.com/in/abhinav-sharma-6254252a5/",
+      label: "LinkedIn",
+      hoverColor: "hover:bg-blue-600 dark:hover:bg-blue-500"
+    },
+    {
+      icon: FaWhatsapp,
+      href: "https://api.whatsapp.com/send?phone=7819872024",
+      label: "WhatsApp",
+      hoverColor: "hover:bg-green-600 dark:hover:bg-green-500"
+    },
+    {
+      icon: MailIcon,
+      href: "mailto:abhinavsharma486@gmail.com",
+      label: "Email",
+      hoverColor: "hover:bg-red-600 dark:hover:bg-red-500"
     }
   ];
 
@@ -153,6 +181,43 @@ const ContactSection = () => {
                 </motion.div>
               ))}
             </div>
+
+            {/* Social Icons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.7, delay: 0.3, type: 'spring', bounce: 0.22 }}
+              className="bg-white/70 dark:bg-gray-900/60 backdrop-blur-lg border border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <div className="text-center mb-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-blue-900 dark:text-white mb-2">
+                  Connect With Me
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  Follow me on social media or reach out directly
+                </p>
+              </div>
+              <div className="flex justify-center gap-3 sm:gap-4">
+                {socialLinks.map(({ icon: Icon, href, label, hoverColor }, i) => (
+                  <motion.a
+                    key={label}
+                    href={href}
+                    target={href.startsWith('http') ? "_blank" : undefined}
+                    rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
+                    initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, delay: 0.1 + i * 0.08, type: 'spring', bounce: 0.4 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className={`flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gray-700 dark:bg-gray-800 text-white border border-gray-600/40 dark:border-gray-700/40 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 ${hoverColor}`}
+                    aria-label={label}
+                  >
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
 
             {/* Additional Info */}
             <motion.div

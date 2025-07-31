@@ -85,16 +85,10 @@ const MyStory = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <div className="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-2xl mb-4 sm:mb-6">
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 via-purple-500/10 to-blue-500/10 dark:from-violet-500/20 dark:via-purple-500/20 dark:to-blue-500/20 z-10" />
-
-              {/* Background Pattern */}
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-transparent to-blue-500/5 dark:from-violet-500/10 dark:via-transparent dark:to-blue-500/10" />
-
               <Image
-                src="/assets/images/profile-img.webp"
+                src="/assets/images/profileimg.webp"
                 alt="Portrait of Abhinav Sharma - Full Stack MERN Developer"
-                className="w-full h-auto object-cover relative z-0"
+                className="w-full h-auto object-cover"
                 width={400}
                 height={300}
                 loading="eager"
@@ -224,6 +218,10 @@ const MyStory = () => {
                 Let's turn your ideas into reality. I'm passionate about creating exceptional web experiences that make a difference.
               </p>
               <motion.button
+                onClick={() => {
+                  // Navigate to home page with scrollTo parameter
+                  window.location.href = '/?scrollTo=contact';
+                }}
                 className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold py-2 sm:py-3 px-6 sm:px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
