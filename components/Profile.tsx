@@ -259,7 +259,7 @@ const Profile = () => {
                 <div className="space-y-2 sm:space-y-2.5">
                   {[
                     "As a MERN Stack Developer, I build secure, scalable, and responsive web applications.",
-                    "My internship projects include a cybersecurity frontend, an Event Management System, and Aniicon's cafe, all utilizing modern MERN stack technologies.",
+                    "My internship projects include a cybersecurity, an Event Management System, and Aniicon's cafe, all utilizing modern MERN stack technologies.",
                     "I am proficient in React, Next.js, Node.js, MongoDB, TypeScript, Tailwind CSS, JavaScript, and Express.",
                     "I've developed real-time applications like a chat app (Chatify) and a collaborative web app (SyncDocs)."
                   ].map((point, index) => {
@@ -282,15 +282,7 @@ const Profile = () => {
                   })}
                 </div>
               </motion.div>
-              {/* <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.25, type: 'spring', bounce: 0.22 }}
-                className="flex items-center gap-2 justify-center md:justify-start text-muted-foreground text-xs xs:text-sm sm:text-base mb-4 text-gray-800 dark:text-white"
-              >
-                <span className="inline-block w-1 h-1 rounded-full bg-blue-600 animate-pulse" />
-                Looking for Full Stack MERN opportunities
-              </motion.div> */}
+
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}

@@ -171,7 +171,7 @@ const ContactSection = () => {
               <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                 <li className="flex items-center gap-2 text-sm sm:text-base">
                   <span className="w-2 h-2 bg-violet-500 rounded-full flex-shrink-0"></span>
-                  <span>Quick response time and clear communication</span>
+                  <span>Team Collaboration</span>
                 </li>
                 <li className="flex items-center gap-2 text-sm sm:text-base">
                   <span className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></span>
@@ -183,7 +183,7 @@ const ContactSection = () => {
                 </li>
                 <li className="flex items-center gap-2 text-sm sm:text-base">
                   <span className="w-2 h-2 bg-violet-500 rounded-full flex-shrink-0"></span>
-                  <span>Ongoing support and collaboration</span>
+                  <span>Problem Solving, Communication & Time Management</span>
                 </li>
               </ul>
             </motion.div>

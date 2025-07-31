@@ -1,6 +1,6 @@
 export const experienceData = [
   {
-    role: "Frontend Developer Intern",
+    role: "MERN Stack Developer Intern",
     company: "The Entrepreneurship Network Pvt. Ltd",
     duration: "3 Months (2025)",
     description: "Contributed to “Ten Sentinel”, developed responsive user interfaces for a cybersecurity platform using React.js, Tailwind CSS & Framer motion. Collaborated with a team of 12 members to ensure UI/UX consistency and security standards. Implemented security-focused design patterns and optimized frontend performance."
