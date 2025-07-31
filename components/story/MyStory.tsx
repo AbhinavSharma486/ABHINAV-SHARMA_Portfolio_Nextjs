@@ -219,8 +219,8 @@ const MyStory = () => {
               </p>
               <motion.button
                 onClick={() => {
-                  // Navigate to home page with scrollTo parameter
-                  window.location.href = '/?scrollTo=contact';
+                  // Navigate to contact page
+                  window.location.href = '/contact';
                 }}
                 className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold py-2 sm:py-3 px-6 sm:px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
                 whileHover={{ scale: 1.05 }}

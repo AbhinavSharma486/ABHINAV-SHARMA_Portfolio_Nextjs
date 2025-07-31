@@ -189,7 +189,7 @@ const Profile = () => {
       <BackgroundBlobs ref={mainRef} />
       <div className={`w-full max-w-7xl mx-auto px-1 xs:px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 ml-0 mr-0 md:ml-16 md:mr-16 lg:ml-20 lg:mr-20 xl:ml-24 xl:mr-24`} style={{ maxWidth: '100vw' }}>
         <article
-          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-lg sm:rounded-xl md:rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl transition-all duration-300 group w-full h-full flex flex-col overflow-hidden'>
+          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-lg sm:rounded-xl md:rounded-2xl border border-transparent hover:border-2 hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl transition-all duration-300 group w-full h-full flex flex-col overflow-hidden'>
           {/* Floating badge - improved responsive positioning */}
           <motion.div
             className="absolute right-0 top-0 xs:right-0.5 xs:top-0.5 sm:right-1 sm:top-1 md:right-2 md:top-2 lg:right-3 lg:top-3 xl:right-4 xl:top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-1.5 py-0.5 xs:px-2 xs:py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 text-[8px] xs:text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg shadow-2xl font-bold flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 border border-white dark:border-black/40 animate-bounce-slow max-w-[calc(100%-1rem)] min-w-fit profile-badge"

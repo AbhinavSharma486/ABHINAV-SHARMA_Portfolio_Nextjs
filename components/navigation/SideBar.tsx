@@ -36,7 +36,7 @@ const NAVIGATION_ITEMS: NavigationItem[] = [
   { name: "Projects", href: "/projects", icon: Folder },
   { name: "Experience", scrollTo: "#experience", icon: Briefcase },
   { name: "My Story", href: "/my-story", icon: History },
-  { name: "Contact Me", scrollTo: "#contact", icon: Contact },
+  { name: "Contact Me", href: "/contact", icon: Contact },
 ];
 
 const NavigationItem: React.FC<NavigationItemProps> = ({ item, open, onClick }) => {
