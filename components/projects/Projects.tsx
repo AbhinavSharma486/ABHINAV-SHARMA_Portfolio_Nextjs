@@ -83,15 +83,22 @@ const Projects = () => {
       sizeOnGitHub: "7.2 MB",
     },
     {
-      key: "aniicone's-cafe",
-      name: "Aniicone's Cafe",
+      key: "event-flow",
+      name: "Event Flow",
       type: "internship" as const,
-      headerImg: "",
-      description: "🍽️ Modern café ordering system with a mobile-first UI, allowing customers to browse a categorized menu, place orders, and view real-time summaries.  🛠️ Admin dashboard for real-time order tracking, status updates, and order filtering by date, customer, or item. 🧾 Automated PDF billing with café branding, order breakdown, timestamps, and tax-inclusive totals—downloadable or printable.  🔐 Secure authentication system for both customers and admins using JWT/session management. ⚙️ Fully responsive full-stack app built with clean code architecture, RESTful backend, and environment-based config handling.",
-      techs: ["reactjs", "tailwindcss", "vitejs", "javascript", "bootstrap", "expressjs", "nodejs", "mongodb", "cloudinary", "firebase", "axios", "bcryptjs", "jsonwebtoken", "cors", "dotenv", "lucide-react", "react-icons", "redux-toolkit", "cookie-parser", "cookie-parser", "react-datepicker", "framer-motion", "react-redux", "redux-persist", "react-easy-crop", "react-hot-toast"],
-
-      linesOfCode: "8,742",
-      sizeOnGitHub: "6.2 MB",
+      headerImg: "/assets/images/eventFlowHomePage.webp",
+      description: "🗓️ Full-featured event platform built with the MERN stack, allowing users to create, manage, and attend events with calendar and analytics support.  🔐 JWT-based authentication system with protected routes, user roles, and secure cookie/session handling.  🧾 Cloudinary integration for seamless event image uploads and visual branding in the UI.  📊 Admin dashboard with attendee management, event status tracking, and data visualization via Recharts.  🌙 Modern, responsive UI with dark mode, built using Tailwind CSS, Redux Toolkit, and Framer Motion for smooth UX.",
+      seeMore: { url: "https://eventflow-km9l.onrender.com/", text: "Visit the website...", target: "_blank" },
+      techs: ["reactjs", "tailwindcss", "vitejs", "lucide-react", "javascript", "bootstrap", "axios", "bcryptjs", "cloudinary", "compression", "cors", "dotenv", "express", "jsonwebtoken", "mongoose", "morgan", "validator", "date-fns", "node-cron", "framer-motion", "react-icons", "@reduxjs/toolkit", "react-datepicker", "react-helmet", "react-redux", "react-toastify", "redux-persist", "@tanstack/react-query", "cookie-parser", "express-rate-limit", "react-hot-toast",],
+      headerLinks: {
+        github: {
+          url: "https://github.com/AbhinavSharma486/Event_Management_System_IBI_Internship_Project",
+          icon: <BsGithub />,
+          target: "_blank"
+        },
+      },
+      linesOfCode: "18,567",
+      sizeOnGitHub: "12.3 MB",
     },
     {
       key: "crypto-harbor",
@@ -112,22 +119,15 @@ const Projects = () => {
       sizeOnGitHub: "9.1 MB",
     },
     {
-      key: "event-flow",
-      name: "Event Flow",
+      key: "aniicone's-cafe",
+      name: "Aniicone's Cafe",
       type: "internship" as const,
-      headerImg: "/assets/images/eventFlowHomePage.webp",
-      description: "🗓️ Full-featured event platform built with the MERN stack, allowing users to create, manage, and attend events with calendar and analytics support.  🔐 JWT-based authentication system with protected routes, user roles, and secure cookie/session handling.  🧾 Cloudinary integration for seamless event image uploads and visual branding in the UI.  📊 Admin dashboard with attendee management, event status tracking, and data visualization via Recharts.  🌙 Modern, responsive UI with dark mode, built using Tailwind CSS, Redux Toolkit, and Framer Motion for smooth UX.",
-      seeMore: { url: "https://eventflow-km9l.onrender.com/", text: "Visit the website...", target: "_blank" },
-      techs: ["reactjs", "tailwindcss", "vitejs", "lucide-react", "javascript", "bootstrap", "axios", "bcryptjs", "cloudinary", "compression", "cors", "dotenv", "express", "jsonwebtoken", "mongoose", "morgan", "validator", "date-fns", "node-cron", "framer-motion", "react-icons", "@reduxjs/toolkit", "react-datepicker", "react-helmet", "react-redux", "react-toastify", "redux-persist", "@tanstack/react-query", "cookie-parser", "express-rate-limit", "react-hot-toast",],
-      headerLinks: {
-        github: {
-          url: "https://github.com/AbhinavSharma486/Event_Management_System_IBI_Internship_Project",
-          icon: <BsGithub />,
-          target: "_blank"
-        },
-      },
-      linesOfCode: "18,567",
-      sizeOnGitHub: "12.3 MB",
+      headerImg: "",
+      description: "🍽️ Modern café ordering system with a mobile-first UI, allowing customers to browse a categorized menu, place orders, and view real-time summaries.  🛠️ Admin dashboard for real-time order tracking, status updates, and order filtering by date, customer, or item. 🧾 Automated PDF billing with café branding, order breakdown, timestamps, and tax-inclusive totals—downloadable or printable.  🔐 Secure authentication system for both customers and admins using JWT/session management. ⚙️ Fully responsive full-stack app built with clean code architecture, RESTful backend, and environment-based config handling.",
+      techs: ["reactjs", "tailwindcss", "vitejs", "javascript", "bootstrap", "expressjs", "nodejs", "mongodb", "cloudinary", "firebase", "axios", "bcryptjs", "jsonwebtoken", "cors", "dotenv", "lucide-react", "react-icons", "redux-toolkit", "cookie-parser", "cookie-parser", "react-datepicker", "framer-motion", "react-redux", "redux-persist", "react-easy-crop", "react-hot-toast"],
+
+      linesOfCode: "8,742",
+      sizeOnGitHub: "6.2 MB",
     }
   ];
 

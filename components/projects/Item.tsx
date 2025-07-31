@@ -53,17 +53,33 @@ export default function Item({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="group relative overflow-hidden transition-all duration-500 h-full">
-      <Card className="relative flex flex-col w-full max-w-7xl mx-auto min-h-[350px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px] xl:min-h-[550px] 2xl:min-h-[600px] bg-white/85 dark:bg-gray-900/85 backdrop-blur-2xl border border-white/30 dark:border-gray-700/40 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl sm:shadow-2xl transition-all duration-700 group overflow-hidden">
+    <div
+      className="group relative w-full h-full p-[3px] rounded-xl sm:rounded-2xl lg:rounded-3xl"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        background: isHovered
+          ? `linear-gradient(to right, #8b5cf6, #3b82f6, #d946ef, #06b6d4, #8b5cf6)`
+          : 'transparent',
+        transition: 'background 0.3s ease'
+      }}
+    >
+      <div
+        className={`absolute inset-0 rounded-xl sm:rounded-2xl lg:rounded-3xl transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'
+          }`}
+        style={{
+          background: 'linear-gradient(to right, #8b5cf6, #3b82f6, #d946ef, #06b6d4, #8b5cf6)',
+          animation: 'none'
+        }}
+      />
 
+      <Card className="relative flex flex-col w-full max-w-7xl mx-auto h-full bg-white/85 dark:bg-gray-900/85 backdrop-blur-2xl border border-white/30 dark:border-gray-700/40 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl sm:shadow-2xl transition-all duration-700 overflow-hidden z-10">
 
-
-        {/* 1. Top Section: Image + Type Badge */}
-        <div className="relative w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
+        <div className="relative w-full overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-t-xl sm:rounded-t-2xl lg:rounded-t-3xl">
           {headerImg ? (
             <div className="relative w-full aspect-[16/10] sm:aspect-[16/5] md:aspect-[16/6] lg:aspect-[16/7]">
               <Image
-                className="object-cover w-full h-full transition-all duration-700 group-hover:scale-[1.02]"
+                className="object-cover w-full h-full transition-all duration-700"
                 src={headerImg}
                 alt={name}
                 fill
@@ -78,9 +94,6 @@ export default function Item({
             </div>
           )}
 
-
-
-          {/* Type Badge - Top Right Corner */}
           <motion.div
             className="absolute top-3 right-3 z-20"
             animate={{ opacity: 1, scale: 1 }}
@@ -100,12 +113,10 @@ export default function Item({
           </motion.div>
         </div>
 
-        {/* 2. Bottom Section: Details */}
         <div className="flex-1 flex flex-col p-3 sm:p-4 md:p-5 lg:p-6 xl:p-8 space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6 min-w-0">
 
-          {/* Title */}
           <motion.h2
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 dark:from-white dark:via-gray-100 dark:to-gray-200 transition-all duration-700 leading-tight tracking-tight"
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 dark:from-white dark:via-gray-100 dark:to-gray-200 group-hover:bg-gradient-to-r group-hover:from-violet-500 group-hover:via-blue-500 group-hover:to-fuchsia-500 dark:group-hover:from-violet-400 dark:group-hover:via-blue-400 dark:group-hover:to-fuchsia-400 transition-all duration-700 leading-tight tracking-tight"
             animate={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -113,7 +124,6 @@ export default function Item({
             {name}
           </motion.h2>
 
-          {/* Description */}
           <motion.div
             className="text-gray-600 dark:text-gray-400 leading-relaxed text-xs sm:text-sm md:text-base lg:text-lg group-hover:text-gray-800 dark:group-hover:text-gray-200 transition-colors duration-500 break-words max-w-none"
             animate={{ opacity: 1, y: 0 }}
@@ -132,7 +142,7 @@ export default function Item({
                   'text-cyan-500',
                   'text-emerald-500'
                 ];
-                const bulletColor = colors[index % colors.length];
+                const bulletColor = colors[(index * 3) % colors.length];
 
                 return (
                   <div key={index} className="flex items-start text-xs sm:text-sm md:text-base lg:text-lg">
@@ -146,7 +156,6 @@ export default function Item({
             </div>
           </motion.div>
 
-          {/* Technologies Used */}
           <motion.div
             className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-3"
             animate={{ opacity: 1, y: 0 }}
@@ -178,7 +187,6 @@ export default function Item({
             ))}
           </motion.div>
 
-          {/* Metrics Row */}
           {(linesOfCode || sizeOnGitHub) && (
             <motion.div
               className="flex flex-wrap gap-2 sm:gap-3 md:gap-4"
@@ -201,14 +209,12 @@ export default function Item({
             </motion.div>
           )}
 
-          {/* CTA Buttons */}
           <motion.div
             className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 pt-2"
             animate={{ opacity: 1, y: 0 }}
             initial={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            {/* GitHub Repository Button */}
             {headerLinks && headerLinks.github && (
               <motion.span whileHover={{ scale: 1.02 }} className="inline-block">
                 <Link
@@ -223,7 +229,6 @@ export default function Item({
               </motion.span>
             )}
 
-            {/* Live Demo Button */}
             {seeMore && (
               <motion.span whileHover={{ scale: 1.02 }} className="inline-block">
                 <Link
