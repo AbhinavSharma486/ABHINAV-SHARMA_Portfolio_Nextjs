@@ -137,7 +137,7 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
 
 
   return (
-    <section id="experience" className="py-8 min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] overflow-hidden relative">
+    <section id="experience" className="py-8 min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] relative">
       {/* Animated Starry Background */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Ultra-Optimized Twinkling Stars */}

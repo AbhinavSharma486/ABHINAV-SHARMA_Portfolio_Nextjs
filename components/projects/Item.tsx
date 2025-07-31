@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Card } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
-import { Button } from "../../components/ui/button";
+
 import Link from "next/link";
 import { ExternalLink, GithubIcon, Code, Download } from 'lucide-react';
 import { motion } from 'framer-motion';

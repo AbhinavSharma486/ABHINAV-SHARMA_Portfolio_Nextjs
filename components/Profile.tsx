@@ -48,8 +48,8 @@ function useParallax(ref: React.RefObject<HTMLElement | null>) {
       if (!ticking) {
         requestAnimationFrame(() => {
           const rect = ref.current!.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width - 0.5) * 1.5;
-          const y = ((e.clientY - rect.top) / rect.height - 0.5) * 1.5;
+          const x = ((e.clientX - rect.left) / rect.width - 0.5) * 0.8;
+          const y = ((e.clientY - rect.top) / rect.height - 0.5) * 0.8;
           setParallax({ x, y });
           ticking = false;
         });
@@ -106,7 +106,7 @@ const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) =>
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
     style={{
-      transform: `translate3d(${parallax.x * 4}px, ${parallax.y * 4}px, 0)`
+      transform: `translate3d(${parallax.x * 2}px, ${parallax.y * 2}px, 0)`
     }}
     className="relative group mx-auto w-full max-w-[10rem] xs:max-w-[6rem] sm:max-w-[8rem] md:max-w-[10rem] lg:max-w-[12rem] xl:max-w-[14rem] 2xl:max-w-[16rem] mt-2 sm:mt-4 md:mt-6 lg:mt-0"
   >
@@ -124,7 +124,7 @@ const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) =>
     <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl border-2 border-violet-500/80 dark:border-violet-700/60">
       <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 to-purple-500/20 dark:from-primary/10 dark:to-violet-500/10 group-hover:opacity-0 transition duration-500" />
       <Image
-        src="/assets/images/profile-img.webp"
+        src="/assets/images/profileimg.webp"
         alt="Abhinav Sharma"
         width={256}
         height={256}
@@ -157,11 +157,11 @@ const SocialLinks = () => (
           href={href}
           target={href.startsWith('http') ? "_blank" : undefined}
           rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-          className={`flex items-center justify-center w-8 h-8 rounded-full bg-gray-700 dark:bg-gray-800 text-white border border-gray-600/40 dark:border-gray-700/40 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 ${hoverColor}`}
+          className={`flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 dark:bg-gray-800 text-white border border-gray-600/40 dark:border-gray-700/40 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 ${hoverColor}`}
           aria-label={label}
           tabIndex={0}
         >
-          <Icon className="w-4 h-4 text-white transition-transform duration-300 group-hover:scale-110" />
+          <Icon className="w-5 h-5 text-white transition-transform duration-300" />
           {/* Ripple effect */}
           <span className="absolute inset-0 rounded-full pointer-events-none group-active:animate-ping bg-violet-400/20" />
         </Link>
@@ -174,7 +174,9 @@ const Profile = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       document.documentElement.style.overflowX = 'hidden';
+      document.documentElement.style.overflowY = 'auto';
       document.body.style.overflowX = 'hidden';
+      document.body.style.overflowY = 'auto';
     }
   }, []);
   const mainRef = useRef<HTMLDivElement>(null);
@@ -183,14 +185,14 @@ const Profile = () => {
     <main
       id="home"
       ref={mainRef}
-      className='relative min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-1 sm:py-2 md:py-4 lg:py-6 xl:py-8 2xl:py-10 overflow-x-hidden'>
+      className='relative min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-1 sm:py-2 md:py-4 lg:py-6 xl:py-8 2xl:py-10'>
       <BackgroundBlobs ref={mainRef} />
-      <div className={`w-full max-w-7xl mx-auto px-1 xs:px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 ml-0 mr-0 md:ml-16 md:mr-16 lg:ml-20 lg:mr-20 xl:ml-24 xl:mr-24`} style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
+      <div className={`w-full max-w-7xl mx-auto px-1 xs:px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 ml-0 mr-0 md:ml-16 md:mr-16 lg:ml-20 lg:mr-20 xl:ml-24 xl:mr-24`} style={{ maxWidth: '100vw' }}>
         <article
-          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-lg sm:rounded-xl md:rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl transition-all duration-300 group w-full min-h-0 max-h-none md:min-h-[80vh] md:max-h-[95vh] flex flex-col'>
+          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-lg sm:rounded-xl md:rounded-2xl border border-transparent hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl transition-all duration-300 group w-full h-full flex flex-col overflow-hidden'>
           {/* Floating badge - improved responsive positioning */}
           <motion.div
-            className="absolute right-1 top-1 xs:right-2 xs:top-2 sm:right-3 sm:top-3 md:right-4 md:top-4 lg:right-6 lg:top-6 xl:right-10 xl:top-10 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-1.5 py-0.5 xs:px-2 xs:py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 text-[8px] xs:text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg shadow-2xl font-bold flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 border border-white dark:border-black/40 animate-bounce-slow max-w-[calc(100%-1rem)] min-w-fit profile-badge"
+            className="absolute right-0 top-0 xs:right-0.5 xs:top-0.5 sm:right-1 sm:top-1 md:right-2 md:top-2 lg:right-3 lg:top-3 xl:right-4 xl:top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-1.5 py-0.5 xs:px-2 xs:py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 text-[8px] xs:text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg shadow-2xl font-bold flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 border border-white dark:border-black/40 animate-bounce-slow max-w-[calc(100%-1rem)] min-w-fit profile-badge"
             initial={{ opacity: 0, y: -16, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 1.1, duration: 0.7, type: 'spring', bounce: 0.4 }}
@@ -211,7 +213,7 @@ const Profile = () => {
             </motion.span>
             <span className="inline">Open to Work</span>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 p-1 xs:p-2 sm:p-3 md:p-4 lg:p-6 xl:p-8 2xl:p-10 md:pt-10 lg:pt-14 xl:pt-18 flex-1 min-h-0 profile-container" style={{ maxWidth: '100%' }}>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 p-1 xs:p-2 sm:p-3 md:p-4 lg:p-6 xl:p-8 2xl:p-10 md:pt-10 lg:pt-14 xl:pt-18 flex-1 min-h-0 profile-container overflow-hidden" style={{ maxWidth: '100%' }}>
             <div className="space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4 flex flex-col items-center justify-center">
               <ProfileImage parallax={parallax} />
               <div className="mt-4" />
@@ -229,7 +231,7 @@ const Profile = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
-                  className="font-orbitron font-bold text-2xl sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl 2xl:text-4xl drop-shadow-md"
+                  className="font-orbitron font-bold text-2xl sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl 2xl:text-4xl drop-shadow-md"
                 >
                   <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-violet-500 bg-clip-text text-transparent">
                     जय श्री राधे, I am
@@ -240,7 +242,7 @@ const Profile = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.1, type: 'spring', bounce: 0.22 }}
-                  className='font-orbitron font-bold text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl drop-shadow-lg'
+                  className='font-orbitron font-bold text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl 2xl:text-5xl drop-shadow-lg'
                 >
                   <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-violet-500 bg-clip-text text-transparent">
                     Abhinav Sharma
@@ -248,25 +250,47 @@ const Profile = () => {
                 </motion.h1>
                 <div className="mt-4" />
               </header>
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.18, type: 'spring', bounce: 0.22 }}
                 className="text-xs xs:text-sm sm:text-base lg:text-lg xl:text-xl text-black dark:text-white leading-relaxed profile-text mb-4"
               >
-                MERN Stack Developer with hands-on experience in building scalable web applications, real-time systems,
-                and robust authentication solutions.
-                Transforming ideas into interactive and dynamic web experiences.
-              </motion.p>
-              <motion.div
+                <div className="space-y-2 sm:space-y-2.5">
+                  {[
+                    "As a MERN Stack Developer, I build secure, scalable, and responsive web applications.",
+                    "My internship projects include a cybersecurity frontend, an Event Management System, and Aniicon's cafe, all utilizing modern MERN stack technologies.",
+                    "I am proficient in React, Next.js, Node.js, MongoDB, TypeScript, Tailwind CSS, JavaScript, and Express.",
+                    "I've developed real-time applications like a chat app (Chatify) and a collaborative web app (SyncDocs)."
+                  ].map((point, index) => {
+                    const colors = [
+                      'text-violet-500',
+                      'text-blue-500',
+                      'text-green-500',
+                      'text-pink-500'
+                    ];
+                    const bulletColor = colors[index % colors.length];
+
+                    return (
+                      <div key={index} className="flex items-start">
+                        <span className={`${bulletColor} text-sm sm:text-base md:text-lg lg:text-xl font-bold mr-2 sm:mr-3 flex-shrink-0 mt-0.5 leading-none`}>•</span>
+                        <span className="text-[14px] xs:text-sm sm:text-md md:text-md lg:text-lg text-black dark:text-white leading-relaxed flex-1">
+                          {point}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+              {/* <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.25, type: 'spring', bounce: 0.22 }}
                 className="flex items-center gap-2 justify-center md:justify-start text-muted-foreground text-xs xs:text-sm sm:text-base mb-4 text-gray-800 dark:text-white"
               >
-                <span className="inline-block w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                <span className="inline-block w-1 h-1 rounded-full bg-blue-600 animate-pulse" />
                 Looking for Full Stack MERN opportunities
-              </motion.div>
+              </motion.div> */}
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}

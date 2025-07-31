@@ -22,8 +22,9 @@
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Reduce layout shifts */
+    /* Reduce layout shifts - only prevent horizontal overflow */
     overflow-x: hidden;
+    overflow-y: auto;
   }
 
   /* Optimize images */
@@ -543,5 +544,6 @@ body {
 html,
 body {
   overflow-x: hidden !important;
+  overflow-y: auto !important;
   width: 100vw !important;
 }

@@ -153,7 +153,7 @@ const Projects = () => {
   const showLessButton = visibleProjects > 4;
 
   return (
-    <section id="projects" ref={sectionRef} className="pt-16 sm:pt-20 bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] relative overflow-hidden">
+    <section id="projects" ref={sectionRef} className="pt-16 sm:pt-20 bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] relative">
       <ProjectBlobs y1={y1} y2={y2} y3={y3} />
       <div className={`relative z-10 container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20`}>
         <motion.h1
