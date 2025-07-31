@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Notification from "@/utils/Notification";
 import {
   validateEmail,
-  validateTextarea,
 } from "../../helpers";
 import emailjs from "@emailjs/browser";
 import ProgressBar from "../ui/LoadingBar";
@@ -68,8 +67,13 @@ const Form = () => {
       return notyf.error(valideEmail.message);
     }
 
-    if (!validateTextarea("message", 5, 1000)) {
+    if (message.length < 5 || message.length > 1000) {
       setInvalidInput((prev) => ({ ...prev, message: true }));
+      if (message.length < 5) {
+        notyf.error("Your message should be more than 5 characters");
+      } else {
+        notyf.error("Please enter no more than 1000 characters");
+      }
       return;
     }
 
@@ -102,12 +106,30 @@ const Form = () => {
       });
 
       setLoading(false);
-    } catch (error) {
+    } catch (error: unknown) {
       console.log("error", error);
-      setMessage({
-        success: "",
-        error: "Internal server error, technical issues!",
-      });
+
+      // Handle specific EmailJS errors
+      const emailError = error as { status?: number; };
+      if (emailError.status === 412) {
+        setMessage({
+          success: "",
+          error: "Email service temporarily unavailable. Please try again later or contact me directly.",
+        });
+        notyf.error("Email service temporarily unavailable. Please try again later.");
+      } else if (emailError.status === 400) {
+        setMessage({
+          success: "",
+          error: "Invalid email configuration. Please check your input and try again.",
+        });
+        notyf.error("Please check your email address and try again.");
+      } else {
+        setMessage({
+          success: "",
+          error: "Unable to send message at the moment. Please try again later.",
+        });
+        notyf.error("Unable to send message. Please try again later.");
+      }
       setLoading(false);
     }
   }
@@ -145,6 +167,9 @@ const Form = () => {
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
               Fill out the form below and I'll get back to you soon
             </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              If the form doesn't work, you can also reach me via the social links below
+            </p>
           </motion.div>
 
           {isLoading && <ProgressBar />}
@@ -163,7 +188,7 @@ const Form = () => {
                 className={`${invalidInput.name
                   ? "text-red-600 dark:text-red-400"
                   : "text-gray-700 dark:text-gray-200"
-                  } block text-sm font-semibold mb-2 flex items-center gap-2`}
+                  } text-sm font-semibold mb-2 flex items-center gap-2`}
                 htmlFor="username"
               >
                 <User className="w-4 h-4" />
@@ -197,7 +222,7 @@ const Form = () => {
                 className={`${invalidInput.email
                   ? "text-red-600 dark:text-red-400"
                   : "text-gray-700 dark:text-gray-200"
-                  } block text-sm font-semibold mb-2 flex items-center gap-2`}
+                  } text-sm font-semibold mb-2 flex items-center gap-2`}
                 htmlFor="email"
               >
                 <Mail className="w-4 h-4" />
@@ -231,7 +256,7 @@ const Form = () => {
                 className={`${invalidInput.subject
                   ? "text-red-600 dark:text-red-400"
                   : "text-gray-700 dark:text-gray-200"
-                  } block text-sm font-semibold mb-2 flex items-center gap-2`}
+                  } text-sm font-semibold mb-2 flex items-center gap-2`}
                 htmlFor="subject"
               >
                 <FileText className="w-4 h-4" />
@@ -264,7 +289,7 @@ const Form = () => {
                 className={`${invalidInput.message
                   ? "text-red-600 dark:text-red-400"
                   : "text-gray-700 dark:text-gray-200"
-                  } block text-sm font-semibold mb-2 flex items-center gap-2`}
+                  } text-sm font-semibold mb-2 flex items-center gap-2`}
                 htmlFor="message"
               >
                 <MessageSquare className="w-4 h-4" />
