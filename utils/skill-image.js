@@ -1,107 +1,65 @@
-import bootstrap from '../app/assets/svg/skills/bootstrap.svg';
-import css from '../app/assets/svg/skills/css.svg';
-import express from "../app/assets/svg/skills/express.svg";
-import firebase from '../app/assets/svg/skills/firebase.svg';
-import git from '../app/assets/svg/skills/git.svg';
-import html from '../app/assets/svg/skills/html.svg';
-import javascript from '../app/assets/svg/skills/javascript.svg';
-import materialui from '../app/assets/svg/skills/materialui.svg';
-import mongoDB from '../app/assets/svg/skills/mongoDB.svg';
-import nextJS from '../app/assets/svg/skills/nextJS.svg';
-import nodejs from "../app/assets/svg/skills/nodejs.svg";
-import react from '../app/assets/svg/skills/react.svg';
-import tailwind from '../app/assets/svg/skills/tailwind.svg';
-import typescript from '../app/assets/svg/skills/typescript.svg';
-import vitejs from '../app/assets/svg/skills/vitejs.svg';
-import redis from "../app/assets/svg/skills/Redis.svg";
-import redux from "../app/assets/svg/skills/Redux.svg";
-import postman from "../app/assets/svg/skills/Postman.svg";
-import socketio from "../app/assets/svg/skills/Socket.io.svg";
-import github from "../app/assets/svg/skills/GitHub.svg";
-import liveblocks from '../app/assets/svg/skills/liveblocks.svg';
-import emailjs from '../app/assets/svg/skills/emailjs.svg';
-import flowbite from '../app/assets/svg/skills/flowbite.svg';
-import mailtrap from '../app/assets/svg/skills/mailtrap.svg';
-import zod from '../app/assets/svg/skills/zod.svg';
-import radixui from '../app/assets/svg/skills/radixui.svg';
-import clerk from '../app/assets/svg/skills/clerk.svg';
-import daisyui from '../app/assets/svg/skills/daisyui.svg';
-import zustand from "../app/assets/svg/skills/zustand.svg";
-import framermotion from "../app/assets/svg/skills/framermotion.svg";
-import chakraui from "../app/assets/svg/skills/chakraui.svg";
-import sass from "../app/assets/svg/skills/sass.svg";
-import cplusplus from "../app/assets/svg/skills/cplusplus.svg";
+// SVG file paths - no webpack processing
+const svgFiles = {
+  bootstrap: '/assets/svg/skills/bootstrap.svg',
+  css: '/assets/svg/skills/css.svg',
+  express: '/assets/svg/skills/express.svg',
+  firebase: '/assets/svg/skills/firebase.svg',
+  git: '/assets/svg/skills/git.svg',
+  html: '/assets/svg/skills/html.svg',
+  javascript: '/assets/svg/skills/javascript.svg',
+  materialui: '/assets/svg/skills/materialui.svg',
+  mongodb: '/assets/svg/skills/mongoDB.svg',
+  'next js': '/assets/svg/skills/nextJS.svg',
+  nodejs: '/assets/svg/skills/nodejs.svg',
+  react: '/assets/svg/skills/react.svg',
+  tailwind: '/assets/svg/skills/tailwind.svg',
+  typescript: '/assets/svg/skills/typescript.svg',
+  vitejs: '/assets/svg/skills/vitejs.svg',
+  redis: '/assets/svg/skills/Redis.svg',
+  redux: '/assets/svg/skills/Redux.svg',
+  postman: '/assets/svg/skills/Postman.svg',
+  'socket.io': '/assets/svg/skills/Socket.io.svg',
+  github: '/assets/svg/skills/GitHub.svg',
+  liveblocks: '/assets/svg/skills/liveblocks.svg',
+  emailjs: '/assets/svg/skills/emailjs.svg',
+  flowbite: '/assets/svg/skills/flowbite.svg',
+  mailtrap: '/assets/svg/skills/mailtrap.svg',
+  zod: '/assets/svg/skills/zod.svg',
+  radixui: '/assets/svg/skills/radixui.svg',
+  clerk: '/assets/svg/skills/clerk.svg',
+  daisyui: '/assets/svg/skills/daisyui.svg',
+  zustand: '/assets/svg/skills/zustand.svg',
+  framer: '/assets/svg/skills/framermotion.svg',
+  chakraui: '/assets/svg/skills/chakraui.svg',
+  sass: '/assets/svg/skills/sass.svg',
+  'c++': '/assets/svg/skills/cplusplus.svg'
+};
 
 export const skillsImage = (skill) => {
-  const skillID = skill.toLowerCase();
-  switch (skillID) {
-    case 'html':
-      return html;
-    case 'css':
-      return css;
-    case 'javascript':
-      return javascript;
-    case 'next js':
-      return nextJS;
-    case 'react':
-      return react;
-    case 'typescript':
-      return typescript;
-    case 'bootstrap':
-      return bootstrap;
-    case 'mongodb':
-      return mongoDB;
-    case 'tailwind':
-      return tailwind;
-    case 'vitejs':
-      return vitejs;
-    case 'c++':
-      return cplusplus;
-    case 'node js':
-      return nodejs;
-    case 'firebase':
-      return firebase;
-    case 'git':
-      return git;
-    case 'materialui':
-      return materialui;
-    case 'express':
-      return express;
-    case 'redis':
-      return redis;
-    case 'redux':
-      return redux;
-    case 'postman':
-      return postman;
-    case 'github':
-      return github;;
-    case 'socket.io':
-      return socketio;
-    case 'liveblocks':
-      return liveblocks;
-    case 'emailjs':
-      return emailjs;
-    case 'flowbite':
-      return flowbite;
-    case 'mailtrap':
-      return mailtrap;
-    case 'zod':
-      return zod;
-    case 'radixui':
-      return radixui;
-    case 'clerk':
-      return clerk;
-    case 'daisyui':
-      return daisyui;
-    case 'zustand':
-      return zustand;
-    case 'framer':
-      return framermotion;
-    case 'chakraui':
-      return chakraui;
-    case 'sass':
-      return sass;
-    default:
-      break;
+  // Handle invalid input
+  if (!skill || typeof skill !== 'string') {
+    return null;
+  }
+
+  const skillID = skill.toLowerCase().trim();
+
+  // Debug the skill ID mapping
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`🔍 Skill mapping: "${skill}" -> "${skillID}"`);
+  }
+
+  // Return the SVG file path
+  const svgPath = svgFiles[skillID];
+
+  if (svgPath) {
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`✅ Found SVG for skill: ${skill} -> ${svgPath}`);
+    }
+    return svgPath;
+  } else {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`❌ No SVG found for skill: "${skill}" (ID: "${skillID}")`);
+    }
+    return null;
   }
 };

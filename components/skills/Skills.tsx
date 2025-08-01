@@ -1,10 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { skillsData } from "../../utils/data/skills";
 import { skillsImage } from "../../utils/skill-image";
 import Image from "next/image";
 import { motion } from 'framer-motion';
+import { Code2 } from 'lucide-react';
+
 
 const cardVariants = {
   hidden: { opacity: 0, y: 15 },
@@ -16,6 +18,45 @@ const cardVariants = {
 };
 
 const Skills = () => {
+  // Memoize skills with their images for better performance
+  const skillsWithImages = useMemo(() => {
+    return skillsData
+      .filter(skill => skill && skill.trim()) // Filter out empty or invalid skills
+      .map(skill => {
+        const image = skillsImage(skill);
+
+        // Debug all skills in development
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`🔍 Processing skill: ${skill}`, {
+            skill,
+            image,
+            imageType: typeof image,
+            isFunction: image && typeof image === 'function',
+            hasDefault: image && image.default,
+            isValid: image && typeof image === 'function'
+          });
+
+          // Special debug for problematic skills
+          if (['Tailwind', 'Liveblocks', 'Framer'].includes(skill)) {
+            console.log(`🚨 Debugging ${skill}:`, {
+              skill,
+              image,
+              imageType: typeof image,
+              isFunction: image && typeof image === 'function',
+              hasDefault: image && image.default,
+              isValid: image && typeof image === 'function',
+              imageString: image ? image.toString() : 'null'
+            });
+          }
+        }
+
+        return {
+          name: skill,
+          image: image
+        };
+      });
+  }, []);
+
   return (
     <section id='skills' className="bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] py-12 md:py-16">
       <div className={`container mx-auto px-4 sm:px-8 md:px-10 lg:px-20 xl:px-32`}>
@@ -33,7 +74,7 @@ const Skills = () => {
         <div className="relative z-50 border-t border-gray-300 dark:border-gray-700 my-2 lg:my-2">
           <div className="w-full my-4 flex justify-center">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 sm:gap-5 md:gap-6">
-              {skillsData.map((skill, id) => (
+              {skillsWithImages.map(({ name: skill, image }, id) => (
                 <motion.div
                   key={id}
                   custom={id}
@@ -44,8 +85,17 @@ const Skills = () => {
                   className="flex flex-col items-center justify-center transition-all duration-200 ease-out rounded-2xl group relative hover:scale-[1.03] cursor-pointer shadow-lg hover:shadow-lg"
                   whileHover={{ scale: 1.03, boxShadow: "0 2px 12px 0 rgba(124,58,237,0.12)" }}
                   transition={{ type: 'tween', duration: 0.15, ease: 'easeOut' }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${skill} skill`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      // Add any interaction logic here
+                    }
+                  }}
                 >
-                  <div className="h-full w-full rounded-2xl border border-transparent bg-[#18181b]/80 backdrop-blur-lg group-hover:border-violet-400 group-hover:border-violet-500 transition-all duration-200 ease-out shadow-md group-hover:shadow-violet-200 group-hover:shadow-violet-900/30">
+                  <div className="h-full w-full rounded-2xl border border-transparent bg-[#18181b]/80 backdrop-blur-lg group-hover:border-violet-500 transition-all duration-200 ease-out shadow-md group-hover:shadow-violet-900/30">
                     <div className="flex -translate-y-[1px] justify-center">
                       <div className="w-3/4">
                         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
@@ -54,13 +104,27 @@ const Skills = () => {
 
                     <div className="flex flex-col items-center justify-center gap-3 p-4 sm:p-5">
                       <div className="h-8 sm:h-9 md:h-10 lg:h-12">
-                        <Image
-                          src={skillsImage(skill)?.src}
-                          alt={skill}
-                          width={44}
-                          height={44}
-                          className="h-full w-auto rounded-lg drop-shadow-md"
-                        />
+                        {image ? (
+                          <div className="h-full w-full flex items-center justify-center">
+                            <Image
+                              src={image}
+                              alt={skill}
+                              width={44}
+                              height={44}
+                              className="h-full w-auto rounded-lg drop-shadow-md"
+                              style={{
+                                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
+                                maxWidth: '100%',
+                                maxHeight: '100%',
+                                objectFit: 'contain'
+                              }}
+                            />
+                          </div>
+                        ) : (
+                          <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-gray-600 to-gray-700 dark:from-gray-700 dark:to-gray-800 rounded-lg">
+                            <Code2 className="h-5 w-5 text-white" />
+                          </div>
+                        )}
                       </div>
                       <p className="text-white text-xs sm:text-sm md:text-base text-center font-semibold">
                         {skill}

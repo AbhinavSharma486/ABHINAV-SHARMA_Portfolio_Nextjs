@@ -1,20 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Notification from "@/utils/Notification";
+import { validateEmail } from "../../helpers";
 import {
-  validateEmail,
-} from "../../helpers";
+  validateName,
+  validateMessage,
+  sanitizeInput,
+  generateCSRFToken,
+  RateLimiter
+} from "../../utils/security";
 import emailjs from "@emailjs/browser";
 import ProgressBar from "../ui/LoadingBar";
-import { Send, User, Mail, MessageSquare, FileText } from "lucide-react";
+import { Send, User, Mail, MessageSquare, FileText, Shield } from "lucide-react";
 import Alert from "../ui/Alert";
 import { motion } from "framer-motion";
+import AccessibleButton from "../ui/AccessibleButton";
 
 const notyf = new Notification(3000);
 
 const Form = () => {
   const [isLoading, setLoading] = useState(false);
+  const [csrfToken, setCsrfToken] = useState("");
+  const [rateLimiter] = useState(() => new RateLimiter(3, 60000)); // 3 attempts per minute
   const [message, setMessage] = useState({
     success: "",
     error: "",
@@ -31,6 +39,11 @@ const Form = () => {
     email: "",
     message: "",
   });
+
+  // Generate CSRF token on component mount
+  useEffect(() => {
+    setCsrfToken(generateCSRFToken());
+  }, []);
 
   function inputHandler(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -49,52 +62,64 @@ const Form = () => {
   async function onSubmitEmailHandler(event: React.FormEvent): Promise<void> {
     event.preventDefault();
 
-    const valideEmail = validateEmail(userInput.email);
-    const { name, subject, email, message } = userInput;
-
-    if (name.length <= 2) {
-      setInvalidInput((prev) => ({ ...prev, name: true }));
-      return notyf.error("Your name shouldn't be less than 2 characters");
-    }
-
-    if (subject.length <= 2) {
-      setInvalidInput((prev) => ({ ...prev, subject: true }));
-      return notyf.error("Subject shouldn't be less than 2 characters");
-    }
-
-    if (!valideEmail.valid) {
-      setInvalidInput((prev) => ({ ...prev, email: true }));
-      return notyf.error(valideEmail.message);
-    }
-
-    if (message.length < 5 || message.length > 1000) {
-      setInvalidInput((prev) => ({ ...prev, message: true }));
-      if (message.length < 5) {
-        notyf.error("Your message should be more than 5 characters");
-      } else {
-        notyf.error("Please enter no more than 1000 characters");
-      }
+    // Rate limiting check
+    const clientId = userInput.email || 'anonymous';
+    if (!rateLimiter.isAllowed(clientId)) {
+      const remainingTime = Math.ceil(rateLimiter.getRemainingTime(clientId) / 1000);
+      notyf.error(`Too many attempts. Please wait ${remainingTime} seconds before trying again.`);
       return;
     }
 
+    // Sanitize all inputs
+    const sanitizedName = sanitizeInput(userInput.name);
+    const sanitizedEmail = sanitizeInput(userInput.email);
+    const sanitizedSubject = sanitizeInput(userInput.subject);
+    const sanitizedMessage = sanitizeInput(userInput.message);
+
+    // Validate inputs using security utilities
+    const nameValidation = validateName(sanitizedName);
+    const emailValidation = validateEmail(sanitizedEmail);
+    const messageValidation = validateMessage(sanitizedMessage);
+
+    if (!nameValidation.valid) {
+      setInvalidInput((prev) => ({ ...prev, name: true }));
+      return notyf.error(nameValidation.message);
+    }
+
+    if (!emailValidation.valid) {
+      setInvalidInput((prev) => ({ ...prev, email: true }));
+      return notyf.error(emailValidation.message);
+    }
+
+    if (sanitizedSubject.length <= 2) {
+      setInvalidInput((prev) => ({ ...prev, subject: true }));
+      return notyf.error("Subject must be at least 2 characters long");
+    }
+
+    if (!messageValidation.valid) {
+      setInvalidInput((prev) => ({ ...prev, message: true }));
+      return notyf.error(messageValidation.message);
+    }
+
     const templateParams = {
-      user_name: name.trim(),
+      user_name: sanitizedName,
       to_name: "Abhinav Sharma",
-      from_name: name.trim(),
-      from_subject: subject.trim(),
-      from_email: email.trim(),
-      reply_to: email.trim(),
-      message: message.trim(),
+      from_name: sanitizedName,
+      from_subject: sanitizedSubject,
+      from_email: sanitizedEmail,
+      reply_to: sanitizedEmail,
+      message: sanitizedMessage,
+      csrf_token: csrfToken,
     };
 
     setLoading(true);
 
     try {
       await emailjs.send(
-        "service_ggnu69n",
-        "template_ifd66zh",
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         templateParams,
-        "FwICwjumTnvkxF5CO"
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
       notyf.success("Message sent successfully!");
 
@@ -170,6 +195,10 @@ const Form = () => {
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               If the form doesn't work, you can also reach me via the social links below
             </p>
+            <div className="flex items-center justify-center gap-2 mt-2 text-xs text-green-600 dark:text-green-400">
+              <Shield className="w-3 h-3" />
+              <span>Secure form with spam protection</span>
+            </div>
           </motion.div>
 
           {isLoading && <ProgressBar />}
@@ -312,19 +341,23 @@ const Form = () => {
             </motion.div>
 
             {/* Send Button */}
-            <motion.button
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.7 }}
               transition={{ duration: 0.6, delay: 0.5, type: 'spring', bounce: 0.22 }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 hover:from-violet-600 hover:via-blue-600 hover:to-fuchsia-500 text-white font-semibold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group text-sm sm:text-base"
             >
-              <span>{isLoading ? "Sending..." : "Send Message"}</span>
-              <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </motion.button>
+              <AccessibleButton
+                type="submit"
+                loading={isLoading}
+                icon={<Send className="w-4 h-4 sm:w-5 sm:h-5" />}
+                iconPosition="right"
+                description="Submit the contact form to send your message"
+                className="w-full"
+              >
+                {isLoading ? "Sending..." : "Send Message"}
+              </AccessibleButton>
+            </motion.div>
           </form>
         </div>
       </div>

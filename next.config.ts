@@ -4,7 +4,10 @@ const nextConfig: NextConfig = {
   // Performance optimizations
   experimental: {
     optimizePackageImports: ['framer-motion', 'react-icons', 'lucide-react'],
+    optimizeCss: true,
   },
+
+
 
   // Image optimization
   images: {
@@ -14,10 +17,14 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: false,
+    loader: 'default',
   },
 
-  // Compression
+  // Compression and optimization
   compress: true,
+  poweredByHeader: false,
+  generateEtags: false,
 
   // TypeScript configuration
   typescript: {
@@ -35,10 +42,29 @@ const nextConfig: NextConfig = {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
             chunks: 'all',
+            priority: 10,
+          },
+          framer: {
+            test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+            name: 'framer-motion',
+            chunks: 'all',
+            priority: 20,
+          },
+          icons: {
+            test: /[\\/]node_modules[\\/](react-icons|lucide-react)[\\/]/,
+            name: 'icons',
+            chunks: 'all',
+            priority: 15,
           },
         },
       };
+
+      // Tree shaking optimization
+      config.optimization.usedExports = true;
+      config.optimization.sideEffects = false;
     }
+
+
 
     return config;
   },

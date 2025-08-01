@@ -1,11 +1,11 @@
-// @ts-ignore
-// @ts-nocheck
-
-import { Notyf } from "notyf";
+import { Notyf, NotyfHorizontalPosition, NotyfVerticalPosition } from "notyf";
 import "notyf/notyf.min.css";
 
 class Notification {
-  constructor(duration = 3000, x = "right", y = "top") {
+  private duration: number;
+  private notif!: Notyf; // Using definite assignment assertion
+
+  constructor(duration = 3000, x: NotyfHorizontalPosition = "right", y: NotyfVerticalPosition = "top") {
     this.duration = duration;
     if (typeof window !== "undefined") {
       this.notif = new Notyf({

@@ -1,4 +1,3 @@
-const CACHE_NAME = 'portfolio-cache-v1';
 const STATIC_CACHE = 'static-cache-v1';
 const DYNAMIC_CACHE = 'dynamic-cache-v1';
 
@@ -69,7 +68,7 @@ async function handleAssetRequest(request) {
       cache.put(request, networkResponse.clone());
       return networkResponse;
     }
-  } catch (error) {
+  } catch {
     console.log('Network failed for asset:', request.url);
   }
 
@@ -102,7 +101,7 @@ async function handleNextRequest(request) {
       cache.put(request, networkResponse.clone());
     }
     return networkResponse;
-  } catch (error) {
+  } catch {
     return new Response('', {
       status: 404,
       statusText: 'Asset not found',
@@ -119,7 +118,7 @@ async function handlePageRequest(request) {
       cache.put(request, networkResponse.clone());
       return networkResponse;
     }
-  } catch (error) {
+  } catch {
     console.log('Network failed for page:', request.url);
   }
 

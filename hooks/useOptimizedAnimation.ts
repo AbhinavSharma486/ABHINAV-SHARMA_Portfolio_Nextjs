@@ -1,66 +1,65 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-interface AnimationOptions {
-  threshold?: number;
-  rootMargin?: string;
-  triggerOnce?: boolean;
-  disableOnMobile?: boolean;
-}
-
-export const useOptimizedAnimation = (options: AnimationOptions = {}) => {
-  const {
-    threshold = 0.1,
-    rootMargin = '0px',
-    triggerOnce = true,
-    disableOnMobile = false
-  } = options;
-
-  const [isVisible, setIsVisible] = useState(false);
-  const [shouldAnimate, setShouldAnimate] = useState(true);
-  const elementRef = useRef<HTMLElement>(null);
+export const useOptimizedAnimation = () => {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setIsClient(true);
 
-    // Check if device is mobile and disableOnMobile is true
-    const isMobile = window.innerWidth < 768;
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
 
-    if (prefersReducedMotion || (disableOnMobile && isMobile)) {
-      setShouldAnimate(false);
-      setIsVisible(true); // Show content immediately
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          if (triggerOnce) {
-            observer.disconnect();
-          }
-        } else if (!triggerOnce) {
-          setIsVisible(false);
-        }
-      },
-      {
-        threshold,
-        rootMargin,
-      }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
     };
-  }, [threshold, rootMargin, triggerOnce, disableOnMobile]);
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  // Optimized animation variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: prefersReducedMotion ? 0.1 : 0.6,
+        ease: 'easeOut'
+      }
+    }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0.05 : 0.1,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const scaleIn = {
+    hidden: { opacity: 0, scale: prefersReducedMotion ? 1 : 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: prefersReducedMotion ? 0.1 : 0.5,
+        ease: 'easeOut'
+      }
+    }
+  };
 
   return {
-    elementRef,
-    isVisible: shouldAnimate ? isVisible : true,
-    shouldAnimate,
+    prefersReducedMotion,
+    isClient,
+    fadeInUp,
+    staggerContainer,
+    scaleIn
   };
 }; 
