@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 // Extend Window interface to include gtag
 declare global {
@@ -43,67 +43,88 @@ interface LayoutShift extends PerformanceEntry {
 }
 
 const PerformanceMonitor: React.FC = () => {
+  const observerRef = useRef<PerformanceObserver | null>(null);
+  const hasReported = useRef<Set<string>>(new Set());
+
   useEffect(() => {
-    if (typeof window !== 'undefined' && 'performance' in window) {
-      // Monitor Core Web Vitals
-      const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          if (entry.entryType === 'largest-contentful-paint') {
-            const lcpEntry = entry as LargestContentfulPaint;
-            // Send to analytics
-            if (window.gtag) {
-              window.gtag('event', 'LCP', {
-                value: Math.round(lcpEntry.startTime),
-                event_category: 'Web Vitals',
-                event_label: lcpEntry.name,
-              });
-            }
-          }
+    if (typeof window === 'undefined' || !('performance' in window)) {
+      return;
+    }
 
-          if (entry.entryType === 'first-input') {
-            const fidEntry = entry as FirstInputDelay;
-            const fidValue = fidEntry.processingStart - fidEntry.startTime;
-            if (window.gtag) {
-              window.gtag('event', 'FID', {
-                value: Math.round(fidValue),
-                event_category: 'Web Vitals',
-                event_label: fidEntry.name,
-              });
-            }
-          }
+    // Debounced reporting function
+    const debouncedReport = (() => {
+      let timeoutId: NodeJS.Timeout;
+      return (eventName: string, value: number, category: string, label?: string) => {
+        if (hasReported.current.has(eventName)) return;
 
-          if (entry.entryType === 'layout-shift') {
-            const clsEntry = entry as LayoutShift;
-            if (window.gtag) {
-              window.gtag('event', 'CLS', {
-                value: clsEntry.value,
-                event_category: 'Web Vitals',
-                event_label: clsEntry.name,
-              });
-            }
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          if (window.gtag) {
+            window.gtag('event', eventName, {
+              value: Math.round(value),
+              event_category: category,
+              event_label: label,
+            });
+            hasReported.current.add(eventName);
+          }
+        }, 100);
+      };
+    })();
+
+    // Monitor Core Web Vitals with reduced overhead
+    try {
+      observerRef.current = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+
+        for (const entry of entries) {
+          switch (entry.entryType) {
+            case 'largest-contentful-paint':
+              const lcpEntry = entry as LargestContentfulPaint;
+              debouncedReport('LCP', lcpEntry.startTime, 'Web Vitals', lcpEntry.name);
+              break;
+
+            case 'first-input':
+              const fidEntry = entry as FirstInputDelay;
+              const fidValue = fidEntry.processingStart - fidEntry.startTime;
+              debouncedReport('FID', fidValue, 'Web Vitals', fidEntry.name);
+              break;
+
+            case 'layout-shift':
+              const clsEntry = entry as LayoutShift;
+              debouncedReport('CLS', clsEntry.value * 1000, 'Web Vitals', clsEntry.name);
+              break;
           }
         }
       });
 
-      observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+      observerRef.current.observe({
+        entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift']
+      });
 
-      // Monitor page load time
-      window.addEventListener('load', () => {
+      // Monitor page load time once
+      const handleLoad = () => {
         const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         if (navigation) {
           const loadTime = navigation.loadEventEnd - navigation.loadEventStart;
-
-          if (window.gtag) {
-            window.gtag('event', 'page_load_time', {
-              value: Math.round(loadTime),
-              event_category: 'Performance',
-            });
-          }
+          debouncedReport('page_load_time', loadTime, 'Performance');
         }
-      });
+      };
 
-      return () => observer.disconnect();
+      if (document.readyState === 'complete') {
+        handleLoad();
+      } else {
+        window.addEventListener('load', handleLoad, { once: true });
+      }
+
+    } catch (error) {
+      console.warn('Performance monitoring not supported:', error);
     }
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
   }, []);
 
   return null;

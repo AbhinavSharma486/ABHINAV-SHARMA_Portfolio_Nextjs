@@ -1,24 +1,23 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useRef, useMemo } from 'react';
+import { motion, useMotionValue, useTransform, useSpring, MotionValue } from 'framer-motion';
 import { Button } from './ui/button';
-
-import { ArrowRight, GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 import { FaWhatsapp } from "react-icons/fa";
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+import LazyImage from './ui/LazyImage';
+import Link from 'next/link';
 
 // Social links data;
 const SOCIAL_LINKS = [
   {
-    icon: GithubIcon,
+    icon: Github,
     href: "https://github.com/AbhinavSharma486",
     label: "GitHub",
     hoverColor: "hover:bg-gray-800 dark:hover:bg-black"
   },
   {
-    icon: LinkedinIcon,
+    icon: Linkedin,
     href: "https://www.linkedin.com/in/abhinav-sharma-6254252a5/",
     label: "LinkedIn",
     hoverColor: "hover:bg-blue-600 dark:hover:bg-blue-500"
@@ -26,92 +25,115 @@ const SOCIAL_LINKS = [
   {
     icon: FaWhatsapp,
     href: "https://api.whatsapp.com/send?phone=7819872024",
-    label: "Whatsapp",
+    label: "WhatsApp",
     hoverColor: "hover:bg-green-600 dark:hover:bg-green-500"
   },
   {
-    icon: MailIcon,
+    icon: Mail,
     href: "/contact",
     label: "Email",
     hoverColor: "hover:bg-red-600 dark:hover:bg-red-500"
   }
 ];
 
-// Optimized Parallax hook with throttling
+// Optimized parallax hook with reduced calculations
 function useParallax(ref: React.RefObject<HTMLElement | null>) {
-  const [parallax, setParallax] = useState({ x: 0, y: 0 });
-  React.useEffect(() => {
-    if (!ref.current) return;
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-    let ticking = false;
-    const handle = (e: MouseEvent) => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const rect = ref.current!.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width - 0.5) * 0.8;
-          const y = ((e.clientY - rect.top) / rect.height - 0.5) * 0.8;
-          setParallax({ x, y });
-          ticking = false;
-        });
-        ticking = true;
-      }
+  const x = useTransform(mouseX, [-300, 300], [-10, 10]);
+  const y = useTransform(mouseY, [-300, 300], [-10, 10]);
+
+  const springX = useSpring(x, { stiffness: 100, damping: 30 });
+  const springY = useSpring(y, { stiffness: 100, damping: 30 });
+
+  React.useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = element.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      mouseX.set(e.clientX - centerX);
+      mouseY.set(e.clientY - centerY);
     };
-    const reset = () => setParallax({ x: 0, y: 0 });
-    const currentRef = ref.current;
-    currentRef.addEventListener('mousemove', handle, { passive: true });
-    currentRef.addEventListener('mouseleave', reset);
+
+    const handleMouseLeave = () => {
+      mouseX.set(0);
+      mouseY.set(0);
+    };
+
+    element.addEventListener('mousemove', handleMouseMove, { passive: true });
+    element.addEventListener('mouseleave', handleMouseLeave);
+
     return () => {
-      currentRef.removeEventListener('mousemove', handle);
-      currentRef.removeEventListener('mouseleave', reset);
+      element.removeEventListener('mousemove', handleMouseMove);
+      element.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [ref]);
-  return parallax;
+  }, [ref, mouseX, mouseY]);
+
+  return { x: springX, y: springY };
 }
 
-// Enhanced Background Blobs
-const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => (
-  <motion.div
-    ref={ref}
-    initial={{ opacity: 0, scale: 0.95 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 1.2, type: 'spring', bounce: 0.2 }}
-    className="absolute inset-0 overflow-hidden"
-    aria-hidden="true"
-  >
-    <div className="absolute -inset-[10px] opacity-40 pointer-events-none">
-      {[
-        "top-1/4 left-1/4 bg-primary/10",
-        "top-1/3 right-1/4 bg-violet-500/10 animation-delay-2000",
-        "bottom-1/4 left-1/3 bg-blue-500/10 animation-delay-4000"
-      ].map((className, index) => (
-        <motion.div
-          key={index}
-          className={`absolute w-16 h-16 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-48 lg:h-48 xl:w-64 xl:h-64 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-lg animate-blob ${className}`}
-          style={{ zIndex: 0 }}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4 + index * 0.4, duration: 2, type: 'spring', bounce: 0.05 }}
-        />
-      ))}
-    </div>
-  </motion.div>
-));
+// Simplified Background Blobs with reduced animations
+const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => {
+  const blobPositions = useMemo(() => [
+    { x: '10%', y: '20%', size: 'w-32 h-32' },
+    { x: '80%', y: '10%', size: 'w-24 h-24' },
+    { x: '20%', y: '80%', size: 'w-28 h-28' },
+    { x: '70%', y: '70%', size: 'w-20 h-20' },
+  ], []);
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+      {...props}
+    >
+      <div className="relative w-full h-full">
+        {blobPositions.map((blob, index) => (
+          <motion.div
+            key={index}
+            className={`absolute ${blob.size} bg-gradient-to-r from-violet-500/20 to-purple-500/20 dark:from-violet-400/10 dark:to-purple-400/10 rounded-full blur-2xl`}
+            style={{
+              left: blob.x,
+              top: blob.y,
+            }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{
+              delay: 0.2 + index * 0.1,
+              duration: 1.5,
+              type: 'spring',
+              bounce: 0.1
+            }}
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+});
 
 BackgroundBlobs.displayName = 'BackgroundBlobs';
 
 // Optimized Profile Image with reduced parallax
-const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) => (
+const ProfileImage = ({ parallax }: { parallax: { x: MotionValue<number>; y: MotionValue<number>; }; }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
     style={{
-      transform: `translate3d(${parallax.x * 2}px, ${parallax.y * 2}px, 0)`
+      transform: `translate3d(${parallax.x}px, ${parallax.y}px, 0)`
     }}
     className="relative group mx-auto w-full max-w-[10rem] xs:max-w-[6rem] sm:max-w-[8rem] md:max-w-[10rem] lg:max-w-[12rem] xl:max-w-[14rem] 2xl:max-w-[16rem] mt-2 sm:mt-4 md:mt-6 lg:mt-0"
   >
     <motion.div
-      className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 dark:from-primary dark:via-violet-500 dark:to-blue-500 rounded-full opacity-90 dark:opacity-80 group-hover:opacity-100 blur-lg transition duration-500 border border-violet-500/60 dark:border-violet-400 animate-gradient-x"
+      className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 dark:from-primary dark:via-violet-500 dark:to-blue-500 rounded-full opacity-90 dark:opacity-80 group-hover:opacity-100 blur-lg transition duration-500 border border-violet-500/60 dark:border-violet-400"
       animate={{
         boxShadow: [
           '0 0 0 0 rgba(124,58,237,0.25)',
@@ -123,12 +145,15 @@ const ProfileImage = ({ parallax }: { parallax: { x: number; y: number; }; }) =>
     />
     <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl border-2 border-violet-500/80 dark:border-violet-700/60">
       <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 to-purple-500/20 dark:from-primary/10 dark:to-violet-500/10 group-hover:opacity-0 transition duration-500" />
-      <Image
+      <LazyImage
         src="/assets/images/profileimg.webp"
         alt="Abhinav Sharma"
         width={256}
         height={256}
         className="object-cover w-full h-full transform group-hover:scale-105 transition duration-500"
+        priority={true}
+        placeholder="blur"
+        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
       />
     </div>
   </motion.div>
@@ -153,25 +178,29 @@ const SocialLinks = () => (
         transition={{ duration: 0.5, delay: 0.1 + i * 0.08, type: 'spring', bounce: 0.4 }}
         className="relative group"
       >
-        <Link
+        <a
           href={href}
           target={href.startsWith('http') ? "_blank" : undefined}
           rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
           className={`flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 dark:bg-gray-800 text-white border border-gray-600/40 dark:border-gray-700/40 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 ${hoverColor}`}
           aria-label={label}
           tabIndex={0}
+          style={{
+            backgroundColor: label === 'WhatsApp' ? '#25D366' : undefined,
+            borderColor: label === 'WhatsApp' ? '#128C7E' : undefined
+          }}
         >
           <Icon className="w-5 h-5 text-white transition-transform duration-300" />
           {/* Ripple effect */}
           <span className="absolute inset-0 rounded-full pointer-events-none group-active:animate-ping bg-violet-400/20" />
-        </Link>
+        </a>
       </motion.div>
     ))}
   </motion.div>
 );
 
 const Profile = () => {
-  useEffect(() => {
+  React.useEffect(() => {
     if (typeof window !== 'undefined') {
       document.documentElement.style.overflowX = 'hidden';
       document.documentElement.style.overflowY = 'auto';
@@ -307,7 +336,7 @@ const Profile = () => {
                 >
                   <Link href="/my-story" className="flex items-center justify-center gap-2">
                     More About Me
-                    <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                    <ExternalLink className="group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
               </motion.div>

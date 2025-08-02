@@ -133,10 +133,8 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
-
-
   return (
-    <section id="experience" className="py-8 min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] relative">
+    <section id="experience" className="py-8 min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] relative overflow-hidden">
       {/* Animated Starry Background */}
       <div className="absolute inset-0 pointer-events-none z-0">
         {/* Ultra-Optimized Twinkling Stars */}
@@ -189,8 +187,6 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
           );
         })}
 
-
-
         {/* Subtle Glow Effect */}
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white/5 dark:to-yellow-200/5 pointer-events-none" />
       </div>
@@ -198,7 +194,7 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
       <div className="container mx-auto px-2 md:px-10 lg:px-20 xl:px-32 relative z-10">
         <h1 className="font-orbitron text-center font-bold dark:text-white text-3xl md:text-5xl mt-4 text-blue-950 mb-2 md:mb-4 drop-shadow-lg">Experience</h1>
         <div className="mx-auto mt-3 mb-8 md:mb-12 h-1 w-full max-w-[340px] md:max-w-[480px] rounded-full bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400" />
-        <div className="relative flex flex-col items-center" ref={ref}>
+        <div className="relative flex flex-col items-center overflow-hidden" ref={ref}>
           {/* Animated vertical line - with proper constraints */}
           <motion.div
             style={{
@@ -206,16 +202,12 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
               opacity: opacityTransform,
               maxHeight: `${height}px`
             }}
-            className="absolute left-6 md:left-1/2 top-0 w-1 bg-gradient-to-b from-violet-500 via-blue-500 to-fuchsia-400 dark:from-violet-400 dark:via-blue-400 dark:to-fuchsia-400 z-10 -translate-x-1/2 md:-translate-x-1/2 rounded-full shadow-[0_0_32px_8px_rgba(124,58,237,0.18)]"
+            className="absolute left-6 md:left-1/2 top-0 w-1 bg-gradient-to-b from-violet-500 via-blue-500 to-fuchsia-400 dark:from-violet-400 dark:via-blue-400 dark:to-fuchsia-400 z-10 md:-translate-x-1/2 rounded-full shadow-[0_0_32px_8px_rgba(124,58,237,0.18)]"
           />
-
-
-
-          <div className="w-full flex flex-col gap-y-10 md:gap-y-0">
-            {experiences.map((exp, idx) => (
-              <TimelineItem key={idx} idx={idx} {...exp} />
-            ))}
-          </div>
+          {/* Timeline items */}
+          {experiences.map((experience, idx) => (
+            <TimelineItem key={idx} {...experience} idx={idx} />
+          ))}
         </div>
       </div>
     </section>

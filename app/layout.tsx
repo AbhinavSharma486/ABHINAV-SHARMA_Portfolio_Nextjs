@@ -2,16 +2,17 @@ import "./globals.css";
 import localFont from "next/font/local";
 import Nav from "../components/navigation/Navigation";
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import Theme from "../context/theme-provider";
-
-const Footer = dynamic(() => import("../components/FooterWrapper"));
+import ClientWrapper from "../components/ClientWrapper";
 
 export const metadata: Metadata = {
   title: "Abhinav Sharma | Full Stack Developer | Personal Portfolio",
   description: "Abhinav Sharma Personal Portfolio",
   icons: {
     icon: "/favicon.ico",
+  },
+  other: {
+    'theme-color': '#7c3aed',
   },
 };
 
@@ -40,6 +41,8 @@ const orbitron = localFont({
     },
   ],
   variable: "--font-orbitron",
+  display: 'swap',
+  preload: true,
 });
 
 export const eduNSW = localFont({
@@ -51,19 +54,25 @@ export const eduNSW = localFont({
     },
   ],
   variable: "--font-edu-nsw",
+  display: 'swap',
+  preload: true,
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode; }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        {/* Preload critical resources */}
+        <link rel="preload" href="/assets/images/profileimg.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/assets/images/logo.webp" as="image" type="image/webp" />
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+      </head>
       <body className={`${orbitron.variable} ${eduNSW.variable}`}>
         <Theme>
           <Nav />
           <main>{children}</main>
-          <Footer />
-          {/* Temporarily disabled for debugging */}
-          {/* <ServiceWorkerRegistration />
-          <PerformanceMonitor /> */}
+          <ClientWrapper />
         </Theme>
       </body>
     </html>
