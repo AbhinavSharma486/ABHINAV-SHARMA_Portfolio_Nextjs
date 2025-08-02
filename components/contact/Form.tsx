@@ -131,7 +131,7 @@ const Form = () => {
       });
 
       setLoading(false);
-    } catch (error) {
+    } catch {
       setMessage({
         success: "",
         error: "Unable to send message at the moment. Please try again later.",
