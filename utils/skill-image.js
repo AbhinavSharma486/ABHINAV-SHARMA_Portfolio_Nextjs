@@ -1,4 +1,4 @@
-// SVG file paths - no webpack processing
+
 const svgFiles = {
   bootstrap: '/assets/svg/skills/bootstrap.svg',
   css: '/assets/svg/skills/css.svg',
@@ -10,7 +10,7 @@ const svgFiles = {
   materialui: '/assets/svg/skills/materialui.svg',
   mongodb: '/assets/svg/skills/mongoDB.svg',
   'next js': '/assets/svg/skills/nextJS.svg',
-  nodejs: '/assets/svg/skills/nodejs.svg',
+  'node js': '/assets/svg/skills/nodejs.svg',
   react: '/assets/svg/skills/react.svg',
   tailwind: '/assets/svg/skills/tailwind.svg',
   typescript: '/assets/svg/skills/typescript.svg',
@@ -43,23 +43,12 @@ export const skillsImage = (skill) => {
 
   const skillID = skill.toLowerCase().trim();
 
-  // Debug the skill ID mapping
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`🔍 Skill mapping: "${skill}" -> "${skillID}"`);
-  }
-
   // Return the SVG file path
   const svgPath = svgFiles[skillID];
 
   if (svgPath) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`✅ Found SVG for skill: ${skill} -> ${svgPath}`);
-    }
     return svgPath;
   } else {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn(`❌ No SVG found for skill: "${skill}" (ID: "${skillID}")`);
-    }
     return null;
   }
 };

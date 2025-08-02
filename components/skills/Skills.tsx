@@ -25,31 +25,6 @@ const Skills = () => {
       .map(skill => {
         const image = skillsImage(skill);
 
-        // Debug all skills in development
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`🔍 Processing skill: ${skill}`, {
-            skill,
-            image,
-            imageType: typeof image,
-            isFunction: image && typeof image === 'function',
-            hasDefault: image && image.default,
-            isValid: image && typeof image === 'function'
-          });
-
-          // Special debug for problematic skills
-          if (['Tailwind', 'Liveblocks', 'Framer'].includes(skill)) {
-            console.log(`🚨 Debugging ${skill}:`, {
-              skill,
-              image,
-              imageType: typeof image,
-              isFunction: image && typeof image === 'function',
-              hasDefault: image && image.default,
-              isValid: image && typeof image === 'function',
-              imageString: image ? image.toString() : 'null'
-            });
-          }
-        }
-
         return {
           name: skill,
           image: image

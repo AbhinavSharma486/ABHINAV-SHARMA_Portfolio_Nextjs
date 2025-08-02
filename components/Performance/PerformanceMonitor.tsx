@@ -50,7 +50,6 @@ const PerformanceMonitor: React.FC = () => {
         for (const entry of list.getEntries()) {
           if (entry.entryType === 'largest-contentful-paint') {
             const lcpEntry = entry as LargestContentfulPaint;
-            console.log('LCP:', lcpEntry.startTime);
             // Send to analytics
             if (window.gtag) {
               window.gtag('event', 'LCP', {
@@ -64,7 +63,6 @@ const PerformanceMonitor: React.FC = () => {
           if (entry.entryType === 'first-input') {
             const fidEntry = entry as FirstInputDelay;
             const fidValue = fidEntry.processingStart - fidEntry.startTime;
-            console.log('FID:', fidValue);
             if (window.gtag) {
               window.gtag('event', 'FID', {
                 value: Math.round(fidValue),
@@ -76,7 +74,6 @@ const PerformanceMonitor: React.FC = () => {
 
           if (entry.entryType === 'layout-shift') {
             const clsEntry = entry as LayoutShift;
-            console.log('CLS:', clsEntry.value);
             if (window.gtag) {
               window.gtag('event', 'CLS', {
                 value: clsEntry.value,
@@ -95,7 +92,6 @@ const PerformanceMonitor: React.FC = () => {
         const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         if (navigation) {
           const loadTime = navigation.loadEventEnd - navigation.loadEventStart;
-          console.log('Page Load Time:', loadTime);
 
           if (window.gtag) {
             window.gtag('event', 'page_load_time', {

@@ -131,30 +131,12 @@ const Form = () => {
       });
 
       setLoading(false);
-    } catch (error: unknown) {
-      console.log("error", error);
-
-      // Handle specific EmailJS errors
-      const emailError = error as { status?: number; };
-      if (emailError.status === 412) {
-        setMessage({
-          success: "",
-          error: "Email service temporarily unavailable. Please try again later or contact me directly.",
-        });
-        notyf.error("Email service temporarily unavailable. Please try again later.");
-      } else if (emailError.status === 400) {
-        setMessage({
-          success: "",
-          error: "Invalid email configuration. Please check your input and try again.",
-        });
-        notyf.error("Please check your email address and try again.");
-      } else {
-        setMessage({
-          success: "",
-          error: "Unable to send message at the moment. Please try again later.",
-        });
-        notyf.error("Unable to send message. Please try again later.");
-      }
+    } catch (error) {
+      setMessage({
+        success: "",
+        error: "Unable to send message at the moment. Please try again later.",
+      });
+      notyf.error("Unable to send message. Please try again later.");
       setLoading(false);
     }
   }

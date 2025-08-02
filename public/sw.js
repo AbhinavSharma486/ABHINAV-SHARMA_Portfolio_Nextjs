@@ -69,7 +69,7 @@ async function handleAssetRequest(request) {
       return networkResponse;
     }
   } catch {
-    console.log('Network failed for asset:', request.url);
+    // Network failed for asset
   }
 
   // Fallback to cache
@@ -119,7 +119,7 @@ async function handlePageRequest(request) {
       return networkResponse;
     }
   } catch {
-    console.log('Network failed for page:', request.url);
+    // Network failed for page
   }
 
   // Fallback to cache
@@ -149,7 +149,6 @@ self.addEventListener('sync', (event) => {
 
 async function doBackgroundSync() {
   // Handle background sync tasks
-  console.log('Background sync triggered');
 }
 
 // Push notification handling
