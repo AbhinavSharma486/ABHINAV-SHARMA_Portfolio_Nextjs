@@ -5,7 +5,7 @@ import { motion, useMotionValue, useTransform, useSpring, MotionValue } from 'fr
 import { Button } from './ui/button';
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 import { FaWhatsapp } from "react-icons/fa";
-import LazyImage from './ui/LazyImage';
+import Image from 'next/image';
 import Link from 'next/link';
 
 // Social links data;
@@ -130,7 +130,7 @@ const ProfileImage = ({ parallax }: { parallax: { x: MotionValue<number>; y: Mot
     style={{
       transform: `translate3d(${parallax.x}px, ${parallax.y}px, 0)`
     }}
-    className="relative group mx-auto w-full max-w-[10rem] xs:max-w-[6rem] sm:max-w-[8rem] md:max-w-[10rem] lg:max-w-[12rem] xl:max-w-[14rem] 2xl:max-w-[16rem] mt-2 sm:mt-4 md:mt-6 lg:mt-0"
+    className="relative group mx-auto w-full max-w-[8rem] xs:max-w-[9rem] sm:max-w-[10rem] md:max-w-[11rem] lg:max-w-[12rem] xl:max-w-[13rem] 2xl:max-w-[14rem] mt-4 sm:mt-6 md:mt-8 lg:mt-10"
   >
     <motion.div
       className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 dark:from-primary dark:via-violet-500 dark:to-blue-500 rounded-full opacity-90 dark:opacity-80 group-hover:opacity-100 blur-lg transition duration-500 border border-violet-500/60 dark:border-violet-400"
@@ -145,12 +145,15 @@ const ProfileImage = ({ parallax }: { parallax: { x: MotionValue<number>; y: Mot
     />
     <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl border-2 border-violet-500/80 dark:border-violet-700/60">
       <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 to-purple-500/20 dark:from-primary/10 dark:to-violet-500/10 group-hover:opacity-0 transition duration-500" />
-      <LazyImage
+      <Image
         src="/assets/images/profileimg.webp"
         alt="Abhinav Sharma"
         width={256}
         height={256}
-        className="object-cover w-full h-full transform group-hover:scale-105 transition duration-500"
+        className="object-cover w-full h-full"
+        style={{
+          objectPosition: '50% 50%'
+        }}
         priority={true}
         placeholder="blur"
         blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
@@ -182,13 +185,7 @@ const SocialLinks = () => (
           href={href}
           target={href.startsWith('http') ? "_blank" : undefined}
           rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-          className={`flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 dark:bg-gray-800 text-white border border-gray-600/40 dark:border-gray-700/40 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 ${hoverColor}`}
-          aria-label={label}
-          tabIndex={0}
-          style={{
-            backgroundColor: label === 'WhatsApp' ? '#25D366' : undefined,
-            borderColor: label === 'WhatsApp' ? '#128C7E' : undefined
-          }}
+          className={`flex items-center justify-center w-10 h-10 rounded-full text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 bg-gray-700 dark:bg-gray-800 border border-gray-600/40 dark:border-gray-700/40 ${hoverColor}`}
         >
           <Icon className="w-5 h-5 text-white transition-transform duration-300" />
           {/* Ripple effect */}
@@ -243,11 +240,10 @@ const Profile = () => {
             <span className="inline">Open to Work</span>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 p-1 xs:p-2 sm:p-3 md:p-4 lg:p-6 xl:p-8 2xl:p-10 md:pt-10 lg:pt-14 xl:pt-18 flex-1 min-h-0 profile-container overflow-hidden" style={{ maxWidth: '100%' }}>
-            <div className="space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4 flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
               <ProfileImage parallax={parallax} />
-              <div className="mt-4" />
               <SocialLinks />
-              <div className="mt-4" />
+              <div className="h-1 sm:h-2 md:h-3 lg:h-4"></div>
             </div>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -332,7 +328,7 @@ const Profile = () => {
                 <Button
                   variant="outline"
                   asChild
-                  className="mb-4 group relative overflow-hidden w-Content sm:w-auto min-w-[100px] sm:min-w-[120px] md:min-w-[140px] bg-black hover:text-black text-white text-sm sm:text-base shadow-lg hover:shadow-xl hover:border-violet-400 dark:hover:border-violet-500 border border-violet-700/60 transition-all duration-300 rounded-full"
+                  className="mb-4 group relative overflow-hidden w-Content sm:w-auto min-w-[100px] sm:min-w-[120px] md:min-w-[140px] hover:bg-black bg-black hover:text-white text-white text-sm sm:text-base shadow-lg hover:shadow-xl hover:border-violet-400 dark:hover:border-violet-500 border border-violet-700/60 transition-all duration-300 rounded-full"
                 >
                   <Link href="/my-story" className="flex items-center justify-center gap-2">
                     More About Me
