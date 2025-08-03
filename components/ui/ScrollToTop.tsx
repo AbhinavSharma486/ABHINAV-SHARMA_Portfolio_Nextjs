@@ -24,24 +24,32 @@ const ScrollToTop = () => {
     };
   }, []);
 
-  // Scroll to top handler
+  // Enhanced smooth scroll to top handler
   const scrollToTop = () => {
-    // Method 1: Direct scroll
-    window.scrollTo(0, 0);
+    const currentScroll = window.pageYOffset;
+    const targetScroll = 0;
+    const distance = currentScroll - targetScroll;
+    const duration = Math.max(800, distance * 0.8); // Dynamic duration based on scroll distance
+    const startTime = performance.now();
 
-    // Method 2: Smooth scroll
-    setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    }, 10);
+    const easeInOutCubic = (t: number) => {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    };
 
-    // Method 3: Document element scroll
-    setTimeout(() => {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }, 20);
+    const animateScroll = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeInOutCubic(progress);
+
+      const newScroll = currentScroll - (distance * easedProgress);
+      window.scrollTo(0, newScroll);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
   };
 
   return (
@@ -76,7 +84,14 @@ const ScrollToTop = () => {
               rotate: [0, -5, 5, 0],
               transition: { duration: 0.3 }
             }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{
+              scale: 0.9,
+              transition: { duration: 0.1 }
+            }}
+            whileFocus={{
+              scale: 1.1,
+              transition: { duration: 0.2 }
+            }}
           >
             {/* Animated background pattern */}
             <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-blue-500/20 to-fuchsia-400/20 rounded-2xl animate-pulse pointer-events-none" />
@@ -93,6 +108,10 @@ const ScrollToTop = () => {
               <motion.div
                 animate={{ y: [0, -2, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                whileTap={{
+                  y: -4,
+                  transition: { duration: 0.2 }
+                }}
               >
                 <ChevronUp className="w-6 h-6 drop-shadow-lg" />
               </motion.div>
