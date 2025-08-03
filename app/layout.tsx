@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Nav from "../components/navigation/Navigation";
 import type { Metadata } from "next";
 import Theme from "../context/theme-provider";
+import { LoadingProvider } from "../context/loading-context";
 import ClientWrapper from "../components/ClientWrapper";
 
 export const metadata: Metadata = {
@@ -70,9 +71,11 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
       </head>
       <body className={`${orbitron.variable} ${eduNSW.variable}`}>
         <Theme>
-          <Nav />
-          <main>{children}</main>
-          <ClientWrapper />
+          <LoadingProvider>
+            <Nav />
+            <main>{children}</main>
+            <ClientWrapper />
+          </LoadingProvider>
         </Theme>
       </body>
     </html>
