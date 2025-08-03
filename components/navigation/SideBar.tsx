@@ -185,7 +185,7 @@ const SideBar = () => {
               onClick={() => setOpen(!open)}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="p-2 h-8 w-8 md:h-11 md:w-8 backdrop-blur-sm rounded-xl shadow-lg transition-all duration-200 z-[9999] bg-gray-800 hover:bg-gray-700"
+              className="p-2 h-8 w-8 md:h-11 md:w-8 backdrop-blur-sm rounded-xl shadow-lg transition-all duration-200 z-[9999] bg-gray-800 hover:bg-gray-700 text-white"
             >
               {open ? <X size={24} className="md:w-8 md:h-8" /> : <MenuIcon size={24} className="md:w-8 md:h-8" />}
             </Button>

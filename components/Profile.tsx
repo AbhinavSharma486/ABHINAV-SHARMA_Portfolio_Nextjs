@@ -133,7 +133,7 @@ const ProfileImage = ({ parallax }: { parallax: { x: MotionValue<number>; y: Mot
     className="relative group mx-auto w-full max-w-[8rem] xs:max-w-[9rem] sm:max-w-[10rem] md:max-w-[11rem] lg:max-w-[12rem] xl:max-w-[13rem] 2xl:max-w-[14rem] mt-4 sm:mt-6 md:mt-8 lg:mt-10"
   >
     <motion.div
-      className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 dark:from-primary dark:via-violet-500 dark:to-blue-500 rounded-full opacity-90 dark:opacity-80 group-hover:opacity-100 blur-lg transition duration-500 border border-violet-500/60 dark:border-violet-400"
+      className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 dark:from-violet-500 dark:via-purple-500 dark:to-blue-500 rounded-full opacity-90 dark:opacity-90 group-hover:opacity-100 blur-lg transition duration-500 border border-violet-500/60 dark:border-violet-400"
       animate={{
         boxShadow: [
           '0 0 0 0 rgba(124,58,237,0.25)',
@@ -144,7 +144,6 @@ const ProfileImage = ({ parallax }: { parallax: { x: MotionValue<number>; y: Mot
       transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
     />
     <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl border-2 border-violet-500/80 dark:border-violet-700/60">
-      <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/20 to-purple-500/20 dark:from-primary/10 dark:to-violet-500/10 group-hover:opacity-0 transition duration-500" />
       <Image
         src="/assets/images/profileimg.webp"
         alt="Abhinav Sharma"
