@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { skillsData } from "../../utils/data/skills";
 import { skillsImage } from "../../utils/skill-image";
 import Image from "next/image";
@@ -18,6 +18,23 @@ const cardVariants = {
 
 const Skills = () => {
   const [visibleSkillsCount, setVisibleSkillsCount] = useState(8);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if screen is mobile on mount and resize
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Check on mount
+    checkScreenSize();
+
+    // Add event listener for resize
+    window.addEventListener('resize', checkScreenSize);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   // Memoize skills with their images for better performance
   const skillsWithImages = useMemo(() => {
@@ -33,11 +50,14 @@ const Skills = () => {
       });
   }, []);
 
-  // Determine how many skills to show based on current state
-  const skillsToShow = skillsWithImages.slice(0, visibleSkillsCount);
+  // Determine how many skills to show based on screen size
+  // On mobile: use visibleSkillsCount, on larger screens: show all skills
+  const skillsToShow = isMobile
+    ? skillsWithImages.slice(0, visibleSkillsCount)
+    : skillsWithImages;
 
-  // Check if there are more skills to show
-  const hasMoreSkills = visibleSkillsCount < skillsWithImages.length;
+  // Check if there are more skills to show (only on mobile)
+  const hasMoreSkills = isMobile && visibleSkillsCount < skillsWithImages.length;
 
   // Handle show more button click
   const handleShowMore = () => {
@@ -138,37 +158,39 @@ const Skills = () => {
           </div>
 
           {/* Show More/Show Less button - only visible on mobile */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mt-8 md:hidden">
-            {hasMoreSkills && (
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleShowMore}
-                className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-violet-500 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:from-violet-600 hover:to-blue-600 text-sm sm:text-base w-fit sm:w-auto min-w-[160px] sm:min-w-[180px] object-contain"
-              >
-                <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 object-contain flex-shrink-0" />
-                <span className="whitespace-nowrap object-contain">Show More Skills</span>
-              </motion.button>
-            )}
+          {isMobile && (
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mt-8">
+              {hasMoreSkills && (
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleShowMore}
+                  className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-violet-500 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:from-violet-600 hover:to-blue-600 text-sm sm:text-base w-fit sm:w-auto min-w-[160px] sm:min-w-[180px] object-contain"
+                >
+                  <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 object-contain flex-shrink-0" />
+                  <span className="whitespace-nowrap object-contain">Show More Skills</span>
+                </motion.button>
+              )}
 
-            {visibleSkillsCount > 8 && (
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleShowLess}
-                className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:from-gray-600 hover:to-gray-700 text-sm sm:text-base w-fit sm:w-auto min-w-[160px] sm:min-w-[180px] object-contain"
-              >
-                <ChevronUp className="w-3 h-3 sm:w-4 sm:h-4 object-contain flex-shrink-0" />
-                <span className="whitespace-nowrap object-contain">Show Less</span>
-              </motion.button>
-            )}
-          </div>
+              {visibleSkillsCount > 8 && (
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleShowLess}
+                  className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:from-gray-600 hover:to-gray-700 text-sm sm:text-base w-fit sm:w-auto min-w-[160px] sm:min-w-[180px] object-contain"
+                >
+                  <ChevronUp className="w-3 h-3 sm:w-4 sm:h-4 object-contain flex-shrink-0" />
+                  <span className="whitespace-nowrap object-contain">Show Less</span>
+                </motion.button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>
