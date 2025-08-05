@@ -1,12 +1,11 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { skillsData } from "../../utils/data/skills";
 import { skillsImage } from "../../utils/skill-image";
 import Image from "next/image";
 import { motion } from 'framer-motion';
-import { Code2 } from 'lucide-react';
-
+import { Code2, ChevronDown, ChevronUp } from 'lucide-react';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 15 },
@@ -18,6 +17,8 @@ const cardVariants = {
 };
 
 const Skills = () => {
+  const [visibleSkillsCount, setVisibleSkillsCount] = useState(8);
+
   // Memoize skills with their images for better performance
   const skillsWithImages = useMemo(() => {
     return skillsData
@@ -31,6 +32,31 @@ const Skills = () => {
         };
       });
   }, []);
+
+  // Determine how many skills to show based on current state
+  const skillsToShow = skillsWithImages.slice(0, visibleSkillsCount);
+
+  // Check if there are more skills to show
+  const hasMoreSkills = visibleSkillsCount < skillsWithImages.length;
+
+  // Handle show more button click
+  const handleShowMore = () => {
+    const newCount = Math.min(visibleSkillsCount + 8, skillsWithImages.length);
+    setVisibleSkillsCount(newCount);
+  };
+
+  // Handle show less button click
+  const handleShowLess = () => {
+    setVisibleSkillsCount(8);
+    // Scroll to the top of the skills section
+    const skillsSection = document.getElementById('skills');
+    if (skillsSection) {
+      skillsSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
   return (
     <section id='skills' className="bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] py-12 md:py-16">
@@ -49,7 +75,7 @@ const Skills = () => {
         <div className="relative z-50 border-t border-gray-300 dark:border-gray-700 my-2 lg:my-2">
           <div className="w-full my-4 flex justify-center">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 sm:gap-5 md:gap-6">
-              {skillsWithImages.map(({ name: skill, image }, id) => (
+              {skillsToShow.map(({ name: skill, image }, id) => (
                 <motion.div
                   key={id}
                   custom={id}
@@ -109,6 +135,39 @@ const Skills = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+
+          {/* Show More/Show Less button - only visible on mobile */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mt-8 md:hidden">
+            {hasMoreSkills && (
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleShowMore}
+                className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-violet-500 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:from-violet-600 hover:to-blue-600 text-sm sm:text-base w-fit sm:w-auto min-w-[160px] sm:min-w-[180px] object-contain"
+              >
+                <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 object-contain flex-shrink-0" />
+                <span className="whitespace-nowrap object-contain">Show More Skills</span>
+              </motion.button>
+            )}
+
+            {visibleSkillsCount > 8 && (
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleShowLess}
+                className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:from-gray-600 hover:to-gray-700 text-sm sm:text-base w-fit sm:w-auto min-w-[160px] sm:min-w-[180px] object-contain"
+              >
+                <ChevronUp className="w-3 h-3 sm:w-4 sm:h-4 object-contain flex-shrink-0" />
+                <span className="whitespace-nowrap object-contain">Show Less</span>
+              </motion.button>
+            )}
           </div>
         </div>
       </div>
