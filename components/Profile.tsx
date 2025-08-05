@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { motion, useMotionValue, useTransform, useSpring, MotionValue } from 'framer-motion';
 import { Button } from './ui/button';
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
@@ -196,35 +196,57 @@ const SocialLinks = () => (
 );
 
 const Profile = () => {
+  const [showAllPoints, setShowAllPoints] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
       document.documentElement.style.overflowX = 'hidden';
       document.documentElement.style.overflowY = 'auto';
       document.body.style.overflowX = 'hidden';
       document.body.style.overflowY = 'auto';
+
+      // Check if screen is mobile
+      const checkMobile = () => setIsMobile(window.innerWidth < 640);
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
     }
   }, []);
+
   const mainRef = useRef<HTMLDivElement>(null);
   const parallax = useParallax(mainRef);
+
+  const bulletPoints = [
+    "As a MERN Stack Developer, I build secure, scalable, and responsive web applications.",
+    "My internship projects include a cybersecurity, an Event Management System, and Aniicon's cafe, all utilizing modern MERN stack technologies.",
+    "I am proficient in React, Next.js, Node.js, MongoDB, TypeScript, Tailwind CSS, JavaScript, and Express.",
+    "I've developed real-time applications like a chat app (Chatify) and a collaborative web app (SyncDocs)."
+  ];
+
+  // Show all points on desktop, only 2 on mobile unless expanded
+  const pointsToShow = !isMobile ? bulletPoints : (showAllPoints ? bulletPoints : bulletPoints.slice(0, 2));
+
   return (
     <main
       id="home"
       ref={mainRef}
-      className='relative min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-1 sm:py-2 md:py-4 lg:py-6 xl:py-8 2xl:py-10'>
+      className='relative min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-6 sm:py-1 md:py-4 lg:py-6 xl:py-8 2xl:py-10'>
       <BackgroundBlobs ref={mainRef} />
-      <div className={`w-full max-w-7xl mx-auto px-1 xs:px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 ml-0 mr-0 md:ml-16 md:mr-16 lg:ml-20 lg:mr-20 xl:ml-24 xl:mr-24`} style={{ maxWidth: '100vw' }}>
+      {/* Mobile-specific spacing wrapper */}
+      <div className={`w-full max-w-7xl mx-auto px-4 sm:px-1 xs:px-2 md:px-6 lg:px-8 xl:px-12 2xl:px-16 ml-0 mr-0 md:ml-16 md:mr-16 lg:ml-20 lg:mr-20 xl:ml-24 xl:mr-24`} style={{ maxWidth: '100vw' }}>
         <article
-          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-lg sm:rounded-xl md:rounded-2xl border border-transparent hover:border-2 hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl transition-all duration-300 group w-full h-full flex flex-col overflow-hidden'>
+          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-2xl sm:rounded-lg md:rounded-2xl border border-transparent hover:border-2 hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl transition-all duration-300 group w-full h-full flex flex-col overflow-hidden'>
           {/* Floating badge - improved responsive positioning */}
           <motion.div
-            className="absolute right-0 top-0 xs:right-0.5 xs:top-0.5 sm:right-1 sm:top-1 md:right-2 md:top-2 lg:right-3 lg:top-3 xl:right-4 xl:top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-1.5 py-0.5 xs:px-2 xs:py-1 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 text-[8px] xs:text-[9px] sm:text-xs md:text-sm lg:text-base xl:text-lg shadow-2xl font-bold flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2 border border-white dark:border-black/40 animate-bounce-slow max-w-[calc(100%-1rem)] min-w-fit profile-badge"
+            className="absolute right-0 top-0 xs:right-0.5 xs:top-0.5 sm:right-1 sm:top-1 md:right-2 md:top-2 lg:right-3 lg:top-3 xl:right-4 xl:top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-3 py-1.5 xs:px-3.5 xs:py-2 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 text-xs xs:text-sm sm:text-xs md:text-sm lg:text-base xl:text-lg shadow-2xl font-bold flex items-center gap-1.5 xs:gap-2 sm:gap-1.5 md:gap-2 border border-white dark:border-black/40 animate-bounce-slow max-w-[calc(100%-1rem)] min-w-fit profile-badge"
             initial={{ opacity: 0, y: -16, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 1.1, duration: 0.7, type: 'spring', bounce: 0.4 }}
             style={{ zIndex: 20 }}
           >
             <motion.span
-              className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl inline-block"
+              className="text-sm xs:text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl inline-block"
               animate={{ rotate: [0, 20, -10, 20, 0] }}
               transition={{
                 repeat: Infinity,
@@ -238,7 +260,7 @@ const Profile = () => {
             </motion.span>
             <span className="inline">Open to Work</span>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 p-1 xs:p-2 sm:p-3 md:p-4 lg:p-6 xl:p-8 2xl:p-10 md:pt-10 lg:pt-14 xl:pt-18 flex-1 min-h-0 profile-container overflow-hidden" style={{ maxWidth: '100%' }}>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 p-4 sm:p-1 xs:p-2 md:p-4 lg:p-6 xl:p-8 2xl:p-10 md:pt-10 lg:pt-14 xl:pt-18 flex-1 min-h-0 profile-container overflow-hidden" style={{ maxWidth: '100%' }}>
             <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10">
               <ProfileImage parallax={parallax} />
               <SocialLinks />
@@ -280,13 +302,8 @@ const Profile = () => {
                 transition={{ duration: 0.7, delay: 0.18, type: 'spring', bounce: 0.22 }}
                 className="text-xs xs:text-sm sm:text-base lg:text-lg xl:text-xl text-black dark:text-white leading-relaxed profile-text mb-4"
               >
-                <div className="space-y-2 sm:space-y-2.5">
-                  {[
-                    "As a MERN Stack Developer, I build secure, scalable, and responsive web applications.",
-                    "My internship projects include a cybersecurity, an Event Management System, and Aniicon's cafe, all utilizing modern MERN stack technologies.",
-                    "I am proficient in React, Next.js, Node.js, MongoDB, TypeScript, Tailwind CSS, JavaScript, and Express.",
-                    "I've developed real-time applications like a chat app (Chatify) and a collaborative web app (SyncDocs)."
-                  ].map((point, index) => {
+                <div className="space-y-2 sm:space-y-2.5 px-4 sm:px-0 md:px-0">
+                  {pointsToShow.map((point, index) => {
                     const colors = [
                       'text-violet-500',
                       'text-blue-500',
@@ -304,6 +321,17 @@ const Profile = () => {
                       </div>
                     );
                   })}
+                  {/* Mobile-only Read More/Read Less button */}
+                  {isMobile && (
+                    <div>
+                      <button
+                        onClick={() => setShowAllPoints(!showAllPoints)}
+                        className="text-violet-500 hover:text-violet-600 font-medium text-sm underline mt-2 transition-colors duration-200"
+                      >
+                        {showAllPoints ? 'Read Less' : 'Read More'}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </motion.div>
 
