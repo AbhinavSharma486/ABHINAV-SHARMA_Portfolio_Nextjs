@@ -8,7 +8,6 @@ import { FaWhatsapp } from "react-icons/fa";
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Social links data;
 const SOCIAL_LINKS = [
   {
     icon: Github,
@@ -36,7 +35,6 @@ const SOCIAL_LINKS = [
   }
 ];
 
-// Optimized parallax hook with reduced calculations
 function useParallax(ref: React.RefObject<HTMLElement | null>) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -77,7 +75,6 @@ function useParallax(ref: React.RefObject<HTMLElement | null>) {
   return { x: springX, y: springY };
 }
 
-// Simplified Background Blobs with reduced animations
 const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => {
   const blobPositions = useMemo(() => [
     { x: '10%', y: '20%', size: 'w-32 h-32' },
@@ -100,10 +97,7 @@ const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => {
           <motion.div
             key={index}
             className={`absolute ${blob.size} bg-gradient-to-r from-violet-500/20 to-purple-500/20 dark:from-violet-400/10 dark:to-purple-400/10 rounded-full blur-2xl`}
-            style={{
-              left: blob.x,
-              top: blob.y,
-            }}
+            style={{ left: blob.x, top: blob.y }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{
@@ -118,10 +112,8 @@ const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => {
     </motion.div>
   );
 });
-
 BackgroundBlobs.displayName = 'BackgroundBlobs';
 
-// Optimized Profile Image with reduced parallax
 const ProfileImage = ({ parallax }: { parallax: { x: MotionValue<number>; y: MotionValue<number>; }; }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -150,18 +142,14 @@ const ProfileImage = ({ parallax }: { parallax: { x: MotionValue<number>; y: Mot
         width={256}
         height={256}
         className="object-cover w-full h-full"
-        style={{
-          objectPosition: '50% 50%'
-        }}
         priority={true}
         placeholder="blur"
-        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZ..."
       />
     </div>
   </motion.div>
 );
 
-// Social links Component with tooltip and ripple
 const SocialLinks = () => (
   <motion.div
     initial="hidden"
@@ -187,7 +175,6 @@ const SocialLinks = () => (
           className={`flex items-center justify-center w-10 h-10 rounded-full text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 bg-gray-700 dark:bg-gray-800 border border-gray-600/40 dark:border-gray-700/40 ${hoverColor}`}
         >
           <Icon className="w-5 h-5 text-white transition-transform duration-300" />
-          {/* Ripple effect */}
           <span className="absolute inset-0 rounded-full pointer-events-none group-active:animate-ping bg-violet-400/20" />
         </a>
       </motion.div>
@@ -206,8 +193,7 @@ const Profile = () => {
       document.body.style.overflowX = 'hidden';
       document.body.style.overflowY = 'auto';
 
-      // Check if screen is mobile
-      const checkMobile = () => setIsMobile(window.innerWidth < 640);
+      const checkMobile = () => setIsMobile(window.innerWidth < 768); // Tablet + Mobile
       checkMobile();
       window.addEventListener('resize', checkMobile);
       return () => window.removeEventListener('resize', checkMobile);
@@ -224,19 +210,24 @@ const Profile = () => {
     "I've developed real-time applications like a chat app (Chatify) and a collaborative web app (SyncDocs)."
   ];
 
-  // Show all points on desktop, only 2 on mobile unless expanded
   const pointsToShow = !isMobile ? bulletPoints : (showAllPoints ? bulletPoints : bulletPoints.slice(0, 2));
 
   return (
     <main
       id="home"
       ref={mainRef}
-      className='relative min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-6 sm:py-1 md:py-4 lg:py-6 xl:py-8 2xl:py-10'>
+      className="relative min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f3e8ff] to-[#e0e7ff] dark:from-[#18181b] dark:via-[#312e81] dark:to-[#0f172a] flex items-center justify-center py-6 sm:py-1 md:py-4 lg:py-6 xl:py-8 2xl:py-10"
+    >
       <BackgroundBlobs ref={mainRef} />
-      {/* Mobile-specific spacing wrapper */}
-      <div className={`w-full max-w-7xl mx-auto px-4 sm:px-1 xs:px-2 md:px-6 lg:px-8 xl:px-12 2xl:px-16 ml-0 mr-0 md:ml-16 md:mr-16 lg:ml-20 lg:mr-20 xl:ml-24 xl:mr-24`} style={{ maxWidth: '100vw' }}>
+
+      <div className={`w-full max-w-7xl mx-auto 
+        px-4 sm:px-4 md:px-4 lg:px-8 xl:px-12 2xl:px-16 
+        ml-2 mr-2 sm:ml-3 sm:mr-3 md:ml-4 md:mr-4 lg:ml-20 lg:mr-20 xl:ml-24 xl:mr-24`}
+        style={{ maxWidth: '100vw' }}
+      >
+
         <article
-          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-2xl sm:rounded-lg md:rounded-2xl border border-transparent hover:border-2 hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl transition-all duration-300 group w-full h-full flex flex-col overflow-hidden'>
+          className='relative backdrop-blur-3xl bg-white/70 dark:bg-gray-900/60 rounded-2xl sm:rounded-lg md:rounded-2xl lg:rounded-2xl border border-transparent hover:border-2 hover:border-violet-400 dark:hover:border-violet-500 shadow-2xl transition-all duration-300 group w-full h-full flex flex-col overflow-hidden'>
           {/* Floating badge - improved responsive positioning */}
           <motion.div
             className="absolute right-0 top-0 xs:right-0.5 xs:top-0.5 sm:right-1 sm:top-1 md:right-2 md:top-2 lg:right-3 lg:top-3 xl:right-4 xl:top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-3 py-1.5 xs:px-3.5 xs:py-2 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 text-xs xs:text-sm sm:text-xs md:text-sm lg:text-base xl:text-lg shadow-2xl font-bold flex items-center gap-1.5 xs:gap-2 sm:gap-1.5 md:gap-2 border border-white dark:border-black/40 animate-bounce-slow max-w-[calc(100%-1rem)] min-w-fit profile-badge"
@@ -277,7 +268,7 @@ const Profile = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
-                  className="font-orbitron font-bold text-2xl sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl 2xl:text-4xl drop-shadow-md"
+                  className="font-orbitron font-bold text-2xl sm:text-2xl md:text-3xl lg:text-2xl xl:text-4xl 2xl:text-4xl drop-shadow-md"
                 >
                   <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-violet-500 bg-clip-text text-transparent">
                     जय श्री राधे, I am
@@ -288,7 +279,7 @@ const Profile = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.1, type: 'spring', bounce: 0.22 }}
-                  className='font-orbitron font-bold text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl 2xl:text-5xl drop-shadow-lg'
+                  className='font-orbitron font-bold text-3xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-5xl 2xl:text-5xl drop-shadow-lg'
                 >
                   <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-violet-500 bg-clip-text text-transparent">
                     Abhinav Sharma
