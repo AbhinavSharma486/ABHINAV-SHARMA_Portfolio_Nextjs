@@ -149,8 +149,7 @@ const Form = () => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.6 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
       className="w-full max-w-sm sm:max-w-md mx-auto"
     >
@@ -160,8 +159,7 @@ const Form = () => {
         <div className="relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.7 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
             className="text-center mb-6 sm:mb-8"
           >
@@ -191,8 +189,7 @@ const Form = () => {
             {/* Name */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.7 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.1, type: 'spring', bounce: 0.22 }}
             >
               <label
@@ -225,8 +222,7 @@ const Form = () => {
             {/* Email */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.7 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2, type: 'spring', bounce: 0.22 }}
             >
               <label
@@ -241,16 +237,16 @@ const Form = () => {
               </label>
               <motion.input
                 autoComplete="email"
+                name="email"
+                value={userInput.email}
+                onChange={inputHandler}
                 className={`${invalidInput.email
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                   : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
                   } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
                 id="email"
-                name="email"
                 type="email"
-                placeholder="Enter your email"
-                onChange={inputHandler}
-                value={userInput.email}
+                placeholder="Enter your email address"
                 variants={inputVariants}
                 whileFocus="focus"
               />
@@ -259,8 +255,7 @@ const Form = () => {
             {/* Subject */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.7 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3, type: 'spring', bounce: 0.22 }}
             >
               <label
@@ -270,10 +265,12 @@ const Form = () => {
                   } text-sm font-semibold mb-2 flex items-center gap-2`}
                 htmlFor="subject"
               >
-                <FileText className="w-4 h-4" />
+                <MessageSquare className="w-4 h-4" />
                 Subject
               </label>
               <motion.input
+                autoComplete="off"
+                name="subject"
                 value={userInput.subject}
                 onChange={inputHandler}
                 className={`${invalidInput.subject
@@ -281,9 +278,8 @@ const Form = () => {
                   : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
                   } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
                 id="subject"
-                name="subject"
                 type="text"
-                placeholder="What's this about?"
+                placeholder="Enter subject"
                 variants={inputVariants}
                 whileFocus="focus"
               />
@@ -292,8 +288,7 @@ const Form = () => {
             {/* Message */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.7 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4, type: 'spring', bounce: 0.22 }}
             >
               <label
@@ -307,26 +302,25 @@ const Form = () => {
                 Message
               </label>
               <motion.textarea
-                rows={4}
+                name="message"
+                value={userInput.message}
+                onChange={inputHandler}
                 className={`${invalidInput.message
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                   : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
                   } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500 resize-none`}
                 id="message"
-                placeholder="Tell me about your project..."
-                name="message"
-                onChange={inputHandler}
-                value={userInput.message}
+                rows={4}
+                placeholder="Enter your message"
                 variants={inputVariants}
                 whileFocus="focus"
               />
             </motion.div>
 
-            {/* Send Button */}
+            {/* Submit Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.7 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5, type: 'spring', bounce: 0.22 }}
             >
               <AccessibleButton

@@ -81,15 +81,13 @@ const ContactSection = () => {
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.7 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
           className="text-center mb-8 sm:mb-12 md:mb-16"
         >
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.7 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
             className="font-orbitron text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-blue-950 dark:text-white mb-3 sm:mb-4 drop-shadow-lg"
           >
@@ -97,15 +95,13 @@ const ContactSection = () => {
           </motion.h1>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, type: 'spring', bounce: 0.4 }}
             className="mx-auto mt-2 sm:mt-3 mb-4 sm:mb-6 h-1 w-full max-w-[280px] sm:max-w-[340px] md:max-w-[480px] rounded-full bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400"
           />
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.7 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, type: 'spring', bounce: 0.22 }}
             className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4 sm:px-0"
           >
@@ -118,15 +114,13 @@ const ContactSection = () => {
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
             className="space-y-6 sm:space-y-8 order-1 xl:order-1"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.7 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2, type: 'spring', bounce: 0.22 }}
               className="text-center xl:text-left"
             >
@@ -146,8 +140,7 @@ const ContactSection = () => {
                   custom={index}
                   variants={cardVariants}
                   initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.3 }}
+                  animate="visible"
                   whileHover={{ scale: 1.02, y: -2 }}
                   className="group relative h-full"
                 >
@@ -185,8 +178,7 @@ const ContactSection = () => {
             {/* Social Icons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.7 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3, type: 'spring', bounce: 0.22 }}
               className="bg-white/70 dark:bg-gray-900/60 backdrop-blur-lg border border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
             >
@@ -206,8 +198,7 @@ const ContactSection = () => {
                     target={href.startsWith('http') ? "_blank" : undefined}
                     rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
                     initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 + i * 0.08, type: 'spring', bounce: 0.4 }}
                     whileHover={{ scale: 1.1, y: -2 }}
                     className={`flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gray-700 dark:bg-gray-800 text-white border border-gray-600/40 dark:border-gray-700/40 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 ${hoverColor}`}
@@ -222,8 +213,7 @@ const ContactSection = () => {
             {/* Additional Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.7 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4, type: 'spring', bounce: 0.22 }}
               className="bg-gradient-to-br from-violet-500/10 via-blue-500/10 to-fuchsia-400/10 dark:from-violet-500/20 dark:via-blue-500/20 dark:to-fuchsia-400/20 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-violet-200/50 dark:border-violet-700/50"
             >
@@ -257,8 +247,7 @@ const ContactSection = () => {
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
             className="flex items-center justify-center order-2 xl:order-2"
           >
