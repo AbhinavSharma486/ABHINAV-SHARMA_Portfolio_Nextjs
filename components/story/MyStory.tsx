@@ -3,8 +3,9 @@
 import React from 'react';
 import { birthday } from '@/helpers';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, GraduationCap, Code, Heart, Target, Award, BookOpen } from 'lucide-react';
+import { Calendar, MapPin, GraduationCap, Code, Heart, Target, BookOpen } from 'lucide-react';
 
 const biographyContent = [
   {
@@ -24,12 +25,6 @@ const biographyContent = [
     icon: <Code className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />,
     title: "The Journey",
     content: 'I started with HTML and CSS, then moved on to JavaScript, built some projects, and later transitioned to React. Over time, I expanded my knowledge to backend development with Node.js and Express, and learned MongoDB for database management. Every day, I worked on improving my skills. What makes my journey unique is that I have never taken a single paid course to learn web development. Everything I know today, I have learned entirely from YouTube, making me a completely self-taught full-stack developer.'
-  },
-  {
-    id: 'portfolio',
-    icon: <Award className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />,
-    title: "The Achievement",
-    content: 'Now, I have built an impressive portfolio showcasing my expertise in developing dynamic, responsive, and visually appealing web applications.'
   },
   {
     id: 'skills',
@@ -217,17 +212,17 @@ const MyStory = () => {
               <p className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-200 mb-4 sm:mb-6 max-w-2xl mx-auto px-4">
                 Let's turn your ideas into reality. I'm passionate about creating exceptional web experiences that make a difference.
               </p>
-              <motion.button
-                onClick={() => {
-                  // Navigate to contact page
-                  window.location.href = '/contact';
-                }}
-                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold py-2 sm:py-3 px-6 sm:px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Get In Touch
-              </motion.button>
+                <Link
+                  href="/contact"
+                  className="inline-block bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold py-2 sm:py-3 px-6 sm:px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
+                >
+                  Get In Touch
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         </motion.main>
