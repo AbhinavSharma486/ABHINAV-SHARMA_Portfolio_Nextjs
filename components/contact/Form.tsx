@@ -12,7 +12,7 @@ import {
 } from "../../utils/security";
 import emailjs from "@emailjs/browser";
 import ProgressBar from "../ui/LoadingBar";
-import { Send, User, Mail, MessageSquare, FileText, Shield } from "lucide-react";
+import { Send, User, Mail, MessageSquare, Shield } from "lucide-react";
 import Alert from "../ui/Alert";
 import { motion } from "framer-motion";
 import AccessibleButton from "../ui/AccessibleButton";
@@ -329,7 +329,7 @@ const Form = () => {
                 icon={<Send className="w-4 h-4 sm:w-5 sm:h-5" />}
                 iconPosition="right"
                 description="Submit the contact form to send your message"
-                className="w-full"
+                className="w-full rounded-full"
               >
                 {isLoading ? "Sending..." : "Send Message"}
               </AccessibleButton>
