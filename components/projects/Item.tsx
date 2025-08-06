@@ -51,6 +51,15 @@ export default function Item({
   sizeOnGitHub,
 }: ItemProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [showAllPoints, setShowAllPoints] = useState(false);
+  const [showAllBadges, setShowAllBadges] = useState(false);
+
+  const bulletPoints = description.split('. ').filter(point => point.trim().length > 0);
+  const pointsToShow = showAllPoints ? bulletPoints : bulletPoints.slice(0, 2);
+  const hasMorePoints = bulletPoints.length > 2;
+
+  const badgesToShow = showAllBadges ? techs : techs.slice(0, 6);
+  const hasMoreBadges = techs.length > 6;
 
   return (
     <div
@@ -131,7 +140,7 @@ export default function Item({
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="space-y-2 sm:space-y-2.5">
-              {description.split('. ').filter(point => point.trim().length > 0).map((point, index) => {
+              {pointsToShow.map((point, index) => {
                 const colors = [
                   'text-violet-500',
                   'text-blue-500',
@@ -153,6 +162,16 @@ export default function Item({
                   </div>
                 );
               })}
+              {hasMorePoints && (
+                <div>
+                  <button
+                    onClick={() => setShowAllPoints(!showAllPoints)}
+                    className="text-violet-500 hover:text-violet-600 font-medium text-xs underline mt-1 transition-colors duration-200"
+                  >
+                    {showAllPoints ? 'Read Less' : 'Read More'}
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -162,7 +181,7 @@ export default function Item({
             initial={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            {techs.map((tech, index) => (
+            {badgesToShow.map((tech, index) => (
               <motion.span
                 key={index}
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -185,6 +204,16 @@ export default function Item({
                 </Badge>
               </motion.span>
             ))}
+            {hasMoreBadges && (
+              <div className="w-full mt-1">
+                <button
+                  onClick={() => setShowAllBadges(!showAllBadges)}
+                  className="text-violet-500 hover:text-violet-600 font-medium text-xs underline transition-colors duration-200"
+                >
+                  {showAllBadges ? 'Read Less' : 'Read More'}
+                </button>
+              </div>
+            )}
           </motion.div>
 
           {(linesOfCode || sizeOnGitHub) && (
@@ -220,7 +249,7 @@ export default function Item({
                 <Link
                   target={headerLinks.github.target || "_blank"}
                   href={headerLinks.github.url || "#"}
-                  className="inline-flex items-center gap-1.5 sm:gap-2 text-white bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:from-gray-600 hover:via-gray-700 hover:to-gray-800 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-xs sm:text-sm font-semibold group/link ring-2 ring-transparent hover:ring-gray-300/30 dark:hover:ring-gray-400/30"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 text-white bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 hover:from-gray-600 hover:via-gray-700 hover:to-gray-800 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-xs sm:text-sm font-semibold group/link ring-2 ring-transparent hover:ring-gray-300/30 dark:hover:ring-gray-400/30"
                 >
                   <GithubIcon className="h-3 w-3 sm:h-4 sm:w-4" />
                   <span className="hidden sm:inline">GitHub Repository</span>
@@ -234,7 +263,7 @@ export default function Item({
                 <Link
                   target={seeMore.target || "_blank"}
                   href={seeMore.url || "#"}
-                  className="inline-flex items-center gap-1.5 sm:gap-2 text-white bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-500 hover:from-violet-400 hover:via-blue-400 hover:to-fuchsia-400 px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-xs sm:text-sm font-semibold group/link ring-2 ring-transparent hover:ring-violet-300/30 dark:hover:ring-violet-400/30"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 text-white bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-500 hover:from-violet-400 hover:via-blue-400 hover:to-fuchsia-400 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-xs sm:text-sm font-semibold group/link ring-2 ring-transparent hover:ring-violet-300/30 dark:hover:ring-violet-400/30"
                 >
                   {seeMore.text}
                   <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
