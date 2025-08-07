@@ -33,44 +33,40 @@ const ScrollToTop = () => {
     };
   }, []);
 
-  // Enhanced smooth scroll to top handler - optimized for mobile/tablet
+  // Optimized scroll to top handler - smooth for both mobile and desktop
   const scrollToTop = () => {
-    // Enhanced smooth scroll with mobile optimization
-    const currentScroll = window.pageYOffset;
-    const targetScroll = 0;
-    const distance = currentScroll - targetScroll;
-    const duration = isMobile ? Math.max(800, distance * 0.4) : Math.max(1500, distance * 0.8);
-    const startTime = performance.now();
+    if (isMobile) {
+      // For mobile: smooth scroll with optimized duration
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // For desktop: use custom animation for better visual effect
+      const currentScroll = window.pageYOffset;
+      const targetScroll = 0;
+      const distance = currentScroll - targetScroll;
+      const duration = Math.max(1500, distance * 0.8);
+      const startTime = performance.now();
 
-    // Use simpler easing for mobile performance
-    const easeOutQuad = (t: number) => {
-      t /= 1;
-      return -t * (t - 2);
-    };
+      const easeOutQuart = (t: number) => {
+        t /= 1;
+        t--;
+        return -(t * t * t * t - 1);
+      };
 
-    // Enhanced easing for desktop
-    const easeOutQuart = (t: number) => {
-      t /= 1;
-      t--;
-      return -(t * t * t * t - 1);
-    };
+      const animateScroll = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutQuart(progress);
 
-    const easingFunction = isMobile ? easeOutQuad : easeOutQuart;
+        const newScroll = currentScroll - (distance * easedProgress);
+        window.scrollTo(0, newScroll);
 
-    const animateScroll = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = easingFunction(progress);
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll);
+        }
+      };
 
-      const newScroll = currentScroll - (distance * easedProgress);
-      window.scrollTo(0, newScroll);
-
-      if (progress < 1) {
-        requestAnimationFrame(animateScroll);
-      }
-    };
-
-    requestAnimationFrame(animateScroll);
+      requestAnimationFrame(animateScroll);
+    }
   };
 
   return (
@@ -80,8 +76,8 @@ const ScrollToTop = () => {
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          transition={{ duration: isMobile ? 0.2 : 0.4, type: 'spring', bounce: 0.6 }}
-          className="fixed bottom-6 right-6 z-50"
+          transition={{ duration: isMobile ? 0.3 : 0.4, type: 'spring', bounce: 0.6 }}
+          className="fixed bottom-6 right-6 z-50 scroll-to-top-button"
         >
           {/* Multiple glowing background layers - only on desktop */}
           {!isMobile && (
@@ -103,7 +99,10 @@ const ScrollToTop = () => {
           {/* Main button */}
           <motion.button
             onClick={scrollToTop}
-            className="relative bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 hover:from-violet-600 hover:via-blue-600 hover:to-fuchsia-500 text-white p-4 rounded-2xl shadow-2xl hover:shadow-[0_20px_40px_rgba(124,58,237,0.3)] transition-all duration-500 transform hover:scale-110 focus:outline-none focus:ring-4 focus:ring-violet-300 dark:focus:ring-violet-600 border border-white/20 backdrop-blur-sm cursor-pointer z-10"
+            className={`relative text-white p-4 rounded-2xl shadow-2xl transition-all duration-500 transform focus:outline-none focus:ring-4 focus:ring-violet-300 dark:focus:ring-violet-600 border border-white/20 backdrop-blur-sm cursor-pointer z-10 ${isMobile
+              ? 'bg-violet-500 hover:bg-violet-600 hover:shadow-lg hover:scale-105'
+              : 'bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400 hover:from-violet-600 hover:via-blue-600 hover:to-fuchsia-500 hover:shadow-[0_20px_40px_rgba(124,58,237,0.3)] hover:scale-110'
+              }`}
             aria-label="Scroll to top"
             whileHover={isMobile ? {} : {
               scale: 1.15,

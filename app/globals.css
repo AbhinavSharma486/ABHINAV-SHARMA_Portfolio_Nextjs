@@ -100,6 +100,45 @@ img {
   image-rendering: crisp-edges;
 }
 
+/* Optimize scroll to top button for mobile performance */
+.scroll-to-top-button {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Mobile-specific scroll to top optimizations */
+@media (max-width: 1024px) {
+  .scroll-to-top-button {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  .scroll-to-top-button:hover {
+    transform: scale(1.05) translateZ(0) !important;
+  }
+
+  /* Disable complex animations on mobile for scroll to top */
+  .scroll-to-top-button * {
+    animation: none !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  /* Optimize scroll behavior for mobile */
+  html {
+    scroll-behavior: smooth !important;
+  }
+
+  /* Ensure smooth scroll only when explicitly requested */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Smoother button appearance/disappearance on mobile */
+  .scroll-to-top-button>div {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+}
+
 /* Reduce paint operations */
 .glass-effect {
   backdrop-filter: blur(10px);
