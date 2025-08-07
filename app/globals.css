@@ -63,13 +63,13 @@ section {
 a,
 button,
 [role="button"] {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Smooth scroll for navigation links */
 a[href^="#"] {
   scroll-behavior: smooth;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Performance optimizations */
@@ -363,6 +363,17 @@ img {
     background: #18181b !important;
   }
   */
+
+  /* Mobile/tablet optimized transitions */
+  a,
+  button,
+  [role="button"] {
+    transition: all 0.2s ease-out;
+  }
+
+  a[href^="#"] {
+    transition: all 0.2s ease-out;
+  }
 }
 
 /* Specific optimizations for mobile devices */
