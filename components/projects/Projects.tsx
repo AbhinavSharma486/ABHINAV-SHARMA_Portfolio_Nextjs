@@ -148,6 +148,11 @@ const Projects = () => {
 
   const handleShowLess = () => {
     setVisibleProjects(2);
+    // Scroll to the top of the projects section
+    const section = document.getElementById('projects');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   const filteredProjects = projects.filter(project => {
