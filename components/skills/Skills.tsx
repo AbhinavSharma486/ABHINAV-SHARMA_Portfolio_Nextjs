@@ -23,7 +23,7 @@ const Skills = () => {
   // Check if screen is mobile on mount and resize
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024);
     };
 
     // Check on mount
@@ -85,7 +85,7 @@ const Skills = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.7 }}
-          transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
+          transition={{ duration: isMobile ? 0.3 : 0.8, type: 'spring', bounce: 0.22 }}
           className={`font-orbitron text-center font-bold dark:text-white text-4xl sm:text-5xl mt-4 text-blue-950 drop-shadow-lg`}
         >
           Experties
@@ -104,8 +104,8 @@ const Skills = () => {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.2 }}
                   className="flex flex-col items-center justify-center transition-all duration-200 ease-out rounded-2xl group relative hover:scale-[1.03] cursor-pointer shadow-lg hover:shadow-lg"
-                  whileHover={{ scale: 1.03, boxShadow: "0 2px 12px 0 rgba(124,58,237,0.12)" }}
-                  transition={{ type: 'tween', duration: 0.15, ease: 'easeOut' }}
+                  whileHover={isMobile ? {} : { scale: 1.03, boxShadow: "0 2px 12px 0 rgba(124,58,237,0.12)" }}
+                  transition={{ type: 'tween', duration: isMobile ? 0.1 : 0.15, ease: 'easeOut' }}
                   role="button"
                   tabIndex={0}
                   aria-label={`${skill} skill`}
@@ -157,21 +157,20 @@ const Skills = () => {
             </div>
           </div>
 
-          {/* Show More/Show Less button - only visible on mobile */}
+          {/* Show More/Less Buttons - Only on mobile */}
           {isMobile && (
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mt-8">
+            <div className="flex justify-center mt-8 gap-2 flex-wrap">
               {hasMoreSkills && (
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  viewport={{ once: true, amount: 0.7 }}
+                  transition={{ duration: isMobile ? 0.2 : 0.6, type: 'spring', bounce: 0.22 }}
                   onClick={handleShowMore}
-                  className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-violet-500 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:from-violet-600 hover:to-blue-600 text-sm sm:text-base w-fit sm:w-auto min-w-[160px] sm:min-w-[180px] object-contain"
+                  className="flex flex-nowrap items-center gap-2 px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base bg-violet-500 hover:bg-violet-600 text-white rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-lg w-auto justify-center"
                 >
-                  <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 object-contain flex-shrink-0" />
-                  <span className="whitespace-nowrap object-contain">Show More Skills</span>
+                  Show More
+                  <ChevronDown className="w-4 h-4" />
                 </motion.button>
               )}
 
@@ -179,14 +178,13 @@ const Skills = () => {
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  viewport={{ once: true, amount: 0.7 }}
+                  transition={{ duration: isMobile ? 0.2 : 0.6, type: 'spring', bounce: 0.22 }}
                   onClick={handleShowLess}
-                  className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:from-gray-600 hover:to-gray-700 text-sm sm:text-base w-fit sm:w-auto min-w-[160px] sm:min-w-[180px] object-contain"
+                  className="flex flex-nowrap items-center gap-2 px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base bg-gray-500 hover:bg-gray-600 text-white rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-lg w-auto justify-center"
                 >
-                  <ChevronUp className="w-3 h-3 sm:w-4 sm:h-4 object-contain flex-shrink-0" />
-                  <span className="whitespace-nowrap object-contain">Show Less</span>
+                  Show Less
+                  <ChevronUp className="w-4 h-4" />
                 </motion.button>
               )}
             </div>

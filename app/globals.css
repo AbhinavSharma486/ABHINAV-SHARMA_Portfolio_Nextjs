@@ -237,15 +237,166 @@ img {
   }
 }
 
-/* Optimize for mobile performance */
-@media (max-width: 768px) {
+/* Comprehensive mobile and tablet performance optimizations */
+@media (max-width: 1024px) {
+
+  /* Disable heavy animations on mobile and tablet */
+  .animate-blob {
+    will-change: auto;
+    animation: none !important;
+  }
+
+  /* Reduce backdrop blur for better performance */
   .glass-effect {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
   }
 
-  .animate-blob {
-    will-change: auto;
+  /* Optimize parallax effects */
+  [data-parallax] {
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Reduce complex animations */
+  .animate-gradient-x {
+    animation: none !important;
+  }
+
+  /* Optimize scrolling performance */
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Reduce motion for better performance */
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.2s !important;
+  }
+
+  /* Disable hover effects on touch devices */
+  @media (hover: none) {
+    *:hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  /* Optimize transform operations */
+  .transform-gpu {
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Reduce shadow complexity */
+  .shadow-2xl {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Remove the following block to keep gradients on all screens */
+  /*
+  .bg-gradient-to-br,
+  .bg-gradient-to-r {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%) !important;
+  }
+  .dark .bg-gradient-to-br,
+  .dark .bg-gradient-to-r {
+    background: linear-gradient(135deg, #18181b 0%, #0f172a 100%) !important;
+  }
+  */
+}
+
+/* Specific optimizations for mobile devices */
+@media (max-width: 768px) {
+
+  /* Disable all complex animations on mobile */
+  .animate-blob,
+  .animate-gradient-x,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none !important;
+  }
+
+  /* Reduce motion even further on mobile */
+  * {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.15s !important;
+  }
+
+  /* Optimize scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+  }
+
+  /* Disable parallax effects completely */
+  [style*="transform"] {
+    transform: none !important;
+  }
+
+  /* Reduce shadow complexity */
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Optimize backdrop filters */
+  .backdrop-blur-lg,
+  .backdrop-blur-xl {
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+  }
+
+  /* Remove the following block to keep gradients on all screens */
+  /*
+  .bg-gradient-to-br,
+  .bg-gradient-to-r {
+    background: #f8fafc !important;
+  }
+  .dark .bg-gradient-to-br,
+  .dark .bg-gradient-to-r {
+    background: #18181b !important;
+  }
+  */
+}
+
+/* Ultra-optimized settings for very small screens */
+@media (max-width: 480px) {
+
+  /* Disable all animations */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Optimize for touch scrolling */
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Remove all shadows for better performance */
+  .shadow-sm,
+  .shadow,
+  .shadow-md,
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: none !important;
+  }
+
+  /* Disable backdrop filters */
+  .backdrop-blur-sm,
+  .backdrop-blur,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 }
 

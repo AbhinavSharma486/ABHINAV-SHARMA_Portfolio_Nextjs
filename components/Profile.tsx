@@ -38,6 +38,14 @@ const SOCIAL_LINKS = [
 function useParallax(ref: React.RefObject<HTMLElement | null>) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const x = useTransform(mouseX, [-300, 300], [-10, 10]);
   const y = useTransform(mouseY, [-300, 300], [-10, 10]);
@@ -45,9 +53,13 @@ function useParallax(ref: React.RefObject<HTMLElement | null>) {
   const springX = useSpring(x, { stiffness: 100, damping: 30 });
   const springY = useSpring(y, { stiffness: 100, damping: 30 });
 
+  // Create separate motion values for mobile
+  const mobileX = useMotionValue(0);
+  const mobileY = useMotionValue(0);
+
   React.useEffect(() => {
     const element = ref.current;
-    if (!element) return;
+    if (!element || isMobile) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = element.getBoundingClientRect();
@@ -70,18 +82,36 @@ function useParallax(ref: React.RefObject<HTMLElement | null>) {
       element.removeEventListener('mousemove', handleMouseMove);
       element.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [ref, mouseX, mouseY]);
+  }, [ref, mouseX, mouseY, isMobile]);
 
-  return { x: springX, y: springY };
+  // Return motion values based on mobile state
+  return {
+    x: isMobile ? mobileX : springX,
+    y: isMobile ? mobileY : springY
+  };
 }
 
 const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const blobPositions = useMemo(() => [
     { x: '10%', y: '20%', size: 'w-32 h-32' },
     { x: '80%', y: '10%', size: 'w-24 h-24' },
     { x: '20%', y: '80%', size: 'w-28 h-28' },
     { x: '70%', y: '70%', size: 'w-20 h-20' },
   ], []);
+
+  // Don't render blobs on mobile for better performance
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <motion.div
@@ -114,73 +144,95 @@ const BackgroundBlobs = React.forwardRef<HTMLDivElement>((props, ref) => {
 });
 BackgroundBlobs.displayName = 'BackgroundBlobs';
 
-const ProfileImage = ({ parallax }: { parallax: { x: MotionValue<number>; y: MotionValue<number>; }; }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
-    style={{
-      transform: `translate3d(${parallax.x}px, ${parallax.y}px, 0)`
-    }}
-    className="relative group mx-auto w-full max-w-[8rem] xs:max-w-[9rem] sm:max-w-[10rem] md:max-w-[11rem] lg:max-w-[12rem] xl:max-w-[13rem] 2xl:max-w-[14rem] mt-4 sm:mt-6 md:mt-8 lg:mt-10"
-  >
-    <motion.div
-      className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 dark:from-violet-500 dark:via-purple-500 dark:to-blue-500 rounded-full opacity-90 dark:opacity-90 group-hover:opacity-100 blur-lg transition duration-500 border border-violet-500/60 dark:border-violet-400"
-      animate={{
-        boxShadow: [
-          '0 0 0 0 rgba(124,58,237,0.25)',
-          '0 0 32px 8px rgba(124,58,237,0.25)',
-          '0 0 0 0 rgba(124,58,237,0.25)'
-        ]
-      }}
-      transition={{ repeat: Infinity, duration: 3, ease: 'easeInOut' }}
-    />
-    <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl border-2 border-violet-500/80 dark:border-violet-700/60">
-      <Image
-        src="/assets/images/profileimg.webp"
-        alt="Abhinav Sharma"
-        width={256}
-        height={256}
-        className="object-cover w-full h-full"
-        priority={true}
-        placeholder="blur"
-        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZ..."
-      />
-    </div>
-  </motion.div>
-);
+const ProfileImage = ({ parallax }: { parallax: { x: MotionValue<number>; y: MotionValue<number>; }; }) => {
+  const [isMobile, setIsMobile] = useState(false);
 
-const SocialLinks = () => (
-  <motion.div
-    initial="hidden"
-    animate="visible"
-    variants={{
-      hidden: {},
-      visible: { transition: { staggerChildren: 0.08 } },
-    }}
-    className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center"
-  >
-    {SOCIAL_LINKS.map(({ icon: Icon, href, label, hoverColor }, i) => (
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, type: 'spring', bounce: 0.2 }}
+      style={{
+        transform: isMobile ? 'none' : `translate3d(${parallax.x}px, ${parallax.y}px, 0)`
+      }}
+      className="relative group mx-auto w-full max-w-[8rem] xs:max-w-[9rem] sm:max-w-[10rem] md:max-w-[11rem] lg:max-w-[12rem] xl:max-w-[13rem] 2xl:max-w-[14rem] mt-4 sm:mt-6 md:mt-8 lg:mt-10"
+    >
       <motion.div
-        key={label}
-        initial={{ opacity: 0, scale: 0.8, y: 10 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 + i * 0.08, type: 'spring', bounce: 0.4 }}
-        className="relative group"
-      >
-        <a
-          href={href}
-          target={href.startsWith('http') ? "_blank" : undefined}
-          rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
-          className={`flex items-center justify-center w-10 h-10 rounded-full text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 bg-gray-700 dark:bg-gray-800 border border-gray-600/40 dark:border-gray-700/40 ${hoverColor}`}
+        className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600 dark:from-violet-500 dark:via-purple-500 dark:to-blue-500 rounded-full opacity-90 dark:opacity-90 group-hover:opacity-100 blur-lg transition duration-500 border border-violet-500/60 dark:border-violet-400"
+        animate={isMobile ? {} : {
+          boxShadow: [
+            '0 0 0 0 rgba(124,58,237,0.25)',
+            '0 0 32px 8px rgba(124,58,237,0.25)',
+            '0 0 0 0 rgba(124,58,237,0.25)'
+          ]
+        }}
+        transition={isMobile ? {} : { repeat: Infinity, duration: 3, ease: 'easeInOut' }}
+      />
+      <div className="relative rounded-full overflow-hidden aspect-square shadow-2xl border-2 border-violet-500/80 dark:border-violet-700/60">
+        <Image
+          src="/assets/images/profileimg.webp"
+          alt="Abhinav Sharma"
+          width={256}
+          height={256}
+          className="object-cover w-full h-full"
+          priority={true}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZ..."
+        />
+      </div>
+    </motion.div>
+  );
+};
+
+const SocialLinks = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return (
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: isMobile ? 0.02 : 0.08 } },
+      }}
+      className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center"
+    >
+      {SOCIAL_LINKS.map(({ icon: Icon, href, label, hoverColor }, i) => (
+        <motion.div
+          key={label}
+          initial={{ opacity: 0, scale: 0.8, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: isMobile ? 0.2 : 0.5, delay: 0.1 + i * (isMobile ? 0.02 : 0.08), type: 'spring', bounce: 0.4 }}
+          className="relative group"
         >
-          <Icon className="w-5 h-5 text-white transition-transform duration-300" />
-          <span className="absolute inset-0 rounded-full pointer-events-none group-active:animate-ping bg-violet-400/20" />
-        </a>
-      </motion.div>
-    ))}
-  </motion.div>
-);
+          <a
+            href={href}
+            target={href.startsWith('http') ? "_blank" : undefined}
+            rel={href.startsWith('http') ? "noopener noreferrer" : undefined}
+            className={`flex items-center justify-center w-10 h-10 rounded-full text-white shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-400/60 active:scale-95 transition-all duration-300 bg-gray-700 dark:bg-gray-800 border border-gray-600/40 dark:border-gray-700/40 ${hoverColor}`}
+          >
+            <Icon className="w-5 h-5 text-white transition-transform duration-300" />
+            <span className="absolute inset-0 rounded-full pointer-events-none group-active:animate-ping bg-violet-400/20" />
+          </a>
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+};
 
 const Profile = () => {
   const [showAllPoints, setShowAllPoints] = useState(false);
@@ -233,13 +285,13 @@ const Profile = () => {
             className="absolute right-0 top-0 xs:right-0.5 xs:top-0.5 sm:right-1 sm:top-1 md:right-2 md:top-2 lg:right-3 lg:top-3 xl:right-4 xl:top-4 left-auto -translate-x-0 z-20 bg-gradient-to-br from-fuchsia-500 via-violet-500 to-blue-500 text-white rounded-full px-3 py-1.5 xs:px-3.5 xs:py-2 sm:px-2.5 sm:py-1.5 md:px-3 md:py-2 lg:px-4 lg:py-2.5 text-xs xs:text-sm sm:text-xs md:text-sm lg:text-base xl:text-lg shadow-2xl font-bold flex items-center gap-1.5 xs:gap-2 sm:gap-1.5 md:gap-2 border border-white dark:border-black/40 animate-bounce-slow max-w-[calc(100%-1rem)] min-w-fit profile-badge"
             initial={{ opacity: 0, y: -16, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 1.1, duration: 0.7, type: 'spring', bounce: 0.4 }}
+            transition={{ delay: isMobile ? 0.3 : 1.1, duration: isMobile ? 0.3 : 0.7, type: 'spring', bounce: 0.4 }}
             style={{ zIndex: 20 }}
           >
             <motion.span
               className="text-sm xs:text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl inline-block"
-              animate={{ rotate: [0, 20, -10, 20, 0] }}
-              transition={{
+              animate={isMobile ? {} : { rotate: [0, 20, -10, 20, 0] }}
+              transition={isMobile ? {} : {
                 repeat: Infinity,
                 repeatType: 'loop',
                 duration: 1.4,
@@ -260,14 +312,14 @@ const Profile = () => {
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, type: 'spring', bounce: 0.22 }}
+              transition={{ duration: isMobile ? 0.3 : 0.8, type: 'spring', bounce: 0.22 }}
               className="space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4 text-center md:text-left flex flex-col justify-center"
             >
               <header className='space-y-2 xs:space-y-2.5 sm:space-y-3 md:space-y-4'>
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, type: 'spring', bounce: 0.22 }}
+                  transition={{ duration: isMobile ? 0.2 : 0.7, type: 'spring', bounce: 0.22 }}
                   className="font-orbitron font-bold text-2xl sm:text-2xl md:text-3xl lg:text-2xl xl:text-4xl 2xl:text-4xl drop-shadow-md"
                 >
                   <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-violet-500 bg-clip-text text-transparent">
@@ -278,7 +330,7 @@ const Profile = () => {
                 <motion.h1
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.1, type: 'spring', bounce: 0.22 }}
+                  transition={{ duration: isMobile ? 0.2 : 0.7, delay: 0.1, type: 'spring', bounce: 0.22 }}
                   className='font-orbitron font-bold text-3xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-5xl 2xl:text-5xl drop-shadow-lg'
                 >
                   <span className="bg-gradient-to-r from-yellow-400 via-pink-500 to-violet-500 bg-clip-text text-transparent">
@@ -290,7 +342,7 @@ const Profile = () => {
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.18, type: 'spring', bounce: 0.22 }}
+                transition={{ duration: isMobile ? 0.2 : 0.7, delay: 0.18, type: 'spring', bounce: 0.22 }}
                 className="text-xs xs:text-sm sm:text-base lg:text-lg xl:text-xl text-black dark:text-white leading-relaxed profile-text mb-4"
               >
                 <div className="space-y-2 sm:space-y-2.5 px-4 sm:px-0 md:px-0">
@@ -329,7 +381,7 @@ const Profile = () => {
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.32, type: 'spring', bounce: 0.22 }}
+                transition={{ duration: isMobile ? 0.2 : 0.7, delay: 0.32, type: 'spring', bounce: 0.22 }}
                 className="flex flex-col sm:flex-row flex-wrap gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 justify-center items-center pt-2 xs:pt-2.5 sm:pt-3 md:pt-4"
               >
                 <Button className="mb-4 group w-Content sm:w-auto min-w-[100px] sm:min-w-[120px] md:min-w-[140px] relative overflow-hidden bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 hover:from-purple-800 hover:via-purple-700 hover:to-indigo-800 text-white text-sm sm:text-base font-medium shadow-lg hover:shadow-xl hover:shadow-violet-500/25 transition-all duration-300 active:scale-95 border border-white/20 hover:border-white/40 backdrop-blur-sm button-glow rounded-full"
