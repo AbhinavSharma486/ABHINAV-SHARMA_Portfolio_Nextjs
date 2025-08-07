@@ -17,7 +17,7 @@ const TimelineItem: React.FC<ExperienceItem & { idx: number; }> = (props) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -108,7 +108,7 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -169,11 +169,11 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({ experien
         <h1 className="font-orbitron text-center font-bold dark:text-white text-3xl md:text-5xl mt-4 text-blue-950 mb-2 md:mb-4 drop-shadow-lg">Experience</h1>
         <div className="mx-auto mt-3 mb-8 md:mb-12 h-1 w-full max-w-[340px] md:max-w-[480px] rounded-full bg-gradient-to-r from-violet-500 via-blue-500 to-fuchsia-400" />
         <div className="relative flex flex-col items-center" ref={ref}>
-          {/* Animated vertical line - hidden on screens smaller than md */}
+          {/* Animated vertical line - shows on md screens and above */}
           <motion.div
             style={{
-              height: isMobile ? 0 : heightTransform,
-              opacity: isMobile ? 0 : opacityTransform,
+              height: heightTransform,
+              opacity: opacityTransform,
               maxHeight: "100%"
             }}
             className="absolute hidden md:block md:left-1/2 top-0 w-1 bg-gradient-to-b from-violet-500 via-blue-500 to-fuchsia-400 dark:from-violet-400 dark:via-blue-400 dark:to-fuchsia-400 z-10 md:-translate-x-1/2 rounded-full shadow-[0_0_32px_8px_rgba(124,58,237,0.18)]"
