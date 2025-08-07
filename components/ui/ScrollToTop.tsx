@@ -33,29 +33,26 @@ const ScrollToTop = () => {
     };
   }, []);
 
-  // Enhanced smooth scroll to top handler - optimized for mobile
+  // Enhanced smooth scroll to top handler - 2x smoother animation
   const scrollToTop = () => {
-    if (isMobile) {
-      // Use native smooth scroll for mobile
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    // Enhanced smooth scroll for desktop
+    // Enhanced smooth scroll with custom easing
     const currentScroll = window.pageYOffset;
     const targetScroll = 0;
     const distance = currentScroll - targetScroll;
-    const duration = Math.max(800, distance * 0.8); // Dynamic duration based on scroll distance
+    const duration = Math.max(1500, distance * 0.8); // Increased duration for smoother animation
     const startTime = performance.now();
 
-    const easeInOutCubic = (t: number) => {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    // Enhanced easing function for ultra-smooth momentum
+    const easeOutQuart = (t: number) => {
+      t /= 1;
+      t--;
+      return -(t * t * t * t - 1);
     };
 
     const animateScroll = (currentTime: number) => {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = easeInOutCubic(progress);
+      const easedProgress = easeOutQuart(progress);
 
       const newScroll = currentScroll - (distance * easedProgress);
       window.scrollTo(0, newScroll);

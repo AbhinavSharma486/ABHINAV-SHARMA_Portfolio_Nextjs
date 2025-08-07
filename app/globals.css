@@ -2,21 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Performance optimizations */
-* {
-  box-sizing: border-box;
+/* Custom smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
 }
 
+/* Enhanced smooth scroll with momentum */
 html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+  /* Custom scroll properties */
+  --scroll-behavior: smooth;
+  --scroll-padding-top: 2rem;
+}
+
+/* Smooth scroll for all elements */
+* {
   scroll-behavior: smooth;
 }
 
+/* Custom scrollbar for enhanced smooth experience */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.3);
+  border-radius: 4px;
+  transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.5);
+}
+
+/* Enhanced smooth scrolling for body */
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1;
   font-kerning: normal;
+  /* Smooth scroll properties */
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Smooth scroll for specific sections */
+section {
+  scroll-margin-top: 2rem;
+  scroll-behavior: smooth;
+}
+
+/* Enhanced smooth transitions for all interactive elements */
+a,
+button,
+[role="button"] {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth scroll for navigation links */
+a[href^="#"] {
+  scroll-behavior: smooth;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
 }
 
 /* Optimize animations with will-change */
@@ -265,7 +323,7 @@ img {
 
   /* Optimize scrolling performance */
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
   }
 
   /* Reduce motion for better performance */
@@ -293,15 +351,16 @@ img {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
   }
 
-  /* Remove the following block to keep gradients on all screens */
+  /* Remove gradient overrides to preserve theme colors */
   /*
   .bg-gradient-to-br,
   .bg-gradient-to-r {
-    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%) !important;
+    background: #f8fafc !important;
   }
+
   .dark .bg-gradient-to-br,
   .dark .bg-gradient-to-r {
-    background: linear-gradient(135deg, #18181b 0%, #0f172a 100%) !important;
+    background: #18181b !important;
   }
   */
 }
@@ -348,12 +407,13 @@ img {
     -webkit-backdrop-filter: blur(4px) !important;
   }
 
-  /* Remove the following block to keep gradients on all screens */
+  /* Remove gradient overrides to preserve theme colors */
   /*
   .bg-gradient-to-br,
   .bg-gradient-to-r {
     background: #f8fafc !important;
   }
+
   .dark .bg-gradient-to-br,
   .dark .bg-gradient-to-r {
     background: #18181b !important;
@@ -372,7 +432,7 @@ img {
 
   /* Optimize for touch scrolling */
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -398,24 +458,6 @@ img {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
-}
-
-/* Custom scrollbar for better performance */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(124, 58, 237, 0.3);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(124, 58, 237, 0.5);
 }
 
 /* Optimize focus styles */

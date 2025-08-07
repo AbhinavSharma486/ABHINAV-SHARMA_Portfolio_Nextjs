@@ -256,13 +256,11 @@ const Profile = () => {
   const parallax = useParallax(mainRef);
 
   const bulletPoints = [
-    "As a MERN Stack Developer, I build secure, scalable, and responsive web applications.",
-    "My internship projects include a cybersecurity, an Event Management System, and Aniicon's cafe, all utilizing modern MERN stack technologies.",
-    "I am proficient in React, Next.js, Node.js, MongoDB, TypeScript, Tailwind CSS, JavaScript, and Express.",
-    "I've developed real-time applications like a chat app (Chatify) and a collaborative web app (SyncDocs)."
+    "MERN Stack Developer with 5 months of internship experience, skilled in building secure, scalable, and responsive web applications using React, Next.js, Node.js, Express, MongoDB, TypeScript, Tailwind CSS, and JavaScript.",
+    "Worked on real-time and dynamic projects like Chatify (chat app), SyncDocs (collaborative editor), a cybersecurity platform, an Event Management System, and Aniicon’s Cafe, leveraging modern MERN stack technologies.",
   ];
 
-  const pointsToShow = !isMobile ? bulletPoints : (showAllPoints ? bulletPoints : bulletPoints.slice(0, 2));
+  const pointsToShow = !isMobile ? bulletPoints : (showAllPoints ? bulletPoints : bulletPoints.slice(0, 1));
 
   return (
     <main

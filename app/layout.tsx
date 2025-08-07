@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import Theme from "../context/theme-provider";
 import { LoadingProvider } from "../context/loading-context";
 import ClientWrapper from "../components/ClientWrapper";
+import SmoothScroll from "../components/ui/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Abhinav Sharma | Full Stack Developer | Personal Portfolio",
@@ -72,9 +73,11 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
       <body className={`${orbitron.variable} ${eduNSW.variable}`}>
         <Theme>
           <LoadingProvider>
-            <Nav />
-            <main>{children}</main>
-            <ClientWrapper />
+            <SmoothScroll>
+              <Nav />
+              <main>{children}</main>
+              <ClientWrapper />
+            </SmoothScroll>
           </LoadingProvider>
         </Theme>
       </body>
