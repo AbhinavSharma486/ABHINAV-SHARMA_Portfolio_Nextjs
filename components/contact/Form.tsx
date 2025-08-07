@@ -210,7 +210,7 @@ const Form = () => {
                 className={`${invalidInput.name
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                   : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
-                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
+                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-xl sm:rounded-2xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
                 id="username"
                 type="text"
                 placeholder="Enter your full name"
@@ -243,7 +243,7 @@ const Form = () => {
                 className={`${invalidInput.email
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                   : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
-                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
+                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-xl sm:rounded-2xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
                 id="email"
                 type="email"
                 placeholder="Enter your email address"
@@ -276,7 +276,7 @@ const Form = () => {
                 className={`${invalidInput.subject
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                   : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
-                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
+                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-xl sm:rounded-2xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500`}
                 id="subject"
                 type="text"
                 placeholder="Enter subject"
@@ -308,7 +308,7 @@ const Form = () => {
                 className={`${invalidInput.message
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                   : "border-gray-300 dark:border-gray-600 focus:border-violet-500 focus:ring-violet-500/20"
-                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-lg sm:rounded-xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500 resize-none`}
+                  } appearance-none block w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-2 rounded-xl sm:rounded-2xl py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:ring-4 transition-all duration-300 placeholder-gray-400 dark:placeholder-gray-500 resize-none`}
                 id="message"
                 rows={4}
                 placeholder="Enter your message"

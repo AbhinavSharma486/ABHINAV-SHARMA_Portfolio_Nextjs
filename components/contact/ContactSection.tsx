@@ -147,11 +147,9 @@ const ContactSection = () => {
                   <div className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-lg border border-transparent hover:border-violet-400 dark:hover:border-violet-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col">
                     <div className="absolute inset-0 pointer-events-none rounded-xl sm:rounded-2xl group-hover:border-2 group-hover:border-violet-400 group-hover:shadow-[0_0_32px_0_rgba(124,58,237,0.18)] transition-all duration-300" />
 
-                    <div className="flex items-start gap-3 sm:gap-4 flex-1">
-                      <div className="flex-shrink-0">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-violet-500 via-blue-500 to-fuchsia-400 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-violet-500/25 transition-all duration-300">
-                          <info.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                        </div>
+                    <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-violet-500 via-blue-500 to-fuchsia-400 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-lg">
+                        <info.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                       </div>
                       <div className="flex-1 min-w-0 flex flex-col justify-between h-full">
                         <div>
