@@ -88,7 +88,7 @@ const TimelineItem: React.FC<ExperienceItem & { idx: number; }> = (props) => {
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: isMobile ? 0.3 : 0.8, type: "spring", bounce: 0.25 }}
         whileHover={isMobile ? {} : { scale: 1.04, boxShadow: "0 8px 32px 0 rgba(124,58,237,0.18)" }}
-        className="w-full relative md:hidden bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-2 border-violet-400 dark:border-violet-500 rounded-2xl shadow-xl p-5 flex-1 group min-h-[90px] mb-8"
+        className="w-full relative md:hidden bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-2 border-violet-400 dark:border-violet-500 rounded-2xl shadow-xl p-5 flex-1 group min-h-[90px] mb-8 mx-2 sm:mx-4"
       >
         <div className="flex items-center gap-3 mb-2">
           <span className="text-2xl">💼</span>
