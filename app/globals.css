@@ -498,16 +498,6 @@ img {
   .shadow-2xl {
     box-shadow: none !important;
   }
-
-  /* Disable backdrop filters */
-  .backdrop-blur-sm,
-  .backdrop-blur,
-  .backdrop-blur-md,
-  .backdrop-blur-lg,
-  .backdrop-blur-xl {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
 }
 
 /* Optimize focus styles */
