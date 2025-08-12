@@ -390,19 +390,6 @@ img {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
   }
 
-  /* Remove gradient overrides to preserve theme colors */
-  /*
-  .bg-gradient-to-br,
-  .bg-gradient-to-r {
-    background: #f8fafc !important;
-  }
-
-  .dark .bg-gradient-to-br,
-  .dark .bg-gradient-to-r {
-    background: #18181b !important;
-  }
-  */
-
   /* Mobile/tablet optimized transitions */
   a,
   button,
@@ -456,19 +443,6 @@ img {
     backdrop-filter: blur(4px) !important;
     -webkit-backdrop-filter: blur(4px) !important;
   }
-
-  /* Remove gradient overrides to preserve theme colors */
-  /*
-  .bg-gradient-to-br,
-  .bg-gradient-to-r {
-    background: #f8fafc !important;
-  }
-
-  .dark .bg-gradient-to-br,
-  .dark .bg-gradient-to-r {
-    background: #18181b !important;
-  }
-  */
 }
 
 /* Ultra-optimized settings for very small screens */
@@ -536,4 +510,70 @@ img {
 
 .font-edu-nsw {
   font-family: var(--font-edu-nsw);
+}
+
+/* Custom Notification System CSS */
+
+/* Prevent conflicts with existing styles */
+#custom-notification-container {
+  position: fixed !important;
+  top: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 999999 !important;
+  width: auto !important;
+  max-width: calc(100vw - 32px) !important;
+  pointer-events: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+  #custom-notification-container {
+    top: 15px !important;
+    max-width: calc(100vw - 20px) !important;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  #custom-notification-container {
+    top: 10px !important;
+    max-width: calc(100vw - 16px) !important;
+  }
+}
+
+/* Ensure no interference with your existing styles */
+@media (max-width: 768px) {
+  [style*="transform"]:not(#custom-notification-container):not(#custom-notification-container *) {
+    transform: none !important;
+  }
+}
+
+/* Optional: Add some padding to body top to prevent overlap with fixed elements */
+@media (max-width: 768px) {
+  body.notification-active {
+    padding-top: 10px;
+  }
+}
+
+/* Override any Notyf styles that might still be loaded */
+.notyf,
+.notyf__wrapper,
+.notyf__toast {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Accessibility improvements */
+#custom-notification-container [role="alert"] {
+  speak: polite;
+}
+
+/* Print styles */
+@media print {
+  #custom-notification-container {
+    display: none !important;
+  }
 }
