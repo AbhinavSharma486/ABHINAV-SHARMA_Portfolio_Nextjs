@@ -5,7 +5,7 @@ import { Card } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
 
 import Link from "next/link";
-import { ExternalLink, GithubIcon, Code, Download } from 'lucide-react';
+import { ExternalLink, GithubIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from "next/image";
 import React from 'react';
@@ -35,8 +35,6 @@ interface ItemProps {
     github?: HeaderLink;
   };
   reverse?: boolean;
-  linesOfCode?: string;
-  sizeOnGitHub?: string;
 }
 
 export default function Item({
@@ -46,9 +44,7 @@ export default function Item({
   type,
   seeMore,
   techs,
-  headerLinks,
-  linesOfCode,
-  sizeOnGitHub,
+  headerLinks
 }: ItemProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [showAllPoints, setShowAllPoints] = useState(false);
@@ -58,8 +54,8 @@ export default function Item({
   const pointsToShow = showAllPoints ? bulletPoints : bulletPoints.slice(0, 2);
   const hasMorePoints = bulletPoints.length > 2;
 
-  const badgesToShow = showAllBadges ? techs : techs.slice(0, 6);
-  const hasMoreBadges = techs.length > 6;
+  const badgesToShow = showAllBadges ? techs : techs.slice(0, 5);
+  const hasMoreBadges = techs.length > 5;
 
   return (
     <div
@@ -215,28 +211,6 @@ export default function Item({
               </div>
             )}
           </motion.div>
-
-          {(linesOfCode || sizeOnGitHub) && (
-            <motion.div
-              className="flex flex-wrap gap-2 sm:gap-3 md:gap-4"
-              animate={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              {linesOfCode && (
-                <Badge className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-medium flex items-center gap-1 sm:gap-1.5">
-                  <Code className="h-3 w-3" />
-                  {linesOfCode} lines
-                </Badge>
-              )}
-              {sizeOnGitHub && (
-                <Badge className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-medium flex items-center gap-1 sm:gap-1.5">
-                  <Download className="h-3 w-3" />
-                  {sizeOnGitHub}
-                </Badge>
-              )}
-            </motion.div>
-          )}
 
           <motion.div
             className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 pt-2"
