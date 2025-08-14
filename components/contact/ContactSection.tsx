@@ -25,7 +25,7 @@ const ContactSection = () => {
     {
       icon: MapPin,
       title: "Location",
-      value: "Baraut, Uttar Pradesh",
+      value: "Delhi, India",
       href: "#",
       description: "Available for remote work"
     },

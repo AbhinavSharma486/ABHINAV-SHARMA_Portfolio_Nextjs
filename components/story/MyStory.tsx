@@ -119,7 +119,7 @@ const MyStory = () => {
                   <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-purple-600 dark:text-purple-400" />
                   <div>
                     <p className="text-xs text-gray-600 dark:text-gray-300">Location</p>
-                    <p className="font-semibold text-xs sm:text-sm text-gray-900 dark:text-white">Baraut, UP</p>
+                    <p className="font-semibold text-xs sm:text-sm text-gray-900 dark:text-white">Delhi, India</p>
                   </div>
                 </div>
               </motion.div>
