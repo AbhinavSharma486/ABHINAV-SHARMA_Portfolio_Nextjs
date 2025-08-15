@@ -11,8 +11,8 @@ const ContactSection = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "abhinavsharma486@gmail.com",
-      href: "mailto:abhinavsharma486@gmail.com",
+      value: "parasharabhinav486@gmail.com",
+      href: "mailto:parasharabhinav486@gmail.com",
       description: "Send me an email anytime"
     },
     {
@@ -59,7 +59,7 @@ const ContactSection = () => {
     },
     {
       icon: MailIcon,
-      href: "mailto:abhinavsharma486@gmail.com",
+      href: "mailto:parasharabhinav486@gmail.com",
       label: "Email",
       hoverColor: "hover:bg-red-600 dark:hover:bg-red-500"
     }
