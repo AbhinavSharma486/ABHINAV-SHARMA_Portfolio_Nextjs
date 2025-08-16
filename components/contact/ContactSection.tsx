@@ -47,7 +47,7 @@ const ContactSection = () => {
     },
     {
       icon: LinkedinIcon,
-      href: "https://www.linkedin.com/in/abhinav-sharma-6254252a5/",
+      href: "https://www.linkedin.com/in/abhinav-sharma-mern/",
       label: "LinkedIn",
       hoverColor: "hover:bg-blue-600 dark:hover:bg-blue-500"
     },
