@@ -27,7 +27,9 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     unoptimized: false,
     loader: 'default',
+    domains: ['res.cloudinary.com'],
   },
+
 
   // Compression and optimization
   compress: true,
@@ -36,108 +38,108 @@ const nextConfig: NextConfig = {
 
   // TypeScript configuration
   typescript: {
-    ignoreBuildErrors: true
+    ignoreBuildErrors: true,
   },
 
   // Bundle optimization
   webpack: (config, { dev, isServer }) => {
     // Only apply optimizations in production
-    if (!dev && !isServer) {
-      // Enhanced code splitting
-      config.optimization.splitChunks = {
+    if(!dev && !isServer) {
+  // Enhanced code splitting
+  config.optimization.splitChunks = {
+    chunks: 'all',
+    maxInitialRequests: 25,
+    minSize: 20000,
+    cacheGroups: {
+      vendor: {
+        test: /[\\/]node_modules[\\/]/,
+        name: 'vendors',
         chunks: 'all',
-        maxInitialRequests: 25,
-        minSize: 20000,
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-            priority: 10,
-            reuseExistingChunk: true,
-          },
-          framer: {
-            test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
-            name: 'framer-motion',
-            chunks: 'all',
-            priority: 20,
-            reuseExistingChunk: true,
-          },
-          icons: {
-            test: /[\\/]node_modules[\\/](react-icons|lucide-react)[\\/]/,
-            name: 'icons',
-            chunks: 'all',
-            priority: 15,
-            reuseExistingChunk: true,
-          },
-          common: {
-            name: 'common',
-            minChunks: 2,
-            chunks: 'all',
-            priority: 5,
-            reuseExistingChunk: true,
-          },
-        },
-      };
+        priority: 10,
+        reuseExistingChunk: true,
+      },
+      framer: {
+        test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+        name: 'framer-motion',
+        chunks: 'all',
+        priority: 20,
+        reuseExistingChunk: true,
+      },
+      icons: {
+        test: /[\\/]node_modules[\\/](react-icons|lucide-react)[\\/]/,
+        name: 'icons',
+        chunks: 'all',
+        priority: 15,
+        reuseExistingChunk: true,
+      },
+      common: {
+        name: 'common',
+        minChunks: 2,
+        chunks: 'all',
+        priority: 5,
+        reuseExistingChunk: true,
+      },
+    },
+  };
 
-      // Enhanced tree shaking
-      config.optimization.usedExports = true;
-      config.optimization.sideEffects = false;
-      config.optimization.minimize = true;
+  // Enhanced tree shaking
+  config.optimization.usedExports = true;
+  config.optimization.sideEffects = false;
+  config.optimization.minimize = true;
 
-      // Module concatenation
-      config.optimization.concatenateModules = true;
-    }
+  // Module concatenation
+  config.optimization.concatenateModules = true;
+}
 
-    // Optimize SVG imports
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
+// Optimize SVG imports
+config.module.rules.push({
+  test: /\.svg$/,
+  use: ['@svgr/webpack'],
+});
 
-    return config;
-  },
+return config;
+},
 
   // Headers for caching
   async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-        ],
-      },
-      {
-        source: '/assets/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/_next/static/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-    ];
-  },
+  return [
+    {
+      source: '/(.*)',
+      headers: [
+        {
+          key: 'X-Content-Type-Options',
+          value: 'nosniff',
+        },
+        {
+          key: 'X-Frame-Options',
+          value: 'DENY',
+        },
+        {
+          key: 'X-XSS-Protection',
+          value: '1; mode=block',
+        },
+      ],
+    },
+    {
+      source: '/assets/(.*)',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+      ],
+    },
+    {
+      source: '/_next/static/(.*)',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'public, max-age=31536000, immutable',
+        },
+      ],
+    },
+  ];
+},
 };
 
 export default nextConfig;

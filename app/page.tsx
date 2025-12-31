@@ -9,6 +9,7 @@ import Projects from "../components/projects/Projects";
 import ExperienceTimeline from "../components/experience/ExperienceTimeline";
 import ContactSection from "../components/contact/ContactSection";
 import ScrollToTop from "../components/ui/ScrollToTop";
+import Certificates from "../components/certificates/certificate";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -30,6 +31,7 @@ export default function Page() {
     <>
       <Profile />
       <Skills />
+      <Certificates />
       <ExperienceTimeline experiences={experienceData} />
       <Projects />
       <ContactSection />
