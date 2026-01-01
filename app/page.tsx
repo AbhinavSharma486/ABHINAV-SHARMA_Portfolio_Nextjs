@@ -9,7 +9,7 @@ import Projects from "../components/projects/Projects";
 import ExperienceTimeline from "../components/experience/ExperienceTimeline";
 import ContactSection from "../components/contact/ContactSection";
 import ScrollToTop from "../components/ui/ScrollToTop";
-import Certificates from "../components/certificates/certificate";
+import Certificates from "../components/certificates/Certificate";
 
 export default function Page() {
   const searchParams = useSearchParams();
