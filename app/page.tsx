@@ -1,6 +1,7 @@
 "use client";
 
 import { experienceData } from "../utils/data/experience";
+import { educationData } from "../utils/data/education";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Profile from "../components/Profile";
@@ -10,6 +11,7 @@ import ExperienceTimeline from "../components/experience/ExperienceTimeline";
 import ContactSection from "../components/contact/ContactSection";
 import ScrollToTop from "../components/ui/ScrollToTop";
 import Certificates from "../components/certificates/Certificate";
+import EducationTimeline from "@/components/education/educationTimeline";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -32,6 +34,7 @@ export default function Page() {
       <Profile />
       <Skills />
       <Certificates />
+      <EducationTimeline education={educationData} />
       <ExperienceTimeline experiences={experienceData} />
       <Projects />
       <ContactSection />
