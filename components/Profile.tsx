@@ -383,7 +383,7 @@ const Profile = () => {
                 className="flex flex-col sm:flex-row flex-wrap gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 justify-center items-center pt-2 xs:pt-2.5 sm:pt-3 md:pt-4"
               >
                 <Button className="mb-4 group w-Content sm:w-auto min-w-[100px] sm:min-w-[120px] md:min-w-[140px] relative overflow-hidden bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 hover:from-purple-800 hover:via-purple-700 hover:to-indigo-800 text-white text-sm sm:text-base font-medium shadow-lg hover:shadow-xl hover:shadow-violet-500/25 transition-all duration-300 active:scale-95 border border-white/20 hover:border-white/40 backdrop-blur-sm button-glow rounded-full"
-                  onClick={() => window.open("https://drive.google.com/file/d/1ywIFDKNN8ZhkqBv3YH8-lgpsBMJ-_sMC/view?usp=sharing", "_blank", "noopener,noreferrer")}
+                  onClick={() => window.open("https://drive.google.com/file/d/1QYQn94qKmGUZH7ht-TkNlj07li-pwEnk/view?usp=sharing", "_blank", "noopener,noreferrer")}
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
